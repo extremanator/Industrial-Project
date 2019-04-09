@@ -7,7 +7,7 @@ const port = 9000;
 
 function getHome(req, res){
     res.writeHead(200, {"Content-Type": "text/html"});
-    res.write("<html><head><title>Home</title></head><body>Want to do some calculation? Click <a href='/calc'>here</a></body></html>");
+    res.write("<html lang="en"><head><title>Home</title></head><body>Want to do some calculation? Click <a href='/calc'>here</a></body></html>");
     res.end();
 }
 
