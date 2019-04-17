@@ -52,5 +52,5 @@ app.get('/', (req, res)=>{
 });
 
 app.get('*', function(req, res) {
-    res.redirect('/');
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
