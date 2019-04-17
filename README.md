@@ -33,6 +33,10 @@ The console should say somewhere "\[initandlisten\] waiting for connections" mea
 Next go to the project folder you created and open a cmd in the "Rafael-Project-master" folder.
 Now run from the console:
 ```
+npm install
+```
+This will install the npm libraries the project is using. Next run:
+```
 node app.js
 ```
 and it should display:
@@ -89,7 +93,5 @@ Add additional notes about how to deploy this on a live system
 ## Acknowledgments
 
 Thanks to all the help from:
-* extremanator's mom
-* emillll's mom
-* and also your mom <3
+* TBD
 
