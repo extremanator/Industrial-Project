@@ -17,7 +17,7 @@ Next install a mongoDB server from [here](https://www.mongodb.com/download-cente
 
 Copy the repository to a project folder in your system (unzip the zip). 
 
-To run the mongoDB server you fist need to create a folder for the data.
+To run the mongoDB server you first need to create a folder for the data.
 Create two nested folders "data" and inside it "db" anywhere you wish (make sure the full path is in english) so that you get:
 ```
 \data\db
@@ -54,7 +54,7 @@ You can use commands like:
 * `db.users.find().pretty()` to view all the users in the db
 * `db.users.count()` will display the number of users
 * `db.users.deleteMany({})` will clear the db of all users
-* any many more you can find on [their site](https://docs.mongodb.com/manual/mongo/)
+* and many more you can find on [their site](https://docs.mongodb.com/manual/mongo/)
 
 ## Running the tests
 
