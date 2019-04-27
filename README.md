@@ -24,9 +24,10 @@ Create two nested folders "data" and inside it "db" anywhere you wish (make sure
 ```
 Now you'll start the server by using the command:
 ```
-"C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath="c:\data\db"
+"<mongodb installation dir>\bin\mongod.exe" --dbpath="c:\data\db"
 ```
 **Replace the "c:\data\db" with the full path to the folders you created**
+(Usually the installation directory is in Program Files)
 
 The console should say somewhere "\[initandlisten\] waiting for connections" meaning the mongoDB server is running.
 
@@ -51,7 +52,7 @@ If you wish to view your database getting updated open a cmd in:
 ```
 <mongodb installation dir>/bin
 ```
-(Usually it's in Program Files) and run the command `mongo`. This should allow you to give mongoDB commands.
+Then run the command `mongo`. This should allow you to give mongoDB commands.
 Running the command: `show dbs` will print the mongoDB dbs on your system. `meanauth` is the db the app created.
 Type `use meanauth` to give commands regarding the app's db.
 You can use commands like:
