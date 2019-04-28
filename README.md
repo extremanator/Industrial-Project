@@ -1,4 +1,4 @@
-# Rafael-Project
+# Cyber-Trainer
 
 A Web application for teaching safe coding through code puzzles.
 An Industrial Project Course Project. 
