@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from "rxjs";
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Problem } from "../problem";
 
 const helper = new JwtHelperService();
 
@@ -10,7 +11,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-export interface Response {
+export interface AuthResponse {
   success: boolean;
   token: string;
   user: {
@@ -31,20 +32,20 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(user): Observable<Response>{
-    return this.http.post<Response>('http://localhost:3000/users/register', user, httpOptions);
+  registerUser(user): Observable<AuthResponse>{
+    return this.http.post<AuthResponse>('http://localhost:3000/users/register', user, httpOptions);
   }
 
-  authenticateUser(user): Observable<Response>{
-    return this.http.post<Response>('http://localhost:3000/users/authenticate', user, httpOptions);
+  authenticateUser(user): Observable<AuthResponse>{
+    return this.http.post<AuthResponse>('http://localhost:3000/users/authenticate', user, httpOptions);
   }
 
-  getProfile(): Observable<Response>{
+  getProfile(): Observable<AuthResponse>{
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json' })
     };
-    return this.http.get<Response>('http://localhost:3000/users/profile', httpOptions);
+    return this.http.get<AuthResponse>('http://localhost:3000/users/profile', httpOptions);
   }
 
   storeUserData(token, user){

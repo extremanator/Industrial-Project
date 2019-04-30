@@ -11,6 +11,7 @@ const app = express();
 const port = 3000;
 
 const users = require('./routes/users');
+const problems = require('./routes/problems')
 
 // Connect To Database
 mongoose.connect(config.database);
@@ -40,6 +41,8 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use('/users', users);
+
+app.use('/problems', problems);
 
 // Start Server
 app.listen(port, ()=>{

@@ -1,2 +1,22 @@
 <h2 class="page-header">Dashboard</h2>
-<p>Welcome to your dashboard</p>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Type</th>
+    <th scope="col">Column heading</th>
+    <th scope="col">Column heading</th>
+    <th scope="col">Column heading</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let problem of problems">
+    <th scope="row">{{problem.name}}</th>
+    <td>
+      <a routerLink="/problem/{{problem.name}}" >Solve</a>
+    </td>
+    <td>Column content</td>
+    <td>Column content</td>
+
+  </tr>
+  </tbody>
+</table>
