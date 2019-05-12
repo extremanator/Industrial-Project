@@ -18,7 +18,11 @@ export interface AuthResponse {
     id: string,
     name: string,
     username: string,
-    email: string
+    email: string,
+    solved_problems: Object,
+    num_solved: number,
+    num_attempted: number,
+    join_date: string
   };
   msg: string;
 }
@@ -60,6 +64,10 @@ export class AuthService {
     return token !== null && !helper.isTokenExpired(token);
   }
 
+  getToken(){
+    return localStorage.getItem('id_token');
+  }
+
   loadToken(){
     const token = localStorage.getItem('id_token');
     this.authToken = token;
@@ -70,4 +78,6 @@ export class AuthService {
     this.user = null;
     localStorage.clear();
   }
+
+
 }

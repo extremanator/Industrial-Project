@@ -8,18 +8,30 @@ const User = require('../models/user');
 
 // Register
 router.post('/register', (req, res, next)=>{
+    let now = new Date();
+    let m = now.getMinutes();
+    const time = now.getHours() + ':' + ((m<10)? ('0' + m): m) + ' ' + now.getDate() + '/' + (now.getMonth()+1) + '/' + now.getFullYear();
     let newUser = new User({
         name: req.body.name,
         email: req.body.email,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        solved_problems: {},
+        num_solved: 0,
+        num_attempted: 0,
+        join_date: time
     });
 
-    User.addUser(newUser, (err,user)=>{
-        if(err){
-            res.json({success: false, msg:'Failed to register user'});
-        } else{
-            res.json({success: true, msg:'User registered'});
+    User.addUserIfUnique(newUser, (err,user)=>{
+        if(err === 'Username not unique'){
+            res.json({success: false, msg: err});
+        } else if(err === 'Email not unique') {
+            res.json({success: false, msg: err});
+        } else if(err){
+            throw err;
+        }
+        else {
+            res.json({success: true, msg: 'User registered'});
         }
     })
 });

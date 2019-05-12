@@ -1,7 +1,11 @@
+<br/>
 <div *ngIf="user">
   <h2 class="page-header">{{user.name}}</h2>
   <ul class="list-group">
     <li class="list-group-item">Username: {{user.username}}</li>
     <li class="list-group-item">Email: {{user.email}}</li>
+    <li class="list-group-item">Join Date: {{user.join_date}}</li>
+    <li class="list-group-item">Number of Solved Problems: {{user.num_solved}}</li>
+    <li class="list-group-item">Number of Solution Attempts: {{user.num_attempted}}</li>
   </ul>
 </div>

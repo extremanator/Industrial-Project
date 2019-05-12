@@ -2,12 +2,32 @@ const mongoose = require('mongoose');
 
 // User Schema
 const ProblemSchema = mongoose.Schema({
-    name: {
+    name: { //unique identifier
+        type: String,
+        required: true
+    },
+    difficulty: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: [String],
+        required: true
+    },
+    paragraph: {
         type: String,
         required: true
     },
     code: {
         type: String,
+        required: true
+    },
+    type: {
+        type: String,
+        required: true
+    },
+    tests: {
+        type: [Object],
         required: true
     }
 });

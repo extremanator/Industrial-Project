@@ -1,3 +1,19 @@
-<p>
-  {{problem.code}}
+<br/>
+<h1>{{problem.name}}</h1>
+<p style="white-space: pre-wrap;">
+  {{problem.paragraph}}
 </p>
+<ngx-codemirror [(ngModel)]="solution_code"
+                [options]="{
+                  lineNumbers: true,
+                  theme: 'material',
+                  mode: 'text/x-c++src',
+                  indentUnit: 4,
+                  indentWithTabs: true,
+                  autoCloseBrackets: true
+                }">{{solution_code}}</ngx-codemirror>
+<br/>
+<button type="button" class="btn btn-primary" (click)="onSubmitSolution(solution_code)">Submit</button>
+<br/>
+<div *ngIf="isSuccess != undefined">{{feedback_msg}}</div>
+
