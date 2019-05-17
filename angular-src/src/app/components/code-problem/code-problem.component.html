@@ -1,8 +1,6 @@
 <br/>
 <h1>{{problem.name}}</h1>
-<p style="white-space: pre-wrap;">
-  {{problem.paragraph}}
-</p>
+<p style="white-space: pre-wrap;">{{problem.paragraph}}</p>
 <ngx-codemirror [(ngModel)]="solution_code"
                 [options]="{
                   lineNumbers: true,

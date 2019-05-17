@@ -27,7 +27,7 @@ const ProblemSchema = mongoose.Schema({
         required: true
     },
     tests: {
-        type: [Object],
+        type: [Object], // tests have property 'code' containing the code and optional property 'stdin' with input to test
         required: true
     }
 });
@@ -48,4 +48,12 @@ module.exports.addProblem = function (newProblem, callback){
 
 module.exports.getProblemByName = function (name, callback){
     Problem.find({name: name}, callback);
+};
+
+module.exports.clear = function (callback){
+    Problem.deleteMany({}, callback);
+};
+
+module.exports.initialize = function (problems, callback){
+    Problem.insertMany(problems, callback);
 };

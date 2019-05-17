@@ -41,6 +41,7 @@ router.post('/add', passport.authenticate('jwt', {session:false}), (req, res, ne
 
    Problem.addProblem(newProblem, (err, problem) => {
        if(err){
+           console.log(err);
            res.json({success: false, msg:'Failed to add problem'});
        } else{
            res.json({success: true, msg:'Problem added'});
@@ -52,6 +53,10 @@ router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false
     const user = req.user;
     const problem_name = req.body.name;
     const solution = req.body.solution;
+    let now = new Date();
+    let m = now.getMinutes();
+    const time = now.getHours() + '.' + ((m<10)? ('0' + m): m) + '.' + now.getSeconds() + '.' + now.getMilliseconds() + '-' + now.getDate() + '.' + (now.getMonth()+1) + '.' + now.getFullYear();
+    const temp_name = '#um-' + user.username + '#ts-' + (time); //um = username, ts=timestamp
     Problem.getProblemByName(problem_name, (err, problem) => {
         if(err){
             res.json({success: false, msg: 'Failed to get problem'});
@@ -67,7 +72,7 @@ router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false
                                 if(err) throw err;
                                 res.json({success: true, msg: 'Solved!'});
                                 if (tests.length > 0) {
-                                    fs.unlink('.\\temp\\temp.cpp', (err) => {
+                                    fs.unlink('.\\temp\\' + temp_name + '.cpp', (err) => {
                                         if (err) throw err;
                                     });
                                 }
@@ -75,14 +80,14 @@ router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false
                         }
                     });
                 } else {
-                    fs.writeFile('.\\temp\\temp.cpp', tests[i].code + solution, (err) => {
+                    fs.writeFile('.\\temp\\' + temp_name + '.cpp', tests[i].code + solution, (err) => {
                         if (err) throw err;
                         else {
                             let resultPromise = null;
                             if(tests[i].hasOwnProperty('stdin')) {
-                                resultPromise = cpp.runFile('.\\temp\\temp.cpp', {stdin: tests[i].stdin});
+                                resultPromise = cpp.runFile('.\\temp\\' + temp_name + '.cpp', {stdin: tests[i].stdin});
                             } else {
-                                resultPromise = cpp.runFile('.\\temp\\temp.cpp');
+                                resultPromise = cpp.runFile('.\\temp\\' + temp_name + '.cpp');
                             }
                             resultPromise.then(result => {
                                 if (result.exitCode !== 0) {
@@ -93,7 +98,7 @@ router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false
                                         } else {
                                             res.json({success: false, msg:'Incorrect Solution!'});
                                         }
-                                        fs.unlink('.\\temp\\temp.cpp', (err) => {
+                                        fs.unlink('.\\temp\\' + temp_name + '.cpp', (err) => {
                                             if(err) throw err;
                                         });
                                     });

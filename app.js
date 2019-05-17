@@ -11,7 +11,9 @@ const app = express();
 const port = 3000;
 
 const users = require('./routes/users');
-const problems = require('./routes/problems')
+const problems = require('./routes/problems');
+const Problem = require('./models/problem');
+const DBproblems = require('./config/DBproblems');
 
 // Connect To Database
 mongoose.connect(config.database);
@@ -19,6 +21,17 @@ mongoose.connect(config.database);
 // On Connection
 mongoose.connection.on('connected', ()=>{
     console.log('Connected to database '+config.database);
+    Problem.clear((err) => {
+        if (err){
+            console.log('Failed to clear problems DB');
+        }
+        Problem.initialize(DBproblems, (err) => {
+            if (err){
+                console.log('Failed to initialize problems DB');
+            }
+            console.log('Initialized problems DB');
+        })
+    })
 });
 
 mongoose.connection.on('error', (err)=>{
