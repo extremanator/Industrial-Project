@@ -17,7 +17,7 @@ Features:
 ## Estimated checkpoints
 - 10 example problems with the ability to check correctness of solution - 12.5
 - User profiles - 12.5
-- Adding documentation, making code neater, fixing various small issues we'll surely have, and improving the UI (html/css) in preparation for mid review and submission - 19.5
+- Adding documentation, making code neater, fixing various small issues we'll surely have, and improving the UI (html/css) in preparation for mid review and submission + Create Powerpoint presentation for the mid-meeting - 19.5
 \*At this point we'll have a framework for creating problems
 - Adding adminstrative view of performance of all Users and more problems - 26.5
 - 30-50 problems and a test option for the user - 2.6
