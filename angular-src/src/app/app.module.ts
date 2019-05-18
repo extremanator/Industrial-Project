@@ -13,13 +13,19 @@ import { FormsModule } from "@angular/forms";
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from "@angular/common/http";
 import { AuthGuard } from "./guards/auth.guard";
+import { CodeProblemComponent } from './components/code-problem/code-problem.component';
+import { CodemirrorModule } from "@ctrl/ngx-codemirror";
+
+import 'codemirror/mode/clike/clike';
+import 'codemirror/addon/edit/closebrackets';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
+  {path: 'problems', component: DashboardComponent, canActivate:[AuthGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'problems/:name', component: CodeProblemComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -30,14 +36,16 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    CodeProblemComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
     FlashMessagesModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    CodemirrorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

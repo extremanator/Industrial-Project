@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from "rxjs";
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -10,16 +9,34 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-export interface Response {
+export interface RegisterResp {
   success: boolean;
+  msg: string;
+}
+
+export interface AuthResp {
+  success: boolean;
+  msg: string;
   token: string;
   user: {
     id: string,
     name: string,
     username: string,
-    email: string
+    email: string,
   };
-  msg: string;
+}
+
+export interface ProfileResp {
+  user: {
+    id: string,
+    name: string,
+    username: string,
+    email: string,
+    solved_problems: Object,
+    num_solved: number,
+    num_attempted: number,
+    join_date: string
+  };
 }
 
 @Injectable({
@@ -31,20 +48,20 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(user): Observable<Response>{
-    return this.http.post<Response>('http://localhost:3000/users/register', user, httpOptions);
+  registerUser(user): Observable<RegisterResp>{
+    return this.http.post<RegisterResp>('http://localhost:3000/users/register', user, httpOptions);
   }
 
-  authenticateUser(user): Observable<Response>{
-    return this.http.post<Response>('http://localhost:3000/users/authenticate', user, httpOptions);
+  authenticateUser(user): Observable<AuthResp>{
+    return this.http.post<AuthResp>('http://localhost:3000/users/authenticate', user, httpOptions);
   }
 
-  getProfile(): Observable<Response>{
+  getProfile(): Observable<ProfileResp>{
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json' })
     };
-    return this.http.get<Response>('http://localhost:3000/users/profile', httpOptions);
+    return this.http.get<ProfileResp>('http://localhost:3000/users/profile', httpOptions);
   }
 
   storeUserData(token, user){
@@ -54,14 +71,17 @@ export class AuthService {
     this.user = user;
   }
 
-  loggedIn() {
+  isLoggedIn() {
     const token = localStorage.getItem('id_token');
     return token !== null && !helper.isTokenExpired(token);
   }
 
+  getToken(){
+    return localStorage.getItem('id_token');
+  }
+
   loadToken(){
-    const token = localStorage.getItem('id_token');
-    this.authToken = token;
+    this.authToken = localStorage.getItem('id_token');
   }
 
   logout(){
@@ -69,4 +89,6 @@ export class AuthService {
     this.user = null;
     localStorage.clear();
   }
+
+
 }
