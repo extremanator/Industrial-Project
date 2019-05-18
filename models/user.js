@@ -8,11 +8,11 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    email: { // unique identifier
         type: String,
         required: true
     },
-    username: {
+    username: { // unique identifier
         type: String,
         required: true
     },
@@ -55,8 +55,8 @@ module.exports.addUserIfUnique = function (newUser, callback){
             User.findOne({email: newUser.email}, (err, user2) => {
                if (err) throw err;
                if(!user2){
-                   bcrypt.genSalt(10, (err,salt)=>{
-                       bcrypt.hash(newUser.password, salt, (err,hash)=>{
+                   bcrypt.genSalt(10, (err,salt) => {
+                       bcrypt.hash(newUser.password, salt, (err,hash) => {
                            if(err) throw err;
                            newUser.password = hash;
                            newUser.save(callback);
@@ -73,7 +73,7 @@ module.exports.addUserIfUnique = function (newUser, callback){
 };
 
 module.exports.comparePassword = function (candidatePassword, hash, callback){
-    bcrypt.compare(candidatePassword, hash, (err, isMatch)=>{
+    bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
         if(err) throw err;
         callback(null, isMatch);
     });
@@ -97,18 +97,16 @@ module.exports.passedProblem = function (username, problem_name, callback){
                 callback(null, null);
             }
         }
-    })
+    });
 };
 
 module.exports.attemptedProblem = function (username, problem_name, callback){
     User.findOne({username: username}, (err, user) => {
         if (err) throw err;
         else {
-            User.updateOne({username: username}, {
-                num_attempted: (user.num_attempted + 1)
-            }, callback);
+            User.updateOne({username: username}, {num_attempted: (user.num_attempted + 1)}, callback);
         }
-    })
+    });
 };
 
 

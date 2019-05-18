@@ -7,28 +7,28 @@ const {c, cpp, node, python, java} = require('compile-run');
 const User = require('../models/user');
 const Problem = require('../models/problem');
 
-router.get('/getAllProblems', passport.authenticate('jwt', {session:false}), (req, res, next)=>{
-    Problem.getProblems((err, problems) => {
+router.get('/getAllProblems', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    Problem.getProblems((err, problemsArr) => {
         if(err){
             throw err;
         } else {
-            res.json({problems: problems});
+            res.json({problems: problemsArr});
         }
     });
 });
 
-router.get('/getProblem/:name', passport.authenticate('jwt', {session:false}), (req, res, next) =>{
+router.get('/getProblem/:name', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     const problemName = req.params.name;
-    Problem.getProblemByName(problemName, (err, problem) => {
+    Problem.getProblemByName(problemName, (err, problemArr) => {
         if(err){
             throw err;
         } else {
-            res.json({problem: problem[0]});
+            res.json({problem: problemArr[0]});
         }
     });
 });
 
-router.post('/add', passport.authenticate('jwt', {session:false}), (req, res, next)=>{
+/*router.post('/add', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let newProblem = new Problem({
         name: req.body.name,
         difficulty: req.body.difficulty,
@@ -39,40 +39,40 @@ router.post('/add', passport.authenticate('jwt', {session:false}), (req, res, ne
         tests: req.body.tests
     });
 
-   Problem.addProblem(newProblem, (err, problem) => {
-       if(err){
-           console.log(err);
-           res.json({success: false, msg:'Failed to add problem'});
-       } else{
-           res.json({success: true, msg:'Problem added'});
-       }
-   });
-});
+    Problem.addProblem(newProblem, (err, problem) => {
+        if(err){
+            console.log(err);
+            res.json({success: false, msg:'Failed to add problem'});
+        } else{
+            res.json({success: true, msg:'Problem added'});
+        }
+    });
+});*/
 
 router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     const user = req.user;
-    const problem_name = req.body.name;
+    const problemName = req.body.name;
     const solution = req.body.solution;
-    let now = new Date();
-    let m = now.getMinutes();
-    const time = now.getHours() + '.' + ((m<10)? ('0' + m): m) + '.' + now.getSeconds() + '.' + now.getMilliseconds() + '-' + now.getDate() + '.' + (now.getMonth()+1) + '.' + now.getFullYear();
-    const temp_name = '#um-' + user.username + '#ts-' + (time); //um = username, ts=timestamp
-    Problem.getProblemByName(problem_name, (err, problem) => {
+    const now = new Date();
+    const m = now.getMinutes();
+    const time = `${now.getHours()}.${((m<10)?(`0${m}`):m)}.${now.getSeconds()}.${now.getMilliseconds()}-${now.getDate()}.${now.getMonth()+1}.${now.getFullYear()}`;
+    const tempName = `#um-${user.username}#ts-${time}`; //um = username, ts=timestamp
+    Problem.getProblemByName(problemName, (err, problemArr) => {
         if(err){
             res.json({success: false, msg: 'Failed to get problem'});
         } else {
-            const tests = problem[0].tests;
+            const tests = problemArr[0].tests;
             // Recursive function to run all tests one after the other (waiting for previous to finish)
             function doTests(i){
-                if (i === tests.length){
-                    User.passedProblem(user.username, problem_name, (err, resp) => {
+                if (i === tests.length){ //If we passed all tests
+                    User.passedProblem(user.username, problemName, (err, resp) => {
                         if(err) throw err;
                         else {
-                            User.attemptedProblem(user.username, problem_name, (err, resp) => {
+                            User.attemptedProblem(user.username, problemName, (err, resp) => {
                                 if(err) throw err;
                                 res.json({success: true, msg: 'Solved!'});
                                 if (tests.length > 0) {
-                                    fs.unlink('.\\temp\\' + temp_name + '.cpp', (err) => {
+                                    fs.unlink(`.\\temp\\${tempName}.cpp`, (err) => {
                                         if (err) throw err;
                                     });
                                 }
@@ -80,32 +80,33 @@ router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false
                         }
                     });
                 } else {
-                    fs.writeFile('.\\temp\\' + temp_name + '.cpp', tests[i].code + solution, (err) => {
+                    const concatenatedCode = tests[i].code + solution;
+                    fs.writeFile(`.\\temp\\${tempName}.cpp`, concatenatedCode , (err) => {
                         if (err) throw err;
                         else {
                             let resultPromise = null;
                             if(tests[i].hasOwnProperty('stdin')) {
-                                resultPromise = cpp.runFile('.\\temp\\' + temp_name + '.cpp', {stdin: tests[i].stdin});
+                                resultPromise = cpp.runFile(`.\\temp\\${tempName}.cpp`, {stdin: tests[i].stdin});
                             } else {
-                                resultPromise = cpp.runFile('.\\temp\\' + temp_name + '.cpp');
+                                resultPromise = cpp.runFile(`.\\temp\\${tempName}.cpp`);
                             }
-                            resultPromise.then(result => {
+                            resultPromise.then((result) => {
                                 if (result.exitCode !== 0) {
-                                    User.attemptedProblem(user.username, problem_name, (err, resp) => {
+                                    User.attemptedProblem(user.username, problemName, (err, resp) => {
                                         if(err) throw err;
                                         if (result.errorType === 'compile-time') {
                                             res.json({success: false, msg:'Compilation Error!'});
                                         } else {
                                             res.json({success: false, msg:'Incorrect Solution!'});
                                         }
-                                        fs.unlink('.\\temp\\' + temp_name + '.cpp', (err) => {
+                                        fs.unlink(`.\\temp\\${tempName}.cpp`, (err) => {
                                             if(err) throw err;
                                         });
                                     });
                                 } else {
                                     doTests(i+1);
                                 }
-                            }).catch(err => {
+                            }).catch((err) => {
                                 throw err;
                             });
                         }

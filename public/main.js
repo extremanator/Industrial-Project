@@ -188,7 +188,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<h1>{{problem.name}}</h1>\n<p style=\"white-space: pre-wrap;\">\n  {{problem.paragraph}}\n</p>\n<ngx-codemirror [(ngModel)]=\"solution_code\"\n                [options]=\"{\n                  lineNumbers: true,\n                  theme: 'material',\n                  mode: 'text/x-c++src',\n                  indentUnit: 4,\n                  indentWithTabs: true,\n                  autoCloseBrackets: true\n                }\">{{solution_code}}</ngx-codemirror>\n<br/>\n<button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\n<br/>\n<div *ngIf=\"isSuccess != undefined\">{{feedback_msg}}</div>\n\n"
+module.exports = "<br/>\n<h1>{{problem.name}}</h1>\n<p style=\"white-space: pre-wrap;\">{{problem.paragraph}}</p>\n<ngx-codemirror [(ngModel)]=\"solution_code\"\n                [options]=\"{\n                  lineNumbers: true,\n                  theme: 'material',\n                  mode: 'text/x-c++src',\n                  indentUnit: 4,\n                  indentWithTabs: true,\n                  autoCloseBrackets: true\n                }\">{{solution_code}}</ngx-codemirror>\n<br/>\n<button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\n<br/>\n<div *ngIf=\"isSuccess != undefined\">{{feedback_msg}}</div>\n\n"
 
 /***/ }),
 
@@ -304,19 +304,20 @@ var DashboardComponent = /** @class */ (function () {
             _this.authService.getProfile().subscribe(function (profile) {
                 _this.problemInfo = new Map();
                 var info = profile.user.solved_problems;
-                for (var i = 0; i < _this.problems.length; i++) {
-                    if (info.hasOwnProperty(_this.problems[i].name)) {
-                        _this.problemInfo.set(_this.problems[i].name, { solved: true, dateSol: info[_this.problems[i].name].dateSol });
+                for (var _i = 0, _a = _this.problems; _i < _a.length; _i++) {
+                    var problem = _a[_i];
+                    if (info.hasOwnProperty(problem.name)) {
+                        _this.problemInfo.set(problem.name, { solved: true, dateSol: info[problem.name].dateSol });
                     }
                     else {
-                        _this.problemInfo.set(_this.problems[i].name, { solved: false, dateSol: 'TBD' });
+                        _this.problemInfo.set(problem.name, { solved: false, dateSol: 'TBD' });
                     }
                 }
             });
         });
     };
     DashboardComponent.prototype.onClickProblem = function (problem_name) {
-        this.router.navigate(['/problems/' + problem_name]);
+        this.router.navigate(["/problems/" + problem_name]);
     };
     DashboardComponent.prototype.ngOnInit = function () {
         this.getAllProblems();
@@ -499,7 +500,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"#\">Rafael-Project</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarColor02\" aria-controls=\"navbarColor02\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarColor02\">\n    <ul class=\"navbar-nav mr-auto navbar-left\">\n      <li *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/']\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/login']\">Login</a>\n      </li>\n      <li *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/register']\">Register</a>\n      </li>\n      <li *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/problems']\">Problems</a>\n      </li>\n      <li *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/profile']\">Profile</a>\n      </li>\n      <li *ngIf=\"authService.loggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">Logout<span class=\"sr-only\">(current)</span></a>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\">\n      <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"#\">Rafael-Project</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarColor02\" aria-controls=\"navbarColor02\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarColor02\">\n    <ul class=\"navbar-nav mr-auto navbar-left\">\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/']\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/login']\">Login</a>\n      </li>\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/register']\">Register</a>\n      </li>\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/problems']\">Problems</a>\n      </li>\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/profile']\">Profile</a>\n      </li>\n      <li *ngIf=\"authService.isLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">Logout<span class=\"sr-only\">(current)</span></a>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\">\n      <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -751,7 +752,7 @@ var AuthGuard = /** @class */ (function () {
         this.router = router;
     }
     AuthGuard.prototype.canActivate = function () {
-        if (this.authService.loggedIn()) {
+        if (this.authService.isLoggedIn()) {
             return true;
         }
         else {
@@ -818,7 +819,7 @@ var AuthService = /** @class */ (function () {
         this.authToken = token;
         this.user = user;
     };
-    AuthService.prototype.loggedIn = function () {
+    AuthService.prototype.isLoggedIn = function () {
         var token = localStorage.getItem('id_token');
         return token !== null && !helper.isTokenExpired(token);
     };
@@ -826,8 +827,7 @@ var AuthService = /** @class */ (function () {
         return localStorage.getItem('id_token');
     };
     AuthService.prototype.loadToken = function () {
-        var token = localStorage.getItem('id_token');
-        this.authToken = token;
+        this.authToken = localStorage.getItem('id_token');
     };
     AuthService.prototype.logout = function () {
         this.authToken = null;
@@ -876,15 +876,14 @@ var ProblemService = /** @class */ (function () {
         var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': authToken, 'Content-Type': 'application/json' })
         };
-        return this.http.get(problemsUrl + '/getAllProblems', httpOptions);
+        return this.http.get(problemsUrl + "/getAllProblems", httpOptions);
     };
     ProblemService.prototype.getProblem = function (name) {
         var authToken = this.authService.getToken();
         var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': authToken, 'Content-Type': 'application/json' })
         };
-        var url = problemsUrl + '/getProblem/' + name;
-        return this.http.get(url, httpOptions);
+        return this.http.get(problemsUrl + "/getProblem/" + name, httpOptions);
     };
     ProblemService.prototype.testProblemSolution = function (name, solution) {
         var authToken = this.authService.getToken();
@@ -895,7 +894,7 @@ var ProblemService = /** @class */ (function () {
             name: name,
             solution: solution
         };
-        return this.http.post(problemsUrl + '/checkProblemSolution', problemRequest, httpOptions);
+        return this.http.post(problemsUrl + "/checkProblemSolution", problemRequest, httpOptions);
     };
     ProblemService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -929,13 +928,8 @@ var ValidateService = /** @class */ (function () {
     function ValidateService() {
     }
     ValidateService.prototype.validateRegister = function (user) {
-        if (user.name == undefined || user.username == undefined || user.email == undefined || user.password == undefined
-            || user.name == '' || user.username == '' || user.email == '' || user.password == '') {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return !(user.name == undefined || user.username == undefined || user.email == undefined || user.password == undefined
+            || user.name == '' || user.username == '' || user.email == '' || user.password == '');
     };
     ValidateService.prototype.validateEmail = function (email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

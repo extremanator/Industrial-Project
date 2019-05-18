@@ -23,11 +23,11 @@ export class DashboardComponent implements OnInit {
       this.authService.getProfile().subscribe(profile => {
         this.problemInfo = new Map();
         const info = profile.user.solved_problems;
-        for (let i = 0; i < this.problems.length; i++){
-          if(info.hasOwnProperty(this.problems[i].name)){
-            this.problemInfo.set(this.problems[i].name, {solved: true, dateSol: info[this.problems[i].name].dateSol});
+        for (let problem of this.problems){
+          if(info.hasOwnProperty(problem.name)){
+            this.problemInfo.set(problem.name, {solved: true, dateSol: info[problem.name].dateSol});
           } else {
-            this.problemInfo.set(this.problems[i].name, {solved: false, dateSol: 'TBD'});
+            this.problemInfo.set(problem.name, {solved: false, dateSol: 'TBD'});
           }
         }
       });
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onClickProblem(problem_name: string){
-    this.router.navigate(['/problems/'+problem_name]);
+    this.router.navigate([`/problems/${problem_name}`]);
   }
 
   ngOnInit() {

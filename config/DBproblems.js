@@ -11,9 +11,9 @@ module.exports = [
         'Can you find the problem?\n' +
         '\'input_password\' is the given password and \'len\' is it\'s length, YOU CAN ASSUME THE LENGTH IS CORRECT.",\n',
     code:
-        '#include \<string.h\>\n' +
-        '#include \<stdlib.h\>\n' +
-        '#include \<stdio.h\>\n' +
+        '#include <string.h>\n' +
+        '#include <stdlib.h>\n' +
+        '#include <stdio.h>\n' +
         '\n' +
         'using namespace ::std;\n' +
         '\n' +
