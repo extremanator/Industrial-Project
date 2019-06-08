@@ -16,10 +16,12 @@ router.post('/register', (req, res, next) => {
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
-        solved_problems: {},
+        attempted_problems: {},
         num_solved: 0,
         num_attempted: 0,
-        join_date: time
+        total_points: 0,
+        join_date: time,
+        isAdmin: false
     });
 
     User.addUserIfUnique(newUser, (err, user) => {
@@ -53,10 +55,10 @@ router.post('/authenticate', (req, res, next) => {
                     success: true,
                     token: 'JWT '+token,
                     user: {
-                      id: user._id,
-                      name: user.name,
-                      username: user.username,
-                      email: user.email
+                        id: user._id,
+                        name: user.name,
+                        username: user.username,
+                        email: user.email
                     }
                 });
             } else{
@@ -68,6 +70,35 @@ router.post('/authenticate', (req, res, next) => {
 
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     res.json({user: req.user});
+});
+
+router.get('/getNumUsers', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    User.getNumUsers((err, count) => {
+        if(err) throw err;
+        res.json({num_users: count});
+    });
+});
+
+router.get('/getAllUsers', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    User.getUsers((err, users) => {
+        if(err) throw err;
+        res.json(users);
+    });
+});
+
+router.get('/search/:username', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    const username = req.params.username;
+    User.searchForUsers(username, (err, users) => {
+        res.json(users);
+    });
+});
+
+router.get('/getUser/:username', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    const username = req.params.username;
+    User.getUserByUsername(username, (err, user) => {
+        if(err) throw err;
+        res.json({user: user});
+    });
 });
 
 module.exports = router;

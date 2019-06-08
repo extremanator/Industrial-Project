@@ -1,0 +1,38 @@
+<br/>
+<div class="jumbotron" style="border-color: black; border-style: dotted; border-radius: 5px">
+  <h2 class="page-header">Setup Test</h2>
+  <hr class="my-4">
+  <h4 class="subheader">Select the categories of the test:</h4>
+  <div class="filters">
+    <fieldset>
+      <div class="form-group">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category1" [(ngModel)]="filterDCL">
+          <label class="custom-control-label" for="category1">Declarations and Initialization</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category2" [(ngModel)]="filterEXP">
+          <label class="custom-control-label" for="category2">Expressions</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category3" [(ngModel)]="filterINT">
+          <label class="custom-control-label" for="category3">Integers</label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <hr class="my-4">
+  <h4 class="subheader">Select number of problems:</h4>
+  <div class="form-group num-questions-form">
+    <select [(ngModel)]="numProblems" class="custom-select">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+    </select>
+  </div>
+  <hr class="my-4">
+  <div class="text-center">
+    <a class="btn btn-primary" (click)="startTest()">Start Test!</a>
+  </div>
+</div>
+

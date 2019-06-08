@@ -1,0 +1,10 @@
+.problems{
+  display: table-cell;
+  width: 80%;
+}
+
+.filters{
+  display: table-cell;
+  margin-left: 20px;
+  width: auto;
+}

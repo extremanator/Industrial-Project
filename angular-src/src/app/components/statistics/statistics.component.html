@@ -1,0 +1,31 @@
+<div class="list">
+  <table class="table table-hover">
+    <tbody class="body">
+    <tr class="change-cursor" (click)="onClickGeneral()" [class.table-active]="'General' === selected.name">
+      <th scope="row">General</th>
+    </tr>
+    <tr *ngFor="let info of problemsInfo" (click)="onClickProblem(info)" class="change-cursor" [class.table-active]="info.name === selected.name">
+      <th scope="row">{{info.name}}</th>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="info">
+  <br/>
+  <h2 align="center">{{selected.name}}</h2>
+  <div *ngIf="selected.name === 'General'; else elseBlock" class="jumbotron">
+    <p class="lead">The number of users in the system is: {{selected.numUsers}}</p>
+    <hr class="my-4">
+    <p>More interesting statistics. <i>Maybe leaderboard?!</i></p>
+  </div>
+  <ng-template #elseBlock>
+    <div class="jumbotron">
+      <p class="lead" style="white-space: pre-line">{{selected.num_attempted}}<br>The number of users who solved the problem is: {{selected.num_solved}}.<br>
+        {{selected.solvingUsers}}
+        Average number of attempts until solution is: {{selected.avg_attempts}}.<br>
+        {{selected.solved_percent}}% of users have solved this problem.</p>
+      <hr class="my-4">
+      <p>More interesting statistics.</p>
+    </div>
+  </ng-template>
+</div>

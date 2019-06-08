@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    solved_problems: {
+    attempted_problems: {
         type: Object
     },
     num_solved: {
@@ -31,13 +31,22 @@ const UserSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    total_points: {
+        type: Number,
+        required: true
+    },
     join_date: {
         type: String,
+        required: true
+    },
+    isAdmin: {
+        type: Boolean,
         required: true
     }
 }, {minimize: false});
 
 const User = module.exports = mongoose.model('User', UserSchema);
+const Problem = require('./problem');
 
 module.exports.getUserById = function (id ,callback){
     User.findById(id, callback);
@@ -46,6 +55,10 @@ module.exports.getUserById = function (id ,callback){
 module.exports.getUserByUsername = function (username ,callback){
     const query = {username: username};
     User.findOne(query, callback);
+};
+
+module.exports.getUsers = function (callback){
+    User.find({}, callback);
 };
 
 module.exports.addUserIfUnique = function (newUser, callback){
@@ -80,33 +93,62 @@ module.exports.comparePassword = function (candidatePassword, hash, callback){
 };
 
 module.exports.passedProblem = function (username, problem_name, callback){
-    User.findOne({username: username}, (err, user) => {
+    Problem.getProblemByName(problem_name, (err, problem) => {
         if (err) throw err;
-        else {
+        User.findOne({username: username}, (err, user) => {
+            if (err) throw err;
             let now = new Date();
             let m = now.getMinutes();
             const time = now.getHours() + ':' + ((m<10)? ('0' + m): m) + ' ' + now.getDate() + '/' + (now.getMonth()+1) + '/' + now.getFullYear();
-            let new_solved_problems = Object.assign({}, user.solved_problems);
-            if (!new_solved_problems.hasOwnProperty(problem_name)){
-                new_solved_problems[problem_name] = {solved: true, dateSol: time};
+            let new_attempted_problems = Object.assign({}, user.attempted_problems);
+            if (!new_attempted_problems[problem_name].solved) {
+                new_attempted_problems[problem_name].solved = true;
+                new_attempted_problems[problem_name].dateSol = time;
                 User.updateOne({username: username}, {
-                    solved_problems: new_solved_problems,
+                    total_points: (user.total_points + problem[0].points),
+                    attempted_problems: new_attempted_problems,
                     num_solved: (user.num_solved + 1)
                 }, callback);
             } else{
-                callback(null, null);
+                callback(null, user);
             }
-        }
+        });
     });
+
 };
 
 module.exports.attemptedProblem = function (username, problem_name, callback){
     User.findOne({username: username}, (err, user) => {
         if (err) throw err;
         else {
-            User.updateOne({username: username}, {num_attempted: (user.num_attempted + 1)}, callback);
+            let new_attempted_problems = Object.assign({}, user.attempted_problems);
+            if(new_attempted_problems.hasOwnProperty(problem_name)) {
+                if(!new_attempted_problems[problem_name].solved){
+                    new_attempted_problems[problem_name].num_attempts += 1;
+                }
+            } else {
+                new_attempted_problems[problem_name] = {solved: false, dateSol: 'TBD', num_attempts: 1};
+            }
+            User.updateOne({username: username}, {attempted_problems: new_attempted_problems, num_attempted: (user.num_attempted + 1)}, callback);
         }
     });
 };
 
+module.exports.didUserSolveProblem = function (username, problem_name, callback){
+    User.findOne({username: username}, (err, user) => {
+        if(user.solved_problems.hasOwnProperty(problem_name)) {
+            callback(err, true);
+        } else{
+            callback(err, false);
+        }
+    });
+};
 
+module.exports.getNumUsers = function(callback){
+    User.count(callback);
+};
+
+module.exports.searchForUsers = function(username, callback){
+    const num_search_results = 4;
+    User.find({username: {$regex: username, $options: 'i'}}, null, {limit: num_search_results}, callback);
+};

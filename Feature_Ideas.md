@@ -13,6 +13,7 @@ Features:
 - Add "Take a Test" option
 - Add solved problems history
 - Add Problem page
+- Add ability to search for users and see their stats
 
 ## Estimated checkpoints
 - 10 example problems with the ability to check correctness of solution - 12.5

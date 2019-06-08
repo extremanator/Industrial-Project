@@ -17,6 +17,17 @@ router.get('/getAllProblems', passport.authenticate('jwt', {session:false}), (re
     });
 });
 
+router.get('/getLanguageProblems/:language', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    const language = req.params.language;
+    Problem.getLanguageProblems(language, (err, problemsArr) => {
+        if(err){
+            throw err;
+        } else {
+            res.json({problems: problemsArr});
+        }
+    });
+});
+
 router.get('/getProblem/:name', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     const problemName = req.params.name;
     Problem.getProblemByName(problemName, (err, problemArr) => {
@@ -50,6 +61,14 @@ router.get('/getProblem/:name', passport.authenticate('jwt', {session:false}), (
 });*/
 
 router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    checkSolution(req, res, next, true);
+});
+
+router.post('/checkTestSolution', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    checkSolution(req, res, next, false);
+});
+
+function checkSolution(req, res, next, updateCounters){
     const user = req.user;
     const problemName = req.body.name;
     const solution = req.body.solution;
@@ -65,20 +84,28 @@ router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false
             // Recursive function to run all tests one after the other (waiting for previous to finish)
             function doTests(i){
                 if (i === tests.length){ //If we passed all tests
-                    User.passedProblem(user.username, problemName, (err, resp) => {
-                        if(err) throw err;
-                        else {
-                            User.attemptedProblem(user.username, problemName, (err, resp) => {
-                                if(err) throw err;
-                                res.json({success: true, msg: 'Solved!'});
-                                if (tests.length > 0) {
-                                    fs.unlink(`.\\temp\\${tempName}.cpp`, (err) => {
+                    if(updateCounters) {
+                        User.attemptedProblem(user.username, problemName, (err, resp) => {
+                            if (err) throw err;
+                            Problem.attemptedByUser(problemName, user.username, (err, resp) => {
+                                if (err) throw err;
+                                User.passedProblem(user.username, problemName, (err, resp) => {
+                                    if (err) throw err;
+                                    Problem.solvedByUser(problemName, user.username, (err, resp) => {
                                         if (err) throw err;
+                                        res.json({success: true, msg: 'Solved!'});
                                     });
-                                }
+                                });
                             });
-                        }
-                    });
+                        });
+                    } else {
+                        res.json({success: true, msg: 'Solved!'});
+                    }
+                    if (tests.length > 0) {
+                        fs.unlink(`.\\temp\\${tempName}.cpp`, (err) => {
+                            if (err) throw err;
+                        });
+                    }
                 } else {
                     const concatenatedCode = tests[i].code + solution;
                     fs.writeFile(`.\\temp\\${tempName}.cpp`, concatenatedCode , (err) => {
@@ -92,17 +119,29 @@ router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false
                             }
                             resultPromise.then((result) => {
                                 if (result.exitCode !== 0) {
-                                    User.attemptedProblem(user.username, problemName, (err, resp) => {
-                                        if(err) throw err;
-                                        if (result.errorType === 'compile-time') {
-                                            res.json({success: false, msg:'Compilation Error!'});
-                                        } else {
-                                            res.json({success: false, msg:'Incorrect Solution!'});
-                                        }
-                                        fs.unlink(`.\\temp\\${tempName}.cpp`, (err) => {
-                                            if(err) throw err;
+                                    if(updateCounters) {
+                                        User.attemptedProblem(user.username, problemName, (err, resp) => {
+                                            if (err) throw err;
+                                            Problem.attemptedByUser(problemName, user.username, (err, resp) => {
+                                                if (err) throw err;
+                                                if (result.errorType === 'compile-time') {
+                                                    res.json({success: false, msg: 'Compilation Error!'});
+                                                } else {
+                                                    res.json({success: false, msg: 'Incorrect Solution!'});
+                                                }
+                                            });
+                                            fs.unlink(`.\\temp\\${tempName}.cpp`, (err) => {
+                                                if (err) throw err;
+                                            });
                                         });
-                                    });
+                                    } else{
+                                        if (result.errorType === 'compile-time') {
+                                            console.log(result);
+                                            res.json({success: false, msg: 'Compilation Error!'});
+                                        } else {
+                                            res.json({success: false, msg: 'Incorrect Solution!'});
+                                        }
+                                    }
                                 } else {
                                     doTests(i+1);
                                 }
@@ -116,6 +155,8 @@ router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false
             doTests(0);
         }
     });
-});
+}
+
+
 
 module.exports = router;

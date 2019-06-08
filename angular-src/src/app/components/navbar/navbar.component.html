@@ -19,15 +19,32 @@
         <a class="nav-link" [routerLink]="['/problems']">Problems</a>
       </li>
       <li *ngIf="authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
+        <a class="nav-link" [routerLink]="['/test']">Tests</a>
+      </li>
+      <li *ngIf="authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
         <a class="nav-link" [routerLink]="['/profile']">Profile</a>
+      </li>
+      <li *ngIf="authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
+        <a class="nav-link" [routerLink]="['/leaderboard']">Leaderboard</a>
+      </li>
+      <li *ngIf="authService.isLoggedIn() && authService.isAdmin()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
+        <a class="nav-link" [routerLink]="['/stats']">Stats</a>
       </li>
       <li *ngIf="authService.isLoggedIn()" class="nav-item">
         <a class="nav-link" (click)="onLogoutClick()" href="#">Logout<span class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <div *ngIf="authService.isLoggedIn()">
+      <form class="form-inline my-2 my-lg-0">
+        <input #searchBox id="search-box" class="form-control mr-sm-2" type="text" placeholder="Search" autocomplete="off" (input)="search(searchBox.value)">
+      </form>
+      <ul class="list-group search-results">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let user of users$ | async" >
+          <a routerLink="/user/{{user.username}}">
+            {{user.username}}
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>

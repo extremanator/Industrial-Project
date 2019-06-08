@@ -1,0 +1,18 @@
+.page-header{
+  text-align: center;
+  margin-top: 5px;
+}
+
+.subheader{
+  margin-left: 5px;
+}
+
+.custom-checkbox{
+  float: left;
+  margin-left: 30px;
+}
+
+.num-questions-form{
+  width: 200px;
+  margin-left: 50px;
+}
