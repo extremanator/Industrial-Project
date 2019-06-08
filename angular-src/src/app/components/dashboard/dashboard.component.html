@@ -1,23 +1,8 @@
 <br/>
-<h2 class="page-header">Problems</h2>
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th scope="col"></th>
-    <th scope="col">Difficulty</th>
-    <th scope="col">Date of Solution</th>
-    <th scope="col">Solved</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let problem of problems" (dblclick)="onClickProblem(problem.name)">
-    <th scope="row">{{problem.name}}</th>
-    <td>{{problem.difficulty}}</td>
-    <td>{{problemInfo.get(problem.name).dateSol}}</td>
-    <td>
-      <div *ngIf="problemInfo.get(problem.name).solved; else elseBlock">&#10004;</div>
-      <ng-template #elseBlock>&#10060;</ng-template>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<h2 class="page-header">Dashboard</h2>
+<div class="jumbotron cpp change-cursor" routerLink="/language/cpp/::">
+  <h2 class="language-name">C++</h2>
+</div>
+<div class="jumbotron java change-cursor" routerLink="/language/java/::">
+  <h2 class="language-name">Java</h2>
+</div>

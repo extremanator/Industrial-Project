@@ -3,3 +3,6 @@
 @import "~codemirror/theme/material.css";
 
 
+.change-cursor {
+  cursor: pointer;
+}

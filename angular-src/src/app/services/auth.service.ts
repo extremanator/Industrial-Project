@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { of, Observable } from "rxjs";
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from "../user";
 
 const helper = new JwtHelperService();
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
+export interface CountResp {
+  num_users: number
+}
 
 export interface RegisterResp {
   success: boolean;
@@ -22,19 +27,19 @@ export interface AuthResp {
     id: string,
     name: string,
     username: string,
-    email: string,
+    email: string
   };
 }
 
 export interface ProfileResp {
   user: {
-    id: string,
     name: string,
     username: string,
     email: string,
-    solved_problems: Object,
+    attempted_problems: Object,
     num_solved: number,
     num_attempted: number,
+    total_points: number,
     join_date: string
   };
 }
@@ -44,7 +49,6 @@ export interface ProfileResp {
 })
 export class AuthService {
   authToken: any;
-  user: any;
 
   constructor(private http: HttpClient) { }
 
@@ -64,11 +68,17 @@ export class AuthService {
     return this.http.get<ProfileResp>('http://localhost:3000/users/profile', httpOptions);
   }
 
+  getUserInfo(username: string): Observable<ProfileResp>{
+    this.loadToken();
+    const httpOptions = {
+      headers: new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json' })
+    };
+    return this.http.get<ProfileResp>(`http://localhost:3000/users/getUser/${username}`, httpOptions);
+  }
+
   storeUserData(token, user){
     localStorage.setItem('id_token', token);
-    localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
-    this.user = user;
   }
 
   isLoggedIn() {
@@ -80,15 +90,61 @@ export class AuthService {
     return localStorage.getItem('id_token');
   }
 
+  getTokenUser(){
+    this.loadToken();
+    if (this.authToken != null) {
+      const user = helper.decodeToken(this.authToken);
+      return user.username;
+    } else {
+      return "";
+    }
+  }
+
+  isAdmin(){
+    this.loadToken();
+    if (this.authToken != null) {
+      const user = helper.decodeToken(this.authToken);
+      return user.isAdmin;
+    } else {
+      return false;
+    }
+  }
+
   loadToken(){
     this.authToken = localStorage.getItem('id_token');
   }
 
   logout(){
     this.authToken = null;
-    this.user = null;
     localStorage.clear();
   }
 
+  getNumUsers(){
+    this.loadToken();
+    const httpOptions = {
+      headers: new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json' })
+    };
+    return this.http.get<CountResp>('http://localhost:3000/users/getNumUsers', httpOptions);
+  }
+
+  getAllUsers(){
+    this.loadToken();
+    const httpOptions = {
+      headers: new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json' })
+    };
+    return this.http.get<User[]>('http://localhost:3000/users/getAllUsers', httpOptions);
+  }
+
+  searchUsers(term: string): Observable<User[]> {
+    if (!term.trim()) {
+      // if not search term, return empty user array.
+      return of([]);
+    }
+    this.loadToken();
+    const httpOptions = {
+      headers: new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json' })
+    };
+    return this.http.get<User[]>(`http://localhost:3000/users/search/${term}`, httpOptions);
+  }
 
 }

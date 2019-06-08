@@ -105,10 +105,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./guards/auth.guard */ "./src/app/guards/auth.guard.ts");
 /* harmony import */ var _components_code_problem_code_problem_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/code-problem/code-problem.component */ "./src/app/components/code-problem/code-problem.component.ts");
 /* harmony import */ var _ctrl_ngx_codemirror__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ctrl/ngx-codemirror */ "./node_modules/@ctrl/ngx-codemirror/fesm5/ctrl-ngx-codemirror.js");
-/* harmony import */ var codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! codemirror/mode/clike/clike */ "./node_modules/codemirror/mode/clike/clike.js");
-/* harmony import */ var codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! codemirror/addon/edit/closebrackets */ "./node_modules/codemirror/addon/edit/closebrackets.js");
-/* harmony import */ var codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _components_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/statistics/statistics.component */ "./src/app/components/statistics/statistics.component.ts");
+/* harmony import */ var _guards_admin_guard__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./guards/admin.guard */ "./src/app/guards/admin.guard.ts");
+/* harmony import */ var _components_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/public-profile/public-profile.component */ "./src/app/components/public-profile/public-profile.component.ts");
+/* harmony import */ var _components_language_language_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/language/language.component */ "./src/app/components/language/language.component.ts");
+/* harmony import */ var _components_leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/leaderboard/leaderboard.component */ "./src/app/components/leaderboard/leaderboard.component.ts");
+/* harmony import */ var _components_test_test_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/test/test.component */ "./src/app/components/test/test.component.ts");
+/* harmony import */ var _components_test_problem_test_problem_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/test-problem/test-problem.component */ "./src/app/components/test-problem/test-problem.component.ts");
+/* harmony import */ var _guards_test_guard__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./guards/test.guard */ "./src/app/guards/test.guard.ts");
+/* harmony import */ var codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! codemirror/mode/clike/clike */ "./node_modules/codemirror/mode/clike/clike.js");
+/* harmony import */ var codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_25__);
+/* harmony import */ var codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! codemirror/addon/edit/closebrackets */ "./node_modules/codemirror/addon/edit/closebrackets.js");
+/* harmony import */ var codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_26__);
+
+
+
+
+
+
+
+
 
 
 
@@ -134,7 +150,13 @@ var appRoutes = [
     { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"] },
     { path: 'problems', component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_9__["DashboardComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
     { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_10__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'problems/:name', component: _components_code_problem_code_problem_component__WEBPACK_IMPORTED_MODULE_15__["CodeProblemComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] }
+    { path: 'leaderboard', component: _components_leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_21__["LeaderboardComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'test', component: _components_test_test_component__WEBPACK_IMPORTED_MODULE_22__["TestComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'test/problem', component: _components_test_problem_test_problem_component__WEBPACK_IMPORTED_MODULE_23__["TestProblemComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"], _guards_test_guard__WEBPACK_IMPORTED_MODULE_24__["TestGuard"]] },
+    { path: 'stats', component: _components_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_17__["StatisticsComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"], _guards_admin_guard__WEBPACK_IMPORTED_MODULE_18__["AdminGuard"]] },
+    { path: 'problems/:name', component: _components_code_problem_code_problem_component__WEBPACK_IMPORTED_MODULE_15__["CodeProblemComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'user/:username', component: _components_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_19__["PublicProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'language/:language/:filters', component: _components_language_language_component__WEBPACK_IMPORTED_MODULE_20__["LanguageComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -149,7 +171,13 @@ var AppModule = /** @class */ (function () {
                 _components_home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"],
                 _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_9__["DashboardComponent"],
                 _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_10__["ProfileComponent"],
-                _components_code_problem_code_problem_component__WEBPACK_IMPORTED_MODULE_15__["CodeProblemComponent"]
+                _components_code_problem_code_problem_component__WEBPACK_IMPORTED_MODULE_15__["CodeProblemComponent"],
+                _components_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_17__["StatisticsComponent"],
+                _components_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_19__["PublicProfileComponent"],
+                _components_leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_21__["LeaderboardComponent"],
+                _components_language_language_component__WEBPACK_IMPORTED_MODULE_20__["LanguageComponent"],
+                _components_test_test_component__WEBPACK_IMPORTED_MODULE_22__["TestComponent"],
+                _components_test_problem_test_problem_component__WEBPACK_IMPORTED_MODULE_23__["TestProblemComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -188,7 +216,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<h1>{{problem.name}}</h1>\n<p style=\"white-space: pre-wrap;\">{{problem.paragraph}}</p>\n<ngx-codemirror [(ngModel)]=\"solution_code\"\n                [options]=\"{\n                  lineNumbers: true,\n                  theme: 'material',\n                  mode: 'text/x-c++src',\n                  indentUnit: 4,\n                  indentWithTabs: true,\n                  autoCloseBrackets: true\n                }\">{{solution_code}}</ngx-codemirror>\n<br/>\n<button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\n<br/>\n<div *ngIf=\"isSuccess != undefined\">{{feedback_msg}}</div>\n\n"
+module.exports = "<br/>\n<h1>{{(problem === undefined)?'':problem.name}}</h1>\n<p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\n<ngx-codemirror [(ngModel)]=\"solution_code\"\n                [options]=\"{\n                  lineNumbers: true,\n                  theme: 'material',\n                  mode: 'text/x-c++src',\n                  indentUnit: 4,\n                  indentWithTabs: true,\n                  autoCloseBrackets: true\n                }\">{{solution_code}}</ngx-codemirror>\n<br/>\n<button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\n<br/>\n<div *ngIf=\"isSuccess != undefined\">{{feedback_msg}}</div>\n\n"
 
 /***/ }),
 
@@ -256,7 +284,7 @@ var CodeProblemComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZGFzaGJvYXJkL2Rhc2hib2FyZC5jb21wb25lbnQuY3NzIn0= */"
+module.exports = ".page-header{\r\n  text-align: center;\r\n}\r\n.language-name{\r\n  text-align: center;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9kYXNoYm9hcmQvZGFzaGJvYXJkLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7QUFDcEI7QUFDQTtFQUNFLGtCQUFrQjtBQUNwQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZGFzaGJvYXJkL2Rhc2hib2FyZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhZ2UtaGVhZGVye1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG4ubGFuZ3VhZ2UtbmFtZXtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -267,7 +295,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<h2 class=\"page-header\">Problems</h2>\n<table class=\"table table-hover\">\n  <thead>\n  <tr>\n    <th scope=\"col\"></th>\n    <th scope=\"col\">Difficulty</th>\n    <th scope=\"col\">Date of Solution</th>\n    <th scope=\"col\">Solved</th>\n  </tr>\n  </thead>\n  <tbody>\n  <tr *ngFor=\"let problem of problems\" (dblclick)=\"onClickProblem(problem.name)\">\n    <th scope=\"row\">{{problem.name}}</th>\n    <td>{{problem.difficulty}}</td>\n    <td>{{problemInfo.get(problem.name).dateSol}}</td>\n    <td>\n      <div *ngIf=\"problemInfo.get(problem.name).solved; else elseBlock\">&#10004;</div>\n      <ng-template #elseBlock>&#10060;</ng-template>\n    </td>\n  </tr>\n  </tbody>\n</table>\n"
+module.exports = "<br/>\n<h2 class=\"page-header\">Dashboard</h2>\n<div class=\"jumbotron cpp change-cursor\" routerLink=\"/language/cpp/::\">\n  <h2 class=\"language-name\">C++</h2>\n</div>\n<div class=\"jumbotron java change-cursor\" routerLink=\"/language/java/::\">\n  <h2 class=\"language-name\">Java</h2>\n</div>\n"
 
 /***/ }),
 
@@ -283,44 +311,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardComponent", function() { return DashboardComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_problem_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/problem.service */ "./src/app/services/problem.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
-
-
-
 
 
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent(problemService, authService, router) {
-        this.problemService = problemService;
-        this.authService = authService;
-        this.router = router;
+    function DashboardComponent() {
     }
-    DashboardComponent.prototype.getAllProblems = function () {
-        var _this = this;
-        this.problemService.getAllProblems().subscribe(function (problemsWrapper) {
-            _this.problems = problemsWrapper.problems;
-            _this.authService.getProfile().subscribe(function (profile) {
-                _this.problemInfo = new Map();
-                var info = profile.user.solved_problems;
-                for (var _i = 0, _a = _this.problems; _i < _a.length; _i++) {
-                    var problem = _a[_i];
-                    if (info.hasOwnProperty(problem.name)) {
-                        _this.problemInfo.set(problem.name, { solved: true, dateSol: info[problem.name].dateSol });
-                    }
-                    else {
-                        _this.problemInfo.set(problem.name, { solved: false, dateSol: 'TBD' });
-                    }
-                }
-            });
-        });
-    };
-    DashboardComponent.prototype.onClickProblem = function (problem_name) {
-        this.router.navigate(["/problems/" + problem_name]);
-    };
     DashboardComponent.prototype.ngOnInit = function () {
-        this.getAllProblems();
     };
     DashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -328,9 +324,7 @@ var DashboardComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./dashboard.component.html */ "./src/app/components/dashboard/dashboard.component.html"),
             styles: [__webpack_require__(/*! ./dashboard.component.css */ "./src/app/components/dashboard/dashboard.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_problem_service__WEBPACK_IMPORTED_MODULE_2__["ProblemService"],
-            _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], DashboardComponent);
     return DashboardComponent;
 }());
@@ -389,6 +383,280 @@ var HomeComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], HomeComponent);
     return HomeComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/language/language.component.css":
+/*!************************************************************!*\
+  !*** ./src/app/components/language/language.component.css ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".problems{\r\n  display: table-cell;\r\n  width: 80%;\r\n}\r\n\r\n.filters{\r\n  display: table-cell;\r\n  margin-left: 20px;\r\n  width: auto;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sYW5ndWFnZS9sYW5ndWFnZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQW1CO0VBQ25CLFVBQVU7QUFDWjs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQixpQkFBaUI7RUFDakIsV0FBVztBQUNiIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sYW5ndWFnZS9sYW5ndWFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2JsZW1ze1xyXG4gIGRpc3BsYXk6IHRhYmxlLWNlbGw7XHJcbiAgd2lkdGg6IDgwJTtcclxufVxyXG5cclxuLmZpbHRlcnN7XHJcbiAgZGlzcGxheTogdGFibGUtY2VsbDtcclxuICBtYXJnaW4tbGVmdDogMjBweDtcclxuICB3aWR0aDogYXV0bztcclxufVxyXG4iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/components/language/language.component.html":
+/*!*************************************************************!*\
+  !*** ./src/app/components/language/language.component.html ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<br/>\n<h2 class=\"page-header\">{{language}}</h2>\n<div class=\"problems\">\n  <table class=\"table table-hover\">\n    <thead>\n    <tr>\n      <th scope=\"col\"></th>\n      <th scope=\"col\">Difficulty</th>\n      <th scope=\"col\">Points</th>\n      <th scope=\"col\">Date of Solution</th>\n      <th scope=\"col\">Solved</th>\n    </tr>\n    </thead>\n    <tbody *ngIf=\"problemInfo\">\n      <tr *ngFor=\"let problem of problems\" (click)=\"onClickProblem(problem.name)\" class=\"change-cursor\">\n        <th scope=\"row\">{{problem.name}}</th>\n        <td>{{problem.difficulty}}</td>\n        <td>{{problem.points}}</td>\n        <td>{{(problemInfo.get(problem.name) === undefined)?'':(problemInfo.get(problem.name).dateSol)}}</td>\n        <td>\n          <div *ngIf=\"(problemInfo.get(problem.name)===undefined)?false:(problemInfo.get(problem.name).solved == true); else elseBlock\">&#10004;</div>\n          <ng-template #elseBlock>&#10060;</ng-template>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n<div class=\"filters\">\n  <fieldset>\n    <legend>Difficulty</legend>\n    <div class=\"form-group\">\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"difficulty1\" [(ngModel)]=\"filterEasy\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"difficulty1\">Easy</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"difficutly2\" [(ngModel)]=\"filterMedium\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"difficutly2\">Medium</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"difficulty3\" [(ngModel)]=\"filterHard\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"difficulty3\">Hard</label>\n      </div>\n    </div>\n    <legend>Category</legend>\n    <div class=\"form-group\">\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category1\" [(ngModel)]=\"filterDCL\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category1\">Declarations and Initialization</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category2\" [(ngModel)]=\"filterEXP\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category2\">Expressions</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category3\" [(ngModel)]=\"filterINT\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category3\">Integers</label>\n      </div>\n    </div>\n  </fieldset>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/language/language.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/components/language/language.component.ts ***!
+  \***********************************************************/
+/*! exports provided: LanguageComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LanguageComponent", function() { return LanguageComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_problem_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/problem.service */ "./src/app/services/problem.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
+
+
+var LanguageComponent = /** @class */ (function () {
+    function LanguageComponent(problemService, authService, router, route) {
+        this.problemService = problemService;
+        this.authService = authService;
+        this.router = router;
+        this.route = route;
+    }
+    LanguageComponent.prototype.getLanguageProblems = function (language, filters) {
+        var _this = this;
+        this.problemService.getLanguageProblems(language).subscribe(function (problemsWrapper) {
+            var temp = problemsWrapper.problems;
+            _this.problems = [];
+            for (var _i = 0, temp_1 = temp; _i < temp_1.length; _i++) {
+                var problem = temp_1[_i];
+                var hasDifficulty = false;
+                if (filters.difficulties.length === 0)
+                    hasDifficulty = true;
+                else {
+                    for (var _a = 0, _b = filters.difficulties; _a < _b.length; _a++) {
+                        var difficulty = _b[_a];
+                        if (problem.category.includes(difficulty)) {
+                            hasDifficulty = true;
+                            break;
+                        }
+                    }
+                }
+                var hasCategory = false;
+                if (filters.categories.length === 0)
+                    hasCategory = true;
+                else {
+                    for (var _c = 0, _d = filters.categories; _c < _d.length; _c++) {
+                        var category = _d[_c];
+                        if (problem.category.includes(category)) {
+                            hasCategory = true;
+                            break;
+                        }
+                    }
+                }
+                if (hasCategory && hasDifficulty) {
+                    _this.problems.push(problem);
+                }
+            }
+            _this.problems.sort(function (obj1, obj2) {
+                return (obj1.name > obj2.name) ? 1 : -1;
+            });
+            _this.authService.getProfile().subscribe(function (profile) {
+                var info = profile.user.attempted_problems;
+                var temp_info = new Map();
+                for (var _i = 0, _a = _this.problems; _i < _a.length; _i++) {
+                    var problem = _a[_i];
+                    if (info.hasOwnProperty(problem.name)) {
+                        temp_info.set(problem.name, { solved: info[problem.name].solved, dateSol: info[problem.name].dateSol });
+                    }
+                    else {
+                        temp_info.set(problem.name, { solved: false, dateSol: 'TBD' });
+                    }
+                }
+                _this.problemInfo = temp_info;
+            });
+        });
+    };
+    LanguageComponent.prototype.onClickProblem = function (problem_name) {
+        this.router.navigate(["/problems/" + problem_name]);
+    };
+    LanguageComponent.prototype.updateFilter = function () {
+        var filters = ":";
+        if (this.filterEasy) {
+            filters += 'easy:';
+        }
+        if (this.filterMedium) {
+            filters += 'medium:';
+        }
+        if (this.filterHard) {
+            filters += 'hard:';
+        }
+        filters += ':';
+        if (this.filterDCL) {
+            filters += 'DCL:';
+        }
+        if (this.filterEXP) {
+            filters += 'EXP:';
+        }
+        if (this.filterINT) {
+            filters += 'INT:';
+        }
+        this.router.navigate(["/language/" + this.routeLanguage + "/" + filters]);
+    };
+    LanguageComponent.prototype.getFilters = function (filters) {
+        var difficulties = [];
+        var i;
+        while (filters[1] != ':') {
+            i = filters.indexOf(':', 1);
+            difficulties.push(filters.slice(1, i));
+            filters = filters.slice(i, filters.length);
+        }
+        filters = filters.slice(1, filters.length);
+        var categories = [];
+        while (filters != ':') {
+            i = filters.indexOf(':', 1);
+            categories.push(filters.slice(1, i));
+            filters = filters.slice(i, filters.length);
+        }
+        return { difficulties: difficulties, categories: categories };
+    };
+    LanguageComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.problemInfo = null;
+        this.route.params.subscribe(function (routeParams) {
+            _this.routeLanguage = routeParams.language;
+            switch (routeParams.language) {
+                case 'cpp':
+                    _this.language = 'C++';
+                    break;
+                case 'java':
+                    _this.language = 'Java';
+                    break;
+                default:
+                    _this.language = '';
+                    break;
+            }
+            var filters = _this.getFilters(routeParams.filters);
+            if (filters.difficulties.includes('easy'))
+                _this.filterEasy = true;
+            if (filters.difficulties.includes('medium'))
+                _this.filterMedium = true;
+            if (filters.difficulties.includes('hard'))
+                _this.filterHard = true;
+            if (filters.categories.includes('DCL'))
+                _this.filterDCL = true;
+            if (filters.categories.includes('EXP'))
+                _this.filterEXP = true;
+            if (filters.categories.includes('INT'))
+                _this.filterINT = true;
+            _this.getLanguageProblems(routeParams.language, filters);
+        });
+    };
+    LanguageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-language',
+            template: __webpack_require__(/*! ./language.component.html */ "./src/app/components/language/language.component.html"),
+            styles: [__webpack_require__(/*! ./language.component.css */ "./src/app/components/language/language.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_problem_service__WEBPACK_IMPORTED_MODULE_2__["ProblemService"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])
+    ], LanguageComponent);
+    return LanguageComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/leaderboard/leaderboard.component.css":
+/*!******************************************************************!*\
+  !*** ./src/app/components/leaderboard/leaderboard.component.css ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbGVhZGVyYm9hcmQvbGVhZGVyYm9hcmQuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/components/leaderboard/leaderboard.component.html":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/leaderboard/leaderboard.component.html ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<table class=\"table table-hover\">\n  <thead>\n  <tr>\n    <th scope=\"col\">Username</th>\n    <th scope=\"col\">Join Date</th>\n    <th scope=\"col\">Number of Problems Solved</th>\n    <th scope=\"col\">Total Points</th>\n  </tr>\n  </thead>\n  <tbody *ngIf=\"users\">\n  <tr *ngFor=\"let user of users\" routerLink=\"/user/{{user.username}}\" class=\"change-cursor\">\n    <th scope=\"row\">{{user.username}}</th>\n    <td>{{user.join_date}}</td>\n    <td>{{user.num_solved}}</td>\n    <td>{{user.total_points}}</td>\n  </tr>\n  </tbody>\n</table>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/leaderboard/leaderboard.component.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/components/leaderboard/leaderboard.component.ts ***!
+  \*****************************************************************/
+/*! exports provided: LeaderboardComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LeaderboardComponent", function() { return LeaderboardComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
+
+var LeaderboardComponent = /** @class */ (function () {
+    function LeaderboardComponent(authService, router) {
+        this.authService = authService;
+        this.router = router;
+    }
+    LeaderboardComponent.prototype.getAllUsers = function () {
+        var _this = this;
+        this.authService.getAllUsers().subscribe(function (users) {
+            _this.users = users;
+            _this.users.sort(function (obj1, obj2) {
+                var points_diff = obj2.total_points - obj1.total_points;
+                if (points_diff != 0)
+                    return points_diff;
+                else {
+                    return (obj2.username > obj1.username) ? 1 : -1;
+                }
+            });
+        });
+    };
+    LeaderboardComponent.prototype.ngOnInit = function () {
+        this.getAllUsers();
+    };
+    LeaderboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-leaderboard',
+            template: __webpack_require__(/*! ./leaderboard.component.html */ "./src/app/components/leaderboard/leaderboard.component.html"),
+            styles: [__webpack_require__(/*! ./leaderboard.component.css */ "./src/app/components/leaderboard/leaderboard.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+    ], LeaderboardComponent);
+    return LeaderboardComponent;
 }());
 
 
@@ -489,7 +757,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbmF2YmFyL25hdmJhci5jb21wb25lbnQuY3NzIn0= */"
+module.exports = ".search-results{\r\n  position: absolute;\r\n  width: 204px;\r\n  z-index: 1;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLFVBQVU7QUFDWiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbmF2YmFyL25hdmJhci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNlYXJjaC1yZXN1bHRze1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICB3aWR0aDogMjA0cHg7XHJcbiAgei1pbmRleDogMTtcclxufVxyXG4iXX0= */"
 
 /***/ }),
 
@@ -500,7 +768,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"#\">Rafael-Project</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarColor02\" aria-controls=\"navbarColor02\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarColor02\">\n    <ul class=\"navbar-nav mr-auto navbar-left\">\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/']\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/login']\">Login</a>\n      </li>\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/register']\">Register</a>\n      </li>\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/problems']\">Problems</a>\n      </li>\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/profile']\">Profile</a>\n      </li>\n      <li *ngIf=\"authService.isLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">Logout<span class=\"sr-only\">(current)</span></a>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\">\n      <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\r\n  <a class=\"navbar-brand\" href=\"#\">Rafael-Project</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarColor02\" aria-controls=\"navbarColor02\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarColor02\">\r\n    <ul class=\"navbar-nav mr-auto navbar-left\">\r\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/']\">Home <span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/login']\">Login</a>\r\n      </li>\r\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/register']\">Register</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/problems']\">Problems</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/test']\">Tests</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/profile']\">Profile</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/leaderboard']\">Leaderboard</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn() && authService.isAdmin()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/stats']\">Stats</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">Logout<span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n    </ul>\r\n    <div *ngIf=\"authService.isLoggedIn()\">\r\n      <form class=\"form-inline my-2 my-lg-0\">\r\n        <input #searchBox id=\"search-box\" class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\" autocomplete=\"off\" (input)=\"search(searchBox.value)\">\r\n      </form>\r\n      <ul class=\"list-group search-results\">\r\n        <li class=\"list-group-item d-flex justify-content-between align-items-center\" *ngFor=\"let user of users$ | async\" >\r\n          <a routerLink=\"/user/{{user.username}}\">\r\n            {{user.username}}\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -520,6 +788,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/module/index.js");
 /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+
+
 
 
 
@@ -530,14 +802,26 @@ var NavbarComponent = /** @class */ (function () {
         this.authService = authService;
         this.router = router;
         this.flashMessage = flashMessage;
+        this.searchTerms = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
     }
     NavbarComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.users$ = this.searchTerms.pipe(
+        // wait 300ms after each keystroke before considering the term
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["debounceTime"])(300), 
+        // ignore new term if same as previous term
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["distinctUntilChanged"])(), 
+        // switch to new search observable each time the term changes
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["switchMap"])(function (term) { return _this.authService.searchUsers(term); }));
     };
     NavbarComponent.prototype.onLogoutClick = function () {
         this.authService.logout();
         this.flashMessage.show('You are logged out', { cssClass: 'alert-success', timeout: 3000 });
         this.router.navigate(['/login']);
         return false;
+    };
+    NavbarComponent.prototype.search = function (term) {
+        this.searchTerms.next(term);
     };
     NavbarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -620,6 +904,118 @@ var ProfileComponent = /** @class */ (function () {
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], ProfileComponent);
     return ProfileComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/public-profile/public-profile.component.css":
+/*!************************************************************************!*\
+  !*** ./src/app/components/public-profile/public-profile.component.css ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcHVibGljLXByb2ZpbGUvcHVibGljLXByb2ZpbGUuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/components/public-profile/public-profile.component.html":
+/*!*************************************************************************!*\
+  !*** ./src/app/components/public-profile/public-profile.component.html ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<br/>\n<div *ngIf=\"user\">\n  <h2 class=\"page-header\">{{user.name}}</h2>\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\">Username: {{user.username}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n    <li class=\"list-group-item\">Join Date: {{user.join_date}}</li>\n    <li class=\"list-group-item\">Number of Solved Problems: {{user.num_solved}}</li>\n    <li class=\"list-group-item\">Number of Solution Attempts: {{user.num_attempted}}</li>\n    <div class=\"jumbotron\">\n      <p class=\"lead\" style=\"white-space: pre-line\">{{attempted_problems}}{{solved_problems}}</p>\n    </div>\n  </ul>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/public-profile/public-profile.component.ts":
+/*!***********************************************************************!*\
+  !*** ./src/app/components/public-profile/public-profile.component.ts ***!
+  \***********************************************************************/
+/*! exports provided: PublicProfileComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PublicProfileComponent", function() { return PublicProfileComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+
+
+
+
+var PublicProfileComponent = /** @class */ (function () {
+    function PublicProfileComponent(route, authService) {
+        this.route = route;
+        this.authService = authService;
+    }
+    PublicProfileComponent.prototype.getUser = function (username) {
+        var _this = this;
+        this.authService.getUserInfo(username).subscribe(function (data) {
+            _this.user = data.user;
+            if (data.user.num_attempted == 0) {
+                _this.attempted_problems = username + " hasn't even tried solving something. What a loser!";
+                _this.solved_problems = "";
+            }
+            else {
+                _this.attempted_problems += username + " has attempted: ";
+                if (data.user.num_solved == 0) {
+                    for (var name_1 in data.user.attempted_problems) {
+                        if (_this.attempted_problems === username + " has attempted: ") {
+                            _this.attempted_problems += name_1;
+                        }
+                        else {
+                            _this.attempted_problems += ", " + name_1;
+                        }
+                    }
+                    _this.solved_problems += "\nBut hasn't solved anything. What a loser!";
+                }
+                else {
+                    _this.solved_problems += "\n" + username + " has solved: ";
+                    for (var name_2 in data.user.attempted_problems) {
+                        if (_this.attempted_problems === username + " has attempted: ") {
+                            _this.attempted_problems += name_2;
+                        }
+                        else {
+                            _this.attempted_problems += ", " + name_2;
+                        }
+                        if (data.user.attempted_problems[name_2].solved) {
+                            if (_this.solved_problems === "\n" + username + " has solved: ") {
+                                _this.solved_problems += name_2;
+                            }
+                            else {
+                                _this.solved_problems += ", " + name_2;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    };
+    PublicProfileComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.subscribe(function (routeParams) {
+            _this.attempted_problems = "";
+            _this.solved_problems = "";
+            _this.getUser(routeParams.username);
+        });
+    };
+    PublicProfileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-public-profile',
+            template: __webpack_require__(/*! ./public-profile.component.html */ "./src/app/components/public-profile/public-profile.component.html"),
+            styles: [__webpack_require__(/*! ./public-profile.component.css */ "./src/app/components/public-profile/public-profile.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
+    ], PublicProfileComponent);
+    return PublicProfileComponent;
 }());
 
 
@@ -728,6 +1124,418 @@ var RegisterComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/statistics/statistics.component.css":
+/*!****************************************************************!*\
+  !*** ./src/app/components/statistics/statistics.component.css ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".list {\r\n  float: left;\r\n}\r\n\r\n.info {\r\n  float: left;\r\n  width: 70%;\r\n  height: 1000px;\r\n}\r\n\r\n\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9zdGF0aXN0aWNzL3N0YXRpc3RpY3MuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxVQUFVO0VBQ1YsY0FBYztBQUNoQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvc3RhdGlzdGljcy9zdGF0aXN0aWNzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubGlzdCB7XHJcbiAgZmxvYXQ6IGxlZnQ7XHJcbn1cclxuXHJcbi5pbmZvIHtcclxuICBmbG9hdDogbGVmdDtcclxuICB3aWR0aDogNzAlO1xyXG4gIGhlaWdodDogMTAwMHB4O1xyXG59XHJcblxyXG5cclxuIl19 */"
+
+/***/ }),
+
+/***/ "./src/app/components/statistics/statistics.component.html":
+/*!*****************************************************************!*\
+  !*** ./src/app/components/statistics/statistics.component.html ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"list\">\n  <table class=\"table table-hover\">\n    <tbody class=\"body\">\n    <tr class=\"change-cursor\" (click)=\"onClickGeneral()\" [class.table-active]=\"'General' === selected.name\">\n      <th scope=\"row\">General</th>\n    </tr>\n    <tr *ngFor=\"let info of problemsInfo\" (click)=\"onClickProblem(info)\" class=\"change-cursor\" [class.table-active]=\"info.name === selected.name\">\n      <th scope=\"row\">{{info.name}}</th>\n    </tr>\n    </tbody>\n  </table>\n</div>\n<div class=\"info\">\n  <br/>\n  <h2 align=\"center\">{{selected.name}}</h2>\n  <div *ngIf=\"selected.name === 'General'; else elseBlock\" class=\"jumbotron\">\n    <p class=\"lead\">The number of users in the system is: {{selected.numUsers}}</p>\n    <hr class=\"my-4\">\n    <p>More interesting statistics. <i>Maybe leaderboard?!</i></p>\n  </div>\n  <ng-template #elseBlock>\n    <div class=\"jumbotron\">\n      <p class=\"lead\" style=\"white-space: pre-line\">{{selected.num_attempted}}<br>The number of users who solved the problem is: {{selected.num_solved}}.<br>\n        {{selected.solvingUsers}}\n        Average number of attempts until solution is: {{selected.avg_attempts}}.<br>\n        {{selected.solved_percent}}% of users have solved this problem.</p>\n      <hr class=\"my-4\">\n      <p>More interesting statistics.</p>\n    </div>\n  </ng-template>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/statistics/statistics.component.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/components/statistics/statistics.component.ts ***!
+  \***************************************************************/
+/*! exports provided: StatisticsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatisticsComponent", function() { return StatisticsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_problem_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/problem.service */ "./src/app/services/problem.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+
+
+
+
+var StatisticsComponent = /** @class */ (function () {
+    function StatisticsComponent(problemService, authService) {
+        this.problemService = problemService;
+        this.authService = authService;
+    }
+    StatisticsComponent.prototype.getAllProblems = function () {
+        var _this = this;
+        this.problemService.getAllProblems().subscribe(function (problemsWrapper) {
+            _this.problems = problemsWrapper.problems;
+            var temp_info = [];
+            _this.authService.getNumUsers().subscribe(function (data) {
+                _this.numUsers = data.num_users;
+                for (var _i = 0, _a = _this.problems; _i < _a.length; _i++) {
+                    var problem = _a[_i];
+                    var tot_attempts = 0;
+                    var solvingUsers = '';
+                    if (problem.solved_by !== undefined) {
+                        if (problem.num_solved > 1) {
+                            var i = 1;
+                            solvingUsers += 'The users are: ';
+                            for (var name_1 in problem.solved_by) {
+                                if (solvingUsers === "The users are: ") {
+                                    solvingUsers += name_1;
+                                }
+                                else if (i === problem.num_solved) {
+                                    if (problem.num_solved !== 2)
+                                        solvingUsers += ',';
+                                    solvingUsers += " and " + name_1;
+                                }
+                                else {
+                                    solvingUsers += ", " + name_1;
+                                }
+                                i++;
+                                tot_attempts += problem.solved_by[name_1];
+                            }
+                            solvingUsers += '.\n';
+                        }
+                        else if (problem.num_solved === 1) {
+                            solvingUsers += 'The user is: ';
+                            for (var name_2 in problem.solved_by) {
+                                solvingUsers += name_2;
+                                tot_attempts += problem.solved_by[name_2];
+                            }
+                            solvingUsers += '.\n';
+                        }
+                        else {
+                            solvingUsers += '\n';
+                        }
+                    }
+                    var text1 = void 0;
+                    if (problem.num_attempted !== 1) {
+                        text1 = "So far their have been " + problem.num_attempted + " attempts to solve the problem.";
+                    }
+                    else {
+                        text1 = "So far their has been " + problem.num_attempted + " attempt to solve the problem.";
+                    }
+                    temp_info.push({
+                        name: problem.name,
+                        solved_percent: ((problem.num_solved * 100) / _this.numUsers),
+                        avg_attempts: (problem.num_solved === 0) ? 0 : tot_attempts / problem.num_solved,
+                        num_solved: problem.num_solved,
+                        num_attempted: text1,
+                        solvingUsers: solvingUsers
+                    });
+                    _this.generalInfo = { name: 'General', numUsers: data.num_users };
+                    _this.selected = _this.generalInfo;
+                }
+                temp_info.sort(function (obj1, obj2) { if (obj1.name > obj2.name)
+                    return 1;
+                else
+                    return -1; });
+            });
+            _this.problemsInfo = temp_info;
+        });
+    };
+    StatisticsComponent.prototype.onClickGeneral = function () {
+        this.selected = this.generalInfo;
+    };
+    StatisticsComponent.prototype.onClickProblem = function (name) {
+        this.selected = name;
+    };
+    StatisticsComponent.prototype.ngOnInit = function () {
+        this.generalInfo = {};
+        this.selected = {};
+        this.getAllProblems();
+    };
+    StatisticsComponent.prototype.test = function () {
+        alert("hi");
+    };
+    StatisticsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-statistics',
+            template: __webpack_require__(/*! ./statistics.component.html */ "./src/app/components/statistics/statistics.component.html"),
+            styles: [__webpack_require__(/*! ./statistics.component.css */ "./src/app/components/statistics/statistics.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_problem_service__WEBPACK_IMPORTED_MODULE_2__["ProblemService"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
+    ], StatisticsComponent);
+    return StatisticsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/test-problem/test-problem.component.css":
+/*!********************************************************************!*\
+  !*** ./src/app/components/test-problem/test-problem.component.css ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGVzdC1wcm9ibGVtL3Rlc3QtcHJvYmxlbS5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/components/test-problem/test-problem.component.html":
+/*!*********************************************************************!*\
+  !*** ./src/app/components/test-problem/test-problem.component.html ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<br/>\r\n<h1 class=\"text-center\">Problem {{cur_prob+1}} of {{num_problems}}</h1>\r\n<div class=\"progress\">\r\n  <div class=\"progress-bar\" role=\"progressbar\" [attr.aria-valuenow]=\"progress\" [style.width.%]=\"(num_problems != 0)?(progress*100)/num_problems:10\"\r\n       aria-valuemin=\"0\" [attr.aria-valuemax]=\"num_problems\"></div>\r\n</div>\r\n<hr class=\"my-4\">\r\n<h1>{{(problem === undefined)?'':problem.name}}</h1>\r\n<p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\r\n<ngx-codemirror [(ngModel)]=\"solution_code\"\r\n                [options]=\"{\r\n                  lineNumbers: true,\r\n                  theme: 'material',\r\n                  mode: 'text/x-c++src',\r\n                  indentUnit: 4,\r\n                  indentWithTabs: true,\r\n                  autoCloseBrackets: true\r\n                }\">{{solution_code}}</ngx-codemirror>\r\n<br/>\r\n<div *ngIf=\"failed != true; else elseBlock\">\r\n  <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\r\n</div>\r\n<ng-template #elseBlock>\r\n  <button type=\"button\" class=\"btn btn-primary\" routerLink=\"/test\">Back to Test Menu</button>\r\n</ng-template>\r\n<br/>\r\n<div *ngIf=\"isSuccess != undefined\">{{feedback_msg}}</div>\r\n<div *ngIf=\"isSuccess == true && (cur_prob!=(num_problems-1))\">\r\n  <hr class=\"my-4\">\r\n  <div class=\"text-center\">\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"nextProblem()\">Next</button>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"isSuccess == true && (cur_prob==(num_problems-1))\">\r\n  <hr class=\"my-4\">\r\n  <p style=\"text-align: center\">========================================You Did It!!!!==============================================</p>\r\n</div>\r\n\r\n"
+
+/***/ }),
+
+/***/ "./src/app/components/test-problem/test-problem.component.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/test-problem/test-problem.component.ts ***!
+  \*******************************************************************/
+/*! exports provided: TestProblemComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestProblemComponent", function() { return TestProblemComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_problem_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/problem.service */ "./src/app/services/problem.service.ts");
+/* harmony import */ var _services_test_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/test.service */ "./src/app/services/test.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
+
+
+var TestProblemComponent = /** @class */ (function () {
+    function TestProblemComponent(problemService, testService, router) {
+        this.problemService = problemService;
+        this.testService = testService;
+        this.router = router;
+    }
+    TestProblemComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.failed = false;
+        this.cur_prob = 0;
+        this.progress = 0;
+        this.num_problems = this.testService.getNumProblems();
+        this.filters = this.testService.getFilters();
+        this.problemService.getAllProblems().subscribe(function (problemsArr) {
+            var allProblems = problemsArr.problems;
+            var filteredProblems = [];
+            for (var _i = 0, allProblems_1 = allProblems; _i < allProblems_1.length; _i++) {
+                var problem = allProblems_1[_i];
+                var hasCategory = false;
+                if (_this.filters.length === 0) {
+                    hasCategory = true;
+                }
+                else {
+                    for (var _a = 0, _b = _this.filters; _a < _b.length; _a++) {
+                        var category = _b[_a];
+                        if (problem.category.includes(category)) {
+                            hasCategory = true;
+                            break;
+                        }
+                    }
+                }
+                if (hasCategory) {
+                    filteredProblems.push(problem);
+                }
+            }
+            _this.shuffle(filteredProblems);
+            _this.problems = filteredProblems;
+            if (_this.problems.length == 0) {
+                _this.router.navigate(['/test']);
+                return;
+            }
+            _this.problem = _this.problems[0];
+            _this.num_problems = Math.min(_this.num_problems, _this.problems.length);
+            _this.solution_code = _this.problem.code;
+        });
+    };
+    /**
+     * Shuffles array in place. ES6 version
+     * @param {Array} arr items An array containing the items.
+     */
+    TestProblemComponent.prototype.shuffle = function (arr) {
+        var _a;
+        for (var i = arr.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            _a = [arr[j], arr[i]], arr[i] = _a[0], arr[j] = _a[1];
+        }
+        return arr;
+    };
+    TestProblemComponent.prototype.onSubmitSolution = function (submitted_code) {
+        var _this = this;
+        this.problemService.testTestSolution(this.problem.name, submitted_code).subscribe(function (res) {
+            _this.isSuccess = res.success;
+            _this.feedback_msg = res.msg;
+            if (_this.isSuccess)
+                _this.progress++;
+            else if (_this.feedback_msg === 'Incorrect Solution!')
+                _this.failed = true;
+        });
+    };
+    TestProblemComponent.prototype.nextProblem = function () {
+        this.isSuccess = undefined;
+        this.feedback_msg = undefined;
+        this.cur_prob += 1;
+        this.problem = this.problems[this.cur_prob];
+        this.solution_code = this.problem.code;
+    };
+    TestProblemComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-test-problem',
+            template: __webpack_require__(/*! ./test-problem.component.html */ "./src/app/components/test-problem/test-problem.component.html"),
+            styles: [__webpack_require__(/*! ./test-problem.component.css */ "./src/app/components/test-problem/test-problem.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_problem_service__WEBPACK_IMPORTED_MODULE_2__["ProblemService"],
+            _services_test_service__WEBPACK_IMPORTED_MODULE_3__["TestService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+    ], TestProblemComponent);
+    return TestProblemComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/test/test.component.css":
+/*!****************************************************!*\
+  !*** ./src/app/components/test/test.component.css ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".page-header{\r\n  text-align: center;\r\n  margin-top: 5px;\r\n}\r\n\r\n.subheader{\r\n  margin-left: 5px;\r\n}\r\n\r\n.custom-checkbox{\r\n  float: left;\r\n  margin-left: 30px;\r\n}\r\n\r\n.num-questions-form{\r\n  width: 200px;\r\n  margin-left: 50px;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90ZXN0L3Rlc3QuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFrQjtFQUNsQixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UsV0FBVztFQUNYLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixpQkFBaUI7QUFDbkIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3Rlc3QvdGVzdC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhZ2UtaGVhZGVye1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICBtYXJnaW4tdG9wOiA1cHg7XHJcbn1cclxuXHJcbi5zdWJoZWFkZXJ7XHJcbiAgbWFyZ2luLWxlZnQ6IDVweDtcclxufVxyXG5cclxuLmN1c3RvbS1jaGVja2JveHtcclxuICBmbG9hdDogbGVmdDtcclxuICBtYXJnaW4tbGVmdDogMzBweDtcclxufVxyXG5cclxuLm51bS1xdWVzdGlvbnMtZm9ybXtcclxuICB3aWR0aDogMjAwcHg7XHJcbiAgbWFyZ2luLWxlZnQ6IDUwcHg7XHJcbn1cclxuIl19 */"
+
+/***/ }),
+
+/***/ "./src/app/components/test/test.component.html":
+/*!*****************************************************!*\
+  !*** ./src/app/components/test/test.component.html ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<br/>\n<div class=\"jumbotron\" style=\"border-color: black; border-style: dotted; border-radius: 5px\">\n  <h2 class=\"page-header\">Setup Test</h2>\n  <hr class=\"my-4\">\n  <h4 class=\"subheader\">Select the categories of the test:</h4>\n  <div class=\"filters\">\n    <fieldset>\n      <div class=\"form-group\">\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category1\" [(ngModel)]=\"filterDCL\">\n          <label class=\"custom-control-label\" for=\"category1\">Declarations and Initialization</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category2\" [(ngModel)]=\"filterEXP\">\n          <label class=\"custom-control-label\" for=\"category2\">Expressions</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category3\" [(ngModel)]=\"filterINT\">\n          <label class=\"custom-control-label\" for=\"category3\">Integers</label>\n        </div>\n      </div>\n    </fieldset>\n  </div>\n  <hr class=\"my-4\">\n  <h4 class=\"subheader\">Select number of problems:</h4>\n  <div class=\"form-group num-questions-form\">\n    <select [(ngModel)]=\"numProblems\" class=\"custom-select\">\n      <option value=\"5\">5</option>\n      <option value=\"10\">10</option>\n      <option value=\"15\">15</option>\n    </select>\n  </div>\n  <hr class=\"my-4\">\n  <div class=\"text-center\">\n    <a class=\"btn btn-primary\" (click)=\"startTest()\">Start Test!</a>\n  </div>\n</div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/components/test/test.component.ts":
+/*!***************************************************!*\
+  !*** ./src/app/components/test/test.component.ts ***!
+  \***************************************************/
+/*! exports provided: TestComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestComponent", function() { return TestComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_test_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/test.service */ "./src/app/services/test.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
+
+var TestComponent = /** @class */ (function () {
+    function TestComponent(testService, router) {
+        this.testService = testService;
+        this.router = router;
+    }
+    TestComponent.prototype.startTest = function () {
+        var filters = [];
+        if (this.filterDCL) {
+            filters.push('DCL');
+        }
+        if (this.filterINT) {
+            filters.push('INT');
+        }
+        if (this.filterEXP) {
+            filters.push('EXP');
+        }
+        this.testService.beginTest(this.numProblems, filters);
+        this.router.navigate(['/test/problem']);
+    };
+    TestComponent.prototype.ngOnInit = function () {
+        this.filterDCL = false;
+        this.filterINT = false;
+        this.filterEXP = false;
+        this.numProblems = 10;
+    };
+    TestComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-test',
+            template: __webpack_require__(/*! ./test.component.html */ "./src/app/components/test/test.component.html"),
+            styles: [__webpack_require__(/*! ./test.component.css */ "./src/app/components/test/test.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_test_service__WEBPACK_IMPORTED_MODULE_2__["TestService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+    ], TestComponent);
+    return TestComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/guards/admin.guard.ts":
+/*!***************************************!*\
+  !*** ./src/app/guards/admin.guard.ts ***!
+  \***************************************/
+/*! exports provided: AdminGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminGuard", function() { return AdminGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
+
+
+
+
+var AdminGuard = /** @class */ (function () {
+    function AdminGuard(authService, router) {
+        this.authService = authService;
+        this.router = router;
+    }
+    AdminGuard.prototype.canActivate = function () {
+        if (this.authService.isAdmin()) {
+            return true;
+        }
+        else {
+            if (this.authService.isLoggedIn()) {
+                this.router.navigate(['/problems']);
+            }
+            else {
+                this.router.navigate(['/login']);
+            }
+            return false;
+        }
+    };
+    AdminGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+    ], AdminGuard);
+    return AdminGuard;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/guards/auth.guard.ts":
 /*!**************************************!*\
   !*** ./src/app/guards/auth.guard.ts ***!
@@ -774,6 +1582,61 @@ var AuthGuard = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/guards/test.guard.ts":
+/*!**************************************!*\
+  !*** ./src/app/guards/test.guard.ts ***!
+  \**************************************/
+/*! exports provided: TestGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestGuard", function() { return TestGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_test_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/test.service */ "./src/app/services/test.service.ts");
+
+
+
+
+
+var TestGuard = /** @class */ (function () {
+    function TestGuard(authService, testService, router) {
+        this.authService = authService;
+        this.testService = testService;
+        this.router = router;
+    }
+    TestGuard.prototype.canActivate = function () {
+        if (this.testService.isTakingTest()) {
+            return true;
+        }
+        else {
+            if (this.authService.isLoggedIn()) {
+                this.router.navigate(['/test']);
+            }
+            else {
+                this.router.navigate(['/login']);
+            }
+            return false;
+        }
+    };
+    TestGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
+            _services_test_service__WEBPACK_IMPORTED_MODULE_4__["TestService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+    ], TestGuard);
+    return TestGuard;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/auth.service.ts":
 /*!******************************************!*\
   !*** ./src/app/services/auth.service.ts ***!
@@ -787,12 +1650,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
 
 
 
 
-var helper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_3__["JwtHelperService"]();
+
+var helper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JwtHelperService"]();
 var httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' })
 };
@@ -813,11 +1678,16 @@ var AuthService = /** @class */ (function () {
         };
         return this.http.get('http://localhost:3000/users/profile', httpOptions);
     };
+    AuthService.prototype.getUserInfo = function (username) {
+        this.loadToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': this.authToken, 'Content-Type': 'application/json' })
+        };
+        return this.http.get("http://localhost:3000/users/getUser/" + username, httpOptions);
+    };
     AuthService.prototype.storeUserData = function (token, user) {
         localStorage.setItem('id_token', token);
-        localStorage.setItem('user', JSON.stringify(user));
         this.authToken = token;
-        this.user = user;
     };
     AuthService.prototype.isLoggedIn = function () {
         var token = localStorage.getItem('id_token');
@@ -826,13 +1696,57 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.getToken = function () {
         return localStorage.getItem('id_token');
     };
+    AuthService.prototype.getTokenUser = function () {
+        this.loadToken();
+        if (this.authToken != null) {
+            var user = helper.decodeToken(this.authToken);
+            return user.username;
+        }
+        else {
+            return "";
+        }
+    };
+    AuthService.prototype.isAdmin = function () {
+        this.loadToken();
+        if (this.authToken != null) {
+            var user = helper.decodeToken(this.authToken);
+            return user.isAdmin;
+        }
+        else {
+            return false;
+        }
+    };
     AuthService.prototype.loadToken = function () {
         this.authToken = localStorage.getItem('id_token');
     };
     AuthService.prototype.logout = function () {
         this.authToken = null;
-        this.user = null;
         localStorage.clear();
+    };
+    AuthService.prototype.getNumUsers = function () {
+        this.loadToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': this.authToken, 'Content-Type': 'application/json' })
+        };
+        return this.http.get('http://localhost:3000/users/getNumUsers', httpOptions);
+    };
+    AuthService.prototype.getAllUsers = function () {
+        this.loadToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': this.authToken, 'Content-Type': 'application/json' })
+        };
+        return this.http.get('http://localhost:3000/users/getAllUsers', httpOptions);
+    };
+    AuthService.prototype.searchUsers = function (term) {
+        if (!term.trim()) {
+            // if not search term, return empty user array.
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])([]);
+        }
+        this.loadToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': this.authToken, 'Content-Type': 'application/json' })
+        };
+        return this.http.get("http://localhost:3000/users/search/" + term, httpOptions);
     };
     AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -878,6 +1792,13 @@ var ProblemService = /** @class */ (function () {
         };
         return this.http.get(problemsUrl + "/getAllProblems", httpOptions);
     };
+    ProblemService.prototype.getLanguageProblems = function (language) {
+        var authToken = this.authService.getToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': authToken, 'Content-Type': 'application/json' })
+        };
+        return this.http.get(problemsUrl + "/getLanguageProblems/" + language, httpOptions);
+    };
     ProblemService.prototype.getProblem = function (name) {
         var authToken = this.authService.getToken();
         var httpOptions = {
@@ -896,6 +1817,17 @@ var ProblemService = /** @class */ (function () {
         };
         return this.http.post(problemsUrl + "/checkProblemSolution", problemRequest, httpOptions);
     };
+    ProblemService.prototype.testTestSolution = function (name, solution) {
+        var authToken = this.authService.getToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': authToken, 'Content-Type': 'application/json' })
+        };
+        var problemRequest = {
+            name: name,
+            solution: solution
+        };
+        return this.http.post(problemsUrl + "/checkTestSolution", problemRequest, httpOptions);
+    };
     ProblemService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
@@ -904,6 +1836,50 @@ var ProblemService = /** @class */ (function () {
             _auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
     ], ProblemService);
     return ProblemService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/test.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/test.service.ts ***!
+  \******************************************/
+/*! exports provided: TestService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestService", function() { return TestService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var TestService = /** @class */ (function () {
+    function TestService() {
+    }
+    TestService.prototype.beginTest = function (num_problems, filters) {
+        this.takingTest = true;
+        this.num_problems = num_problems;
+        this.filters = filters;
+    };
+    TestService.prototype.getNumProblems = function () {
+        return this.num_problems;
+    };
+    TestService.prototype.getFilters = function () {
+        return this.filters;
+    };
+    TestService.prototype.isTakingTest = function () {
+        return (this.takingTest === true);
+    };
+    TestService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], TestService);
+    return TestService;
 }());
 
 

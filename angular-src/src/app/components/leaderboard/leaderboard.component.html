@@ -1,0 +1,18 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Username</th>
+    <th scope="col">Join Date</th>
+    <th scope="col">Number of Problems Solved</th>
+    <th scope="col">Total Points</th>
+  </tr>
+  </thead>
+  <tbody *ngIf="users">
+  <tr *ngFor="let user of users" routerLink="/user/{{user.username}}" class="change-cursor">
+    <th scope="row">{{user.username}}</th>
+    <td>{{user.join_date}}</td>
+    <td>{{user.num_solved}}</td>
+    <td>{{user.total_points}}</td>
+  </tr>
+  </tbody>
+</table>

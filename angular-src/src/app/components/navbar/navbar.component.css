@@ -1,0 +1,5 @@
+.search-results{
+  position: absolute;
+  width: 204px;
+  z-index: 1;
+}
