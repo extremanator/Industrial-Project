@@ -2,7 +2,8 @@
   <h1>Cyber-Trainer</h1>
   <p class="lead">Welcome to our project</p>
   <div>
-    <a class="btn btn-primary" [routerLink]="['/register']">Register</a> <a class="btn btn-default" [routerLink]="['/login']">Login</a>
+    <a *ngIf="user === undefined" class="btn btn-primary" [routerLink]="['/register']">Register</a> <a *ngIf="user === undefined" class="btn btn-default" [routerLink]="['/login']">Login</a>
+    <p *ngIf="user !== undefined">Welcome, {{ user.name }}</p>
   </div>
 </div>
 

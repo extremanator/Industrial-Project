@@ -91,7 +91,6 @@ module.exports.attemptedByUser = function (problemName, username, callback){
     Problem.findOne({name: problemName}, (err, problem) => {
         if (err) throw err;
         else {
-            console.log(problem);
             Problem.updateOne({name: problemName}, {num_attempted: (problem.num_attempted + 1)}, callback);
         }
     });

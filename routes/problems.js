@@ -30,7 +30,6 @@ router.get('/getLanguageProblems/:language', passport.authenticate('jwt', {sessi
 
 router.get('/getProblem/:name', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     const problemName = req.params.name;
-    console.log('backend: ' + problemName);
     Problem.getProblemByName(problemName, (err, problemArr) => {
         if(err){
             throw err;
@@ -111,7 +110,6 @@ function checkSolution(req, res, next, updateCounters){
             res.json({success: false, msg: 'Failed to get problem'});
         } else {
             const tests = problemArr[0].tests;
-            console.log(problemArr[0]);
             // Recursive function to run all tests one after the other (waiting for previous to finish)
             function doTests(i){
                 if (i === tests.length){ //If we passed all tests
@@ -164,7 +162,6 @@ function checkSolution(req, res, next, updateCounters){
                                         });
                                     } else{
                                         if (result.errorType === 'compile-time') {
-                                            console.log(result);
                                             res.json({success: false, msg: 'Compilation Error!'});
                                         } else {
                                             res.json({success: false, msg: 'Incorrect Solution!'});
