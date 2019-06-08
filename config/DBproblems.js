@@ -459,6 +459,26 @@ module.exports = [
     ]
   }),
   new Problem({
+    name: 'first close',
+    difficulty: 'Easy',
+    points: 5,
+    category: ['cpp', 'easy'],
+    paragraph:
+        'This is a closed question paragraph',
+    code: ' ',
+    type: 'close',
+    num_solved: 0,
+    num_attempted: 0,
+    tests: [{code: ''}],
+    solutions: [
+      'first answer',
+      'second answer',
+      'third answer',
+      'fourth answer'
+    ],
+    solution: 'second answer'
+  }),
+  new Problem({
     name: 'User Input',
     difficulty: 'Medium',
     points: 10,

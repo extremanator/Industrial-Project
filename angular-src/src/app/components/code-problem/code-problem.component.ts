@@ -21,7 +21,9 @@ export class CodeProblemComponent implements OnInit {
     const name = this.route.snapshot.paramMap.get('name');
     this.problemService.getProblem(name).subscribe(problem => {
       this.problem = problem.problem;
-      this.solution_code = problem.problem.code;
+      if(problem.problem.type === 'open') {
+        this.solution_code = problem.problem.code;
+      }
     });
   }
 
@@ -32,6 +34,13 @@ export class CodeProblemComponent implements OnInit {
     });
   }
 
+
+  onSolveClosed(solution: string) {
+    this.problemService.checkCloseProblemSolution(this.problem.name, solution).subscribe((res) => {
+      this.isSuccess = res.success;
+      this.feedback_msg = res.msg;
+    });
+  }
 
   ngOnInit() {
     this.getProblem();

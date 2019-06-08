@@ -46,7 +46,13 @@ const ProblemSchema = mongoose.Schema({
     tests: {
         type: [Object], // tests have property 'code' containing the code and optional property 'stdin' with input to test
         required: true
-    }
+    },
+    solutions: {
+        type: [String]
+    },
+    solution: {
+        type: String,
+    },
 });
 
 const Problem = module.exports = mongoose.model('Problem', ProblemSchema);

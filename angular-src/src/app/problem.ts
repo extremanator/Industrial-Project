@@ -7,4 +7,5 @@ export class Problem {
   code: string;
   type: string;
   tests: object[];
+  solutions: string[];
 }

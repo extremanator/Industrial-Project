@@ -68,6 +68,38 @@ router.post('/checkTestSolution', passport.authenticate('jwt', {session:false}),
     checkSolution(req, res, next, false);
 });
 
+router.post('/checkClosedProblemSolution', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    const problemName = req.body.name;
+    const user = req.user;
+    Problem.getProblemByName(problemName, (err, problemArr) => {
+        if(err){
+            res.json({success: false, msg: 'Failed to get problem'});
+        } else {
+            const problem = problemArr[0];
+
+            //TODO: add the following:
+
+            User.attemptedProblem(user.username, problemName, (err, resp) => {
+                if (err) throw err;
+                Problem.attemptedByUser(problemName, user.username, (err, resp) => {
+                    if (err) throw err;
+                    if(req.body.solution === problem.solution) {
+                        User.passedProblem(user.username, problemName, (err, resp) => {
+                            if (err) throw err;
+                            Problem.solvedByUser(problemName, user.username, (err, resp) => {
+                                if (err) throw err;
+                                res.json({success: true, msg: 'Correct!'});
+                            });
+                        });
+                    } else {
+                        res.json({success: false, msg: 'Incorrect!'})
+                    }
+                });
+            });
+        }
+        });
+});
+
 function checkSolution(req, res, next, updateCounters){
     const user = req.user;
     const problemName = req.body.name;

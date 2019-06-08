@@ -74,4 +74,17 @@ export class ProblemService {
     };
     return this.http.post<CheckSolutionResp>(`${problemsUrl}/checkTestSolution`, problemRequest, httpOptions);
   }
+
+  checkCloseProblemSolution(name: string, solution: string): Observable<CheckSolutionResp>{
+    const authToken = this.authService.getToken();
+    const httpOptions = {
+      headers: new HttpHeaders({'Authorization': authToken, 'Content-Type': 'application/json' })
+    };
+    let problemRequest = {
+      name: name,
+      solution: solution
+    };
+    return this.http.post<CheckSolutionResp>(`${problemsUrl}/checkClosedProblemSolution`, problemRequest, httpOptions);
+  }
+
 }

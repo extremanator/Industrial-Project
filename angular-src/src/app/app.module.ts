@@ -27,6 +27,7 @@ import { TestGuard } from "./guards/test.guard";
 import 'codemirror/mode/clike/clike';
 import 'codemirror/addon/edit/closebrackets';
 
+
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
@@ -39,7 +40,7 @@ const appRoutes: Routes = [
   {path: 'stats', component: StatisticsComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: 'problems/:name', component: CodeProblemComponent, canActivate: [AuthGuard]},
   {path: 'user/:username', component: PublicProfileComponent, canActivate: [AuthGuard]},
-  {path: 'language/:language/:filters', component: LanguageComponent, canActivate: [AuthGuard]}
+  {path: 'language/:language/:filters', component: LanguageComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
@@ -57,7 +58,7 @@ const appRoutes: Routes = [
     LeaderboardComponent,
     LanguageComponent,
     TestComponent,
-    TestProblemComponent
+    TestProblemComponent,
   ],
   imports: [
     BrowserModule,
