@@ -8,7 +8,6 @@ import { ProblemService } from "../../services/problem.service";
   templateUrl: './code-problem.component.html',
   styleUrls: ['./code-problem.component.css']
 })
-
 export class CodeProblemComponent implements OnInit {
   problem: Problem;
   solution_code: string;
