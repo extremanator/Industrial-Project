@@ -54,7 +54,9 @@ module.exports = [
             '    return 0;\n' +
             '}\n'
       }
-    ]
+    ],
+    solutions: ['a',],
+    solution: 'a'
   }),
   new Problem({
     name: 'Array Boundaries',
@@ -91,7 +93,9 @@ module.exports = [
             '    && get_item(a,5,3)==-1 && get_item(a,-5,3)==-1);\n' +
             '}\n'
       }
-    ]
+    ],
+    solutions: ['a'],
+    solution: 'a'
   }),
   new Problem({
     name: 'Login Attempts',

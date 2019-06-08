@@ -121,6 +121,7 @@ module.exports.attemptedProblem = function (username, problem_name, callback){
     User.findOne({username: username}, (err, user) => {
         if (err) throw err;
         else {
+            //console.log(user);
             let new_attempted_problems = Object.assign({}, user.attempted_problems);
             if(new_attempted_problems.hasOwnProperty(problem_name)) {
                 if(!new_attempted_problems[problem_name].solved){

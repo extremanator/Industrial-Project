@@ -48,10 +48,12 @@ const ProblemSchema = mongoose.Schema({
         required: true
     },
     solutions: {
-        type: [String]
+        type: [String],
+        required: false
     },
     solution: {
         type: String,
+        required: false
     },
 });
 
@@ -89,6 +91,7 @@ module.exports.attemptedByUser = function (problemName, username, callback){
     Problem.findOne({name: problemName}, (err, problem) => {
         if (err) throw err;
         else {
+            console.log(problem);
             Problem.updateOne({name: problemName}, {num_attempted: (problem.num_attempted + 1)}, callback);
         }
     });

@@ -77,9 +77,6 @@ router.post('/checkClosedProblemSolution', passport.authenticate('jwt', {session
             res.json({success: false, msg: 'Failed to get problem'});
         } else {
             const problem = problemArr[0];
-
-            //TODO: add the following:
-
             User.attemptedProblem(user.username, problemName, (err, resp) => {
                 if (err) throw err;
                 Problem.attemptedByUser(problemName, user.username, (err, resp) => {
@@ -114,6 +111,7 @@ function checkSolution(req, res, next, updateCounters){
             res.json({success: false, msg: 'Failed to get problem'});
         } else {
             const tests = problemArr[0].tests;
+            console.log(problemArr[0]);
             // Recursive function to run all tests one after the other (waiting for previous to finish)
             function doTests(i){
                 if (i === tests.length){ //If we passed all tests

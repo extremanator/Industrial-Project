@@ -22,7 +22,6 @@ export class CodeProblemComponent implements OnInit {
     console.log(name);
     this.problemService.getProblem(name).subscribe(problem => {
       this.problem = problem.problem;
-      console.log(problem.problem);
       if(problem.problem.type === 'open') {
         this.solution_code = problem.problem.code;
       }
