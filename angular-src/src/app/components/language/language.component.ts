@@ -26,6 +26,14 @@ export class LanguageComponent implements OnInit {
   filterDCL: boolean;
   filterEXP: boolean;
   filterINT: boolean;
+  filterCTR: boolean;
+  filterSTR: boolean;
+  filterMEM: boolean;
+  filterFIO: boolean;
+  filterERR: boolean;
+  filterOOP: boolean;
+  filterCON: boolean;
+  filterMSC: boolean;
 
   constructor(private problemService: ProblemService,
               private authService: AuthService,
@@ -106,6 +114,30 @@ export class LanguageComponent implements OnInit {
     if (this.filterINT){
       filters += 'INT:';
     }
+    if (this.filterCTR){
+      filters += 'CTR:';
+    }
+    if (this.filterSTR){
+      filters += 'STR:';
+    }
+    if (this.filterMEM){
+      filters += 'MEM:';
+    }
+    if (this.filterFIO){
+      filters += 'FIO:';
+    }
+    if (this.filterERR){
+      filters += 'ERR:';
+    }
+    if (this.filterOOP){
+      filters += 'OOP:';
+    }
+    if (this.filterCON){
+      filters += 'CON:';
+    }
+    if (this.filterMSC){
+      filters += 'MSC:';
+    }
     this.router.navigate([`/language/${this.routeLanguage}/${filters}`]);
   }
 
@@ -145,16 +177,60 @@ export class LanguageComponent implements OnInit {
       const filters = this.getFilters(routeParams.filters);
       if(filters.difficulties.includes('easy'))
         this.filterEasy = true;
+      else
+        this.filterEasy = false;
       if(filters.difficulties.includes('medium'))
         this.filterMedium = true;
+      else
+        this.filterMedium = false;
       if(filters.difficulties.includes('hard'))
         this.filterHard = true;
+      else
+        this.filterHard = false;
       if(filters.categories.includes('DCL'))
         this.filterDCL = true;
+      else
+        this.filterDCL = false;
       if(filters.categories.includes('EXP'))
         this.filterEXP = true;
+      else
+        this.filterEXP = false;
       if(filters.categories.includes('INT'))
         this.filterINT = true;
+      else
+        this.filterINT = false;
+      if(filters.categories.includes('CTR'))
+        this.filterCTR = true;
+      else
+        this.filterCTR = false;
+      if(filters.categories.includes('STR'))
+        this.filterSTR = true;
+      else
+        this.filterSTR = false;
+      if(filters.categories.includes('MEM'))
+        this.filterMEM = true;
+      else
+        this.filterMEM = false;
+      if(filters.categories.includes('FIO'))
+        this.filterFIO = true;
+      else
+        this.filterFIO = false;
+      if(filters.categories.includes('ERR'))
+        this.filterERR = true;
+      else
+        this.filterERR = false;
+      if(filters.categories.includes('OOP'))
+        this.filterOOP = true;
+      else
+        this.filterOOP = false;
+      if(filters.categories.includes('CON'))
+        this.filterCON = true;
+      else
+        this.filterCON = false;
+      if(filters.categories.includes('MSC'))
+        this.filterMSC = true;
+      else
+        this.filterMSC = false;
       this.getLanguageProblems(routeParams.language, filters);
     });
   }

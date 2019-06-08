@@ -11,6 +11,14 @@ export class TestComponent implements OnInit {
   filterDCL: boolean;
   filterINT: boolean;
   filterEXP: boolean;
+  filterCTR: boolean;
+  filterSTR: boolean;
+  filterMEM: boolean;
+  filterFIO: boolean;
+  filterERR: boolean;
+  filterOOP: boolean;
+  filterCON: boolean;
+  filterMSC: boolean;
   numProblems: number;
 
   constructor(private testService: TestService,
@@ -26,6 +34,30 @@ export class TestComponent implements OnInit {
     }
     if (this.filterEXP){
       filters.push('EXP');
+    }
+    if (this.filterCTR){
+      filters.push('CTR');
+    }
+    if (this.filterSTR){
+      filters.push('STR');
+    }
+    if (this.filterMEM){
+      filters.push('MEM');
+    }
+    if (this.filterFIO){
+      filters.push('FIO');
+    }
+    if (this.filterERR){
+      filters.push('ERR');
+    }
+    if (this.filterOOP){
+      filters.push('OOP');
+    }
+    if (this.filterCON){
+      filters.push('CON');
+    }
+    if (this.filterMSC){
+      filters.push('MSC');
     }
     this.testService.beginTest(this.numProblems, filters);
     this.router.navigate(['/test/problem']);

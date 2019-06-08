@@ -63,7 +63,7 @@ export class ProblemService {
     return this.http.post<CheckSolutionResp>(`${problemsUrl}/checkProblemSolution`, problemRequest, httpOptions);
   }
 
-  testTestSolution(name: string, solution: string): Observable<CheckSolutionResp>{
+  checkOpenSolutionInTest(name: string, solution: string): Observable<CheckSolutionResp>{
     const authToken = this.authService.getToken();
     const httpOptions = {
       headers: new HttpHeaders({'Authorization': authToken, 'Content-Type': 'application/json' })
@@ -73,6 +73,18 @@ export class ProblemService {
       solution: solution
     };
     return this.http.post<CheckSolutionResp>(`${problemsUrl}/checkTestSolution`, problemRequest, httpOptions);
+  }
+
+  checkCloseSolutionInTest(name: string, solution: string): Observable<CheckSolutionResp>{
+    const authToken = this.authService.getToken();
+    const httpOptions = {
+      headers: new HttpHeaders({'Authorization': authToken, 'Content-Type': 'application/json' })
+    };
+    let problemRequest = {
+      name: name,
+      solution: solution
+    };
+    return this.http.post<CheckSolutionResp>(`${problemsUrl}/checkClosedTestSolution`, problemRequest, httpOptions);
   }
 
   checkCloseProblemSolution(name: string, solution: string): Observable<CheckSolutionResp>{

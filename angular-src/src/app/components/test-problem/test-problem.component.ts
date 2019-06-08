@@ -52,7 +52,7 @@ export class TestProblemComponent implements OnInit {
       }
       this.shuffle(filteredProblems);
       this.problems = filteredProblems;
-      if(this.problems.length == 0){
+      if(this.problems.length === 0){
         this.router.navigate(['/test']);
         return;
       }
@@ -75,7 +75,7 @@ export class TestProblemComponent implements OnInit {
   }
 
   onSubmitSolution(submitted_code: string){
-    this.problemService.testTestSolution(this.problem.name, submitted_code).subscribe((res) => {
+    this.problemService.checkOpenSolutionInTest(this.problem.name, submitted_code).subscribe((res) => {
       this.isSuccess = res.success;
       this.feedback_msg = res.msg;
       if(this.isSuccess)
@@ -85,11 +85,26 @@ export class TestProblemComponent implements OnInit {
     });
   }
 
+  onSolveClosed(solution: string) {
+    if(this.failed !== true) {
+      this.problemService.checkCloseSolutionInTest(this.problem.name, solution).subscribe((res) => {
+        this.isSuccess = res.success;
+        this.feedback_msg = res.msg;
+        if (this.isSuccess)
+          this.progress++;
+        else if (this.feedback_msg === 'Incorrect!')
+          this.failed = true;
+      });
+    }
+  }
+
   nextProblem(){
     this.isSuccess = undefined;
     this.feedback_msg = undefined;
     this.cur_prob += 1;
     this.problem = this.problems[this.cur_prob];
-    this.solution_code = this.problem.code;
+    if(this.problem.type === 'open'){
+      this.solution_code = this.problem.code;
+    }
   }
 }

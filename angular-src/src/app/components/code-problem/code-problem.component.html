@@ -16,7 +16,6 @@
   <button type="button" class="btn btn-primary" (click)="onSubmitSolution(solution_code)">Submit</button>
   <br/>
   <br/>
-  <!-- <div *ngIf="isSuccess != undefined">{{feedback_msg}}</div> -->
   <div *ngIf="isSuccess == true" class="alert alert-dismissible alert-success">
     <strong>{{feedback_msg}}</strong>
   </div>
@@ -34,15 +33,12 @@
     </tr>
     </tbody>
   </table>
-
-  <!-- <div *ngIf="isSuccess != undefined">{{feedback_msg}}</div> -->
   <div *ngIf="isSuccess == true" class="alert alert-dismissible alert-success">
     <strong>{{feedback_msg}}</strong>
   </div>
   <div *ngIf="isSuccess == false" class="alert alert-dismissible alert-danger">
     <strong>{{feedback_msg}}</strong>
   </div>
-
 </div>
 
 

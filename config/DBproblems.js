@@ -5,7 +5,7 @@ module.exports = [
     name: 'Compare Password',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy'],
+    category: ['cpp', 'easy', 'STR'],
     paragraph:
         'The following function should return \'true\' if the given password is \'adminadmin\' and \'false\' otherwise.\n' +
         'Some users managed to login without knowing the password!\n' +
@@ -62,7 +62,7 @@ module.exports = [
     name: 'Array Boundaries',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy'],
+    category: ['cpp', 'easy', 'CTR'],
     paragraph:
         'The following function should return the i\'th element of the given array.\n' +
         'When using the function some unexpected results happened. Can you fix it? \n' +
@@ -101,7 +101,7 @@ module.exports = [
     name: 'Login Attempts',
     difficulty: 'Medium',
     points: 10,
-    category: ['cpp', 'medium'],
+    category: ['cpp', 'medium', 'FIO', 'MSC'],
     paragraph:
         'Alice wrote a login system. The function \'checkLogin\' is getting input from the user and checks if the user is valid.\n' +
         'After a while someone managed to log in without knowing a valid username. Can you make sure it doesn\'t happen?\n' +
@@ -185,7 +185,7 @@ module.exports = [
     name: 'Getting started with Vectors',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy'],
+    category: ['cpp', 'easy', 'CTR'],
     paragraph:
         'Bob wrote the following function which receives as parameters: a container and an index.\n' +
         'It should return the element in index i, or \'-1\' if there was an error.\n' +
@@ -242,7 +242,7 @@ module.exports = [
     name: 'Simple Copy',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy'],
+    category: ['cpp', 'easy', 'STR', 'MEM'],
     paragraph:
         'Bob tried to implement a function to help him copy data from one place to another, but it didn\'t work as expected.\n' +
         'Find the problem and fix it.\n' +
@@ -291,7 +291,7 @@ module.exports = [
     name: 'Basics using Exceptions',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy'],
+    category: ['cpp', 'easy', 'ERR'],
     paragraph:
         'The function \'f\' should return error code \'-1\' when B is thrown and \'-2\' when D is thrown, otherwise return \'0\'.\n' +
         'Something is not right with the following code, can you figure it out?\n' +
@@ -361,7 +361,7 @@ module.exports = [
     name: 'Don\'t forget the little things',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy'],
+    category: ['cpp', 'easy', 'DCL'],
     paragraph:
         'When using the following function some unexpected results happened.\n' +
         'Fix the code so that it will return the sum of the numbers 1, ..., n.\n' +
@@ -405,7 +405,7 @@ module.exports = [
     name: 'Strings understanding',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy'],
+    category: ['cpp', 'easy', 'STR'],
     paragraph:
         'The following function should take in a positive number as argument a string and adds the number to the end of the string to create a message.\n' +
         'There are some problems with the current implementation. Can you fix the given code?\n' +
@@ -463,30 +463,37 @@ module.exports = [
     ]
   }),
   new Problem({
-    name: 'first close',
+    name: 'Sizeof 1',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy'],
+    category: ['cpp', 'easy', 'MSC'],
     paragraph:
-        'This is a closed question paragraph',
+        'What is the value of size in the following program equal to?\n' +
+        'void func(char s[]){\n' +
+        '\tsize_t size = sizeof(s)/sizeof(s[0]);\n' +
+        '}\n' +
+        'int main(void){\n' +
+        '\tchar str[] = "0123456789";\n' +
+        '\tfunc(str);\n' +
+        '}',
     code: ' ',
     type: 'close',
     num_solved: 0,
     num_attempted: 0,
     tests: [{code: ''}],
     solutions: [
-      'first answer',
-      'second answer',
-      'third answer',
-      'fourth answer'
+      'sizeof("0123456789")',
+      'sizeof("0123456789") + 1',
+      'sizeof(char*)',
+      'sizeof("0123456789")/sizeof(char)'
     ],
-    solution: 'second answer'
+    solution: 'sizeof(char*)'
   }),
   new Problem({ 
     name: 'Do you know basic math',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy'],
+    category: ['cpp', 'easy', 'MSC'],
     paragraph:
         'Solve the following: 2*3+3 = ?',
     code: ' ',
@@ -506,7 +513,7 @@ module.exports = [
     name: 'User Input',
     difficulty: 'Medium',
     points: 10,
-    category: ['cpp', 'medium'],
+    category: ['cpp', 'medium', 'FIO'],
     paragraph:
         'Alice tries to write a function to classify users. It reads an username as input and returns \'1\' if the user is an Admin,\n' +
         'and \'0\' otherwise. Some of Alice\'s workers were smarter than her and managed to register as admins even though they are not!\n' +

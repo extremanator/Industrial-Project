@@ -6,9 +6,10 @@
 </div>
 <hr class="my-4">
 <h1>{{(problem === undefined)?'':problem.name}}</h1>
-<p style="white-space: pre-wrap;">{{(problem === undefined)?'':problem.paragraph}}</p>
-<ngx-codemirror [(ngModel)]="solution_code"
-                [options]="{
+<div *ngIf="problem?.type==='open'">
+  <p style="white-space: pre-wrap;">{{(problem === undefined)?'':problem.paragraph}}</p>
+  <ngx-codemirror [(ngModel)]="solution_code"
+                  [options]="{
                   lineNumbers: true,
                   theme: 'material',
                   mode: 'text/x-c++src',
@@ -16,15 +17,41 @@
                   indentWithTabs: true,
                   autoCloseBrackets: true
                 }">{{solution_code}}</ngx-codemirror>
-<br/>
-<div *ngIf="failed != true; else elseBlock">
-  <button type="button" class="btn btn-primary" (click)="onSubmitSolution(solution_code)">Submit</button>
+  <br/>
+  <div *ngIf="failed != true; else elseBlock">
+    <button type="button" class="btn btn-primary" (click)="onSubmitSolution(solution_code)">Submit</button>
+  </div>
+  <ng-template #elseBlock>
+    <button type="button" class="btn btn-primary" routerLink="/test">Back to Test Menu</button>
+  </ng-template>
+  <br/>
+  <div *ngIf="isSuccess == true" class="alert alert-dismissible alert-success">
+    <strong>{{feedback_msg}}</strong>
+  </div>
+  <div *ngIf="isSuccess == false" class="alert alert-dismissible alert-danger">
+    <strong>{{feedback_msg}}</strong>
+  </div>
 </div>
-<ng-template #elseBlock>
-  <button type="button" class="btn btn-primary" routerLink="/test">Back to Test Menu</button>
-</ng-template>
-<br/>
-<div *ngIf="isSuccess != undefined">{{feedback_msg}}</div>
+<div *ngIf="problem?.type==='close'">
+  <p style="white-space: pre-wrap;">{{problem.paragraph}}</p>
+  <table class="table table-hover">
+    <tbody>
+    <tr *ngFor="let sol of problem.solutions" (click)="onSolveClosed(sol)" class="change-cursor">
+      <button type="button" class="btn btn-primary btn-lg btn-block">{{ sol }}</button>
+    </tr>
+    </tbody>
+  </table>
+  <br/>
+  <div *ngIf="failed == true">
+    <button type="button" class="btn btn-primary" routerLink="/test">Back to Test Menu</button>
+  </div>
+  <div *ngIf="isSuccess == true" class="alert alert-dismissible alert-success">
+    <strong>{{feedback_msg}}</strong>
+  </div>
+  <div *ngIf="isSuccess == false" class="alert alert-dismissible alert-danger">
+    <strong>{{feedback_msg}}</strong>
+  </div>
+</div>
 <div *ngIf="isSuccess == true && (cur_prob!=(num_problems-1))">
   <hr class="my-4">
   <div class="text-center">
