@@ -19,8 +19,10 @@ export class CodeProblemComponent implements OnInit {
 
   getProblem(){
     const name = this.route.snapshot.paramMap.get('name');
+    console.log(name);
     this.problemService.getProblem(name).subscribe(problem => {
       this.problem = problem.problem;
+      console.log(problem.problem);
       if(problem.problem.type === 'open') {
         this.solution_code = problem.problem.code;
       }

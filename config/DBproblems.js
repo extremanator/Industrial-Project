@@ -478,6 +478,26 @@ module.exports = [
     ],
     solution: 'second answer'
   }),
+  new Problem({ 
+    name: 'Do you know basic math',
+    difficulty: 'Easy',
+    points: 5,
+    category: ['cpp', 'easy'],
+    paragraph:
+        'Solve the following: 2*3+3 = ?',
+    code: ' ',
+    type: 'close',
+    num_solved: 0,
+    num_attempted: 0,
+    tests: [{code: ''}],
+    solutions: [
+      '12',
+      '4',
+      '8',
+      '9'
+    ],
+    solution: '9'
+  }),
   new Problem({
     name: 'User Input',
     difficulty: 'Medium',

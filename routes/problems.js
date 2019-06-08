@@ -30,6 +30,7 @@ router.get('/getLanguageProblems/:language', passport.authenticate('jwt', {sessi
 
 router.get('/getProblem/:name', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     const problemName = req.params.name;
+    console.log('backend: ' + problemName);
     Problem.getProblemByName(problemName, (err, problemArr) => {
         if(err){
             throw err;
