@@ -130,9 +130,6 @@ function checkSolution(req, res, next, updateCounters){
                                                     res.json({success: false, msg: 'Incorrect Solution!'});
                                                 }
                                             });
-                                            fs.unlink(`.\\temp\\${tempName}.cpp`, (err) => {
-                                                if (err) throw err;
-                                            });
                                         });
                                     } else{
                                         if (result.errorType === 'compile-time') {
@@ -142,6 +139,9 @@ function checkSolution(req, res, next, updateCounters){
                                             res.json({success: false, msg: 'Incorrect Solution!'});
                                         }
                                     }
+                                    fs.unlink(`.\\temp\\${tempName}.cpp`, (err) => {
+                                        if (err) throw err;
+                                    });
                                 } else {
                                     doTests(i+1);
                                 }
