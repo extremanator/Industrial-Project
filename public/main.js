@@ -156,7 +156,7 @@ var appRoutes = [
     { path: 'stats', component: _components_statistics_statistics_component__WEBPACK_IMPORTED_MODULE_17__["StatisticsComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"], _guards_admin_guard__WEBPACK_IMPORTED_MODULE_18__["AdminGuard"]] },
     { path: 'problems/:name', component: _components_code_problem_code_problem_component__WEBPACK_IMPORTED_MODULE_15__["CodeProblemComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
     { path: 'user/:username', component: _components_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_19__["PublicProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'language/:language/:filters', component: _components_language_language_component__WEBPACK_IMPORTED_MODULE_20__["LanguageComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] }
+    { path: 'language/:language/:filters', component: _components_language_language_component__WEBPACK_IMPORTED_MODULE_20__["LanguageComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -177,7 +177,7 @@ var AppModule = /** @class */ (function () {
                 _components_leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_21__["LeaderboardComponent"],
                 _components_language_language_component__WEBPACK_IMPORTED_MODULE_20__["LanguageComponent"],
                 _components_test_test_component__WEBPACK_IMPORTED_MODULE_22__["TestComponent"],
-                _components_test_problem_test_problem_component__WEBPACK_IMPORTED_MODULE_23__["TestProblemComponent"]
+                _components_test_problem_test_problem_component__WEBPACK_IMPORTED_MODULE_23__["TestProblemComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -205,7 +205,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvY29kZS1wcm9ibGVtL2NvZGUtcHJvYmxlbS5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "tr {\r\n  background: #ededed;\r\n  border: 1px solid #ccc;\r\n  padding: 10px 30px;\r\n  border-radius: 3px;\r\n  cursor: pointer;\r\n}\r\n\r\ntr:active {\r\n  background: #e5e5e5;\r\n  box-shadow: inset 0px 0px 5px #c1c1c1;\r\n  outline: none;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9jb2RlLXByb2JsZW0vY29kZS1wcm9ibGVtLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxtQkFBbUI7RUFDbkIsc0JBQXNCO0VBQ3RCLGtCQUFrQjtFQUNsQixrQkFBa0I7RUFDbEIsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLG1CQUFtQjtFQUduQixxQ0FBcUM7RUFDckMsYUFBYTtBQUNmIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9jb2RlLXByb2JsZW0vY29kZS1wcm9ibGVtLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0ciB7XHJcbiAgYmFja2dyb3VuZDogI2VkZWRlZDtcclxuICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xyXG4gIHBhZGRpbmc6IDEwcHggMzBweDtcclxuICBib3JkZXItcmFkaXVzOiAzcHg7XHJcbiAgY3Vyc29yOiBwb2ludGVyO1xyXG59XHJcblxyXG50cjphY3RpdmUge1xyXG4gIGJhY2tncm91bmQ6ICNlNWU1ZTU7XHJcbiAgLXdlYmtpdC1ib3gtc2hhZG93OiBpbnNldCAwcHggMHB4IDVweCAjYzFjMWMxO1xyXG4gIC1tb3otYm94LXNoYWRvdzogaW5zZXQgMHB4IDBweCA1cHggI2MxYzFjMTtcclxuICBib3gtc2hhZG93OiBpbnNldCAwcHggMHB4IDVweCAjYzFjMWMxO1xyXG4gIG91dGxpbmU6IG5vbmU7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -216,7 +216,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<h1>{{(problem === undefined)?'':problem.name}}</h1>\n<p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\n<ngx-codemirror [(ngModel)]=\"solution_code\"\n                [options]=\"{\n                  lineNumbers: true,\n                  theme: 'material',\n                  mode: 'text/x-c++src',\n                  indentUnit: 4,\n                  indentWithTabs: true,\n                  autoCloseBrackets: true\n                }\">{{solution_code}}</ngx-codemirror>\n<br/>\n<button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\n<br/>\n<div *ngIf=\"isSuccess != undefined\">{{feedback_msg}}</div>\n\n"
+module.exports = "<br/>\r\n\r\n<h1>{{(problem === undefined)?'':problem.name}}</h1>\r\n<div *ngIf=\"problem?.type==='open'\">\r\n  <p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\r\n  <ngx-codemirror [(ngModel)]=\"solution_code\"\r\n                  [options]=\"{\r\n                  lineNumbers: true,\r\n                  theme: 'material',\r\n                  mode: 'text/x-c++src',\r\n                  indentUnit: 4,\r\n                  indentWithTabs: true,\r\n                  autoCloseBrackets: true\r\n                }\">{{solution_code}}</ngx-codemirror>\r\n  <br/>\r\n  <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\r\n  <br/>\r\n  <br/>\r\n  <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n  <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"problem?.type==='close'\">\r\n  <p style=\"white-space: pre-wrap;\">{{problem.paragraph}}</p>\r\n  <table class=\"table table-hover\">\r\n    <tbody>\r\n    <tr *ngFor=\"let sol of problem.solutions\" (click)=\"onSolveClosed(sol)\" class=\"change-cursor\">\r\n      <button type=\"button\" class=\"btn btn-primary btn-lg btn-block\">{{ sol }}</button>\r\n    </tr>\r\n    </tbody>\r\n  </table>\r\n  <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n  <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -246,14 +246,23 @@ var CodeProblemComponent = /** @class */ (function () {
     CodeProblemComponent.prototype.getProblem = function () {
         var _this = this;
         var name = this.route.snapshot.paramMap.get('name');
-        this.problemService.getProblem(name).subscribe(function (problem) {
-            _this.problem = problem.problem;
-            _this.solution_code = problem.problem.code;
+        this.problemService.getProblem(name).subscribe(function (problemWrapper) {
+            _this.problem = problemWrapper.problem;
+            if (_this.problem.type === 'open') {
+                _this.solution_code = _this.problem.code;
+            }
         });
     };
     CodeProblemComponent.prototype.onSubmitSolution = function (submitted_code) {
         var _this = this;
         this.problemService.testProblemSolution(this.problem.name, submitted_code).subscribe(function (res) {
+            _this.isSuccess = res.success;
+            _this.feedback_msg = res.msg;
+        });
+    };
+    CodeProblemComponent.prototype.onSolveClosed = function (solution) {
+        var _this = this;
+        this.problemService.checkCloseProblemSolution(this.problem.name, solution).subscribe(function (res) {
             _this.isSuccess = res.success;
             _this.feedback_msg = res.msg;
         });
@@ -295,7 +304,7 @@ module.exports = ".page-header{\r\n  text-align: center;\r\n}\r\n.language-name{
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<h2 class=\"page-header\">Dashboard</h2>\n<div class=\"jumbotron cpp change-cursor\" routerLink=\"/language/cpp/::\">\n  <h2 class=\"language-name\">C++</h2>\n</div>\n<div class=\"jumbotron java change-cursor\" routerLink=\"/language/java/::\">\n  <h2 class=\"language-name\">Java</h2>\n</div>\n"
+module.exports = "<br/>\r\n<h2 class=\"page-header\">Programming Languages</h2>\r\n<div class=\"jumbotron cpp change-cursor\" routerLink=\"/language/cpp/::\">\r\n  <h2 class=\"language-name\">C++</h2>\r\n</div>\r\n<div class=\"jumbotron java change-cursor\" routerLink=\"/language/java/::\">\r\n  <h2 class=\"language-name\">Java</h2>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -351,7 +360,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron text-center\">\n  <h1>Cyber-Trainer</h1>\n  <p class=\"lead\">Welcome to our project</p>\n  <div>\n    <a class=\"btn btn-primary\" [routerLink]=\"['/register']\">Register</a> <a class=\"btn btn-default\" [routerLink]=\"['/login']\">Login</a>\n  </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"col-md-4\">\n    <h3>Express Backend</h3>\n    <p>A rock solid blah</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>Angular-CLI</h3>\n    <p>A paper solid blah</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>JWT Tokens</h3>\n    <p>A scissors solid blah</p>\n  </div>\n</div>\n"
+module.exports = "<div class=\"jumbotron text-center\">\r\n  <h1>Cyber-Trainer</h1>\r\n  <p class=\"lead\">Welcome to our project</p>\r\n  <div>\r\n    <a *ngIf=\"user === undefined\" class=\"btn btn-primary\" [routerLink]=\"['/register']\">Register</a> <a *ngIf=\"user === undefined\" class=\"btn btn-default\" [routerLink]=\"['/login']\">Login</a>\r\n    <p *ngIf=\"user !== undefined\">Welcome, {{ user.name }}</p>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-4\">\r\n    <h3>Express Backend</h3>\r\n    <p>A rock solid blah</p>\r\n  </div>\r\n  <div class=\"col-md-4\">\r\n    <h3>Angular-CLI</h3>\r\n    <p>A paper solid blahh</p>\r\n  </div>\r\n  <div class=\"col-md-4\">\r\n    <h3>JWT Tokens</h3>\r\n    <p>A scissors solid blah</p>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -367,12 +376,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+
 
 
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent() {
+    function HomeComponent(authService) {
+        this.authService = authService;
     }
     HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.authService.getProfile().subscribe(function (profile) {
+            _this.user = profile.user;
+        }, function (err) {
+            console.log(err);
+            return false;
+        });
     };
     HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -380,7 +399,7 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/components/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/components/home/home.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -407,7 +426,7 @@ module.exports = ".problems{\r\n  display: table-cell;\r\n  width: 80%;\r\n}\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<h2 class=\"page-header\">{{language}}</h2>\n<div class=\"problems\">\n  <table class=\"table table-hover\">\n    <thead>\n    <tr>\n      <th scope=\"col\"></th>\n      <th scope=\"col\">Difficulty</th>\n      <th scope=\"col\">Points</th>\n      <th scope=\"col\">Date of Solution</th>\n      <th scope=\"col\">Solved</th>\n    </tr>\n    </thead>\n    <tbody *ngIf=\"problemInfo\">\n      <tr *ngFor=\"let problem of problems\" (click)=\"onClickProblem(problem.name)\" class=\"change-cursor\">\n        <th scope=\"row\">{{problem.name}}</th>\n        <td>{{problem.difficulty}}</td>\n        <td>{{problem.points}}</td>\n        <td>{{(problemInfo.get(problem.name) === undefined)?'':(problemInfo.get(problem.name).dateSol)}}</td>\n        <td>\n          <div *ngIf=\"(problemInfo.get(problem.name)===undefined)?false:(problemInfo.get(problem.name).solved == true); else elseBlock\">&#10004;</div>\n          <ng-template #elseBlock>&#10060;</ng-template>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n<div class=\"filters\">\n  <fieldset>\n    <legend>Difficulty</legend>\n    <div class=\"form-group\">\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"difficulty1\" [(ngModel)]=\"filterEasy\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"difficulty1\">Easy</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"difficutly2\" [(ngModel)]=\"filterMedium\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"difficutly2\">Medium</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"difficulty3\" [(ngModel)]=\"filterHard\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"difficulty3\">Hard</label>\n      </div>\n    </div>\n    <legend>Category</legend>\n    <div class=\"form-group\">\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category1\" [(ngModel)]=\"filterDCL\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category1\">Declarations and Initialization</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category2\" [(ngModel)]=\"filterEXP\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category2\">Expressions</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category3\" [(ngModel)]=\"filterINT\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category3\">Integers</label>\n      </div>\n    </div>\n  </fieldset>\n</div>\n"
+module.exports = "<br/>\n<h2 class=\"page-header\">{{language}}</h2>\n<div class=\"problems\">\n  <table class=\"table table-hover\">\n    <thead>\n    <tr>\n      <th scope=\"col\"></th>\n      <th scope=\"col\">Difficulty</th>\n      <th scope=\"col\">Points</th>\n      <th scope=\"col\">Date of Solution</th>\n      <th scope=\"col\">Solved</th>\n    </tr>\n    </thead>\n    <tbody *ngIf=\"problemInfo\">\n      <tr *ngFor=\"let problem of problems\" (click)=\"onClickProblem(problem.name)\" class=\"change-cursor\">\n        <th scope=\"row\">{{problem.name}}</th>\n        <td>{{problem.difficulty}}</td>\n        <td>{{problem.points}}</td>\n        <td>{{(problemInfo.get(problem.name) === undefined)?'':(problemInfo.get(problem.name).dateSol)}}</td>\n        <td>\n          <div *ngIf=\"(problemInfo.get(problem.name)===undefined)?false:(problemInfo.get(problem.name).solved == true); else elseBlock\">&#10004;</div>\n          <ng-template #elseBlock>&#10060;</ng-template>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n<div class=\"filters\">\n  <fieldset>\n    <legend>Difficulty</legend>\n    <div class=\"form-group\">\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"difficulty1\" [(ngModel)]=\"filterEasy\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"difficulty1\">Easy</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"difficutly2\" [(ngModel)]=\"filterMedium\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"difficutly2\">Medium</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"difficulty3\" [(ngModel)]=\"filterHard\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"difficulty3\">Hard</label>\n      </div>\n    </div>\n    <legend>Category</legend>\n    <div class=\"form-group\">\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category1\" [(ngModel)]=\"filterDCL\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category1\">Declarations and Initialization</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category2\" [(ngModel)]=\"filterEXP\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category2\">Expressions</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category3\" [(ngModel)]=\"filterINT\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category3\">Integers</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category4\" [(ngModel)]=\"filterCTR\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category4\">Containers</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category5\" [(ngModel)]=\"filterSTR\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category5\">Characters and Strings</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category6\" [(ngModel)]=\"filterMEM\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category6\">Memory Management</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category7\" [(ngModel)]=\"filterFIO\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category7\">Input Output</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category8\" [(ngModel)]=\"filterERR\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category8\">Exceptions and Error Handling</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category9\" [(ngModel)]=\"filterOOP\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category9\">Object Oriented Programming</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category10\" [(ngModel)]=\"filterCON\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category10\">Concurrency</label>\n      </div>\n      <div class=\"custom-control custom-checkbox\">\n        <input type=\"checkbox\" class=\"custom-control-input\" id=\"category11\" [(ngModel)]=\"filterMSC\" (change)=\"updateFilter()\">\n        <label class=\"custom-control-label\" for=\"category11\">Miscellaneous</label>\n      </div>\n    </div>\n  </fieldset>\n</div>\n"
 
 /***/ }),
 
@@ -516,6 +535,30 @@ var LanguageComponent = /** @class */ (function () {
         if (this.filterINT) {
             filters += 'INT:';
         }
+        if (this.filterCTR) {
+            filters += 'CTR:';
+        }
+        if (this.filterSTR) {
+            filters += 'STR:';
+        }
+        if (this.filterMEM) {
+            filters += 'MEM:';
+        }
+        if (this.filterFIO) {
+            filters += 'FIO:';
+        }
+        if (this.filterERR) {
+            filters += 'ERR:';
+        }
+        if (this.filterOOP) {
+            filters += 'OOP:';
+        }
+        if (this.filterCON) {
+            filters += 'CON:';
+        }
+        if (this.filterMSC) {
+            filters += 'MSC:';
+        }
         this.router.navigate(["/language/" + this.routeLanguage + "/" + filters]);
     };
     LanguageComponent.prototype.getFilters = function (filters) {
@@ -554,16 +597,60 @@ var LanguageComponent = /** @class */ (function () {
             var filters = _this.getFilters(routeParams.filters);
             if (filters.difficulties.includes('easy'))
                 _this.filterEasy = true;
+            else
+                _this.filterEasy = false;
             if (filters.difficulties.includes('medium'))
                 _this.filterMedium = true;
+            else
+                _this.filterMedium = false;
             if (filters.difficulties.includes('hard'))
                 _this.filterHard = true;
+            else
+                _this.filterHard = false;
             if (filters.categories.includes('DCL'))
                 _this.filterDCL = true;
+            else
+                _this.filterDCL = false;
             if (filters.categories.includes('EXP'))
                 _this.filterEXP = true;
+            else
+                _this.filterEXP = false;
             if (filters.categories.includes('INT'))
                 _this.filterINT = true;
+            else
+                _this.filterINT = false;
+            if (filters.categories.includes('CTR'))
+                _this.filterCTR = true;
+            else
+                _this.filterCTR = false;
+            if (filters.categories.includes('STR'))
+                _this.filterSTR = true;
+            else
+                _this.filterSTR = false;
+            if (filters.categories.includes('MEM'))
+                _this.filterMEM = true;
+            else
+                _this.filterMEM = false;
+            if (filters.categories.includes('FIO'))
+                _this.filterFIO = true;
+            else
+                _this.filterFIO = false;
+            if (filters.categories.includes('ERR'))
+                _this.filterERR = true;
+            else
+                _this.filterERR = false;
+            if (filters.categories.includes('OOP'))
+                _this.filterOOP = true;
+            else
+                _this.filterOOP = false;
+            if (filters.categories.includes('CON'))
+                _this.filterCON = true;
+            else
+                _this.filterCON = false;
+            if (filters.categories.includes('MSC'))
+                _this.filterMSC = true;
+            else
+                _this.filterMSC = false;
             _this.getLanguageProblems(routeParams.language, filters);
         });
     };
@@ -1287,7 +1374,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\r\n<h1 class=\"text-center\">Problem {{cur_prob+1}} of {{num_problems}}</h1>\r\n<div class=\"progress\">\r\n  <div class=\"progress-bar\" role=\"progressbar\" [attr.aria-valuenow]=\"progress\" [style.width.%]=\"(num_problems != 0)?(progress*100)/num_problems:10\"\r\n       aria-valuemin=\"0\" [attr.aria-valuemax]=\"num_problems\"></div>\r\n</div>\r\n<hr class=\"my-4\">\r\n<h1>{{(problem === undefined)?'':problem.name}}</h1>\r\n<p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\r\n<ngx-codemirror [(ngModel)]=\"solution_code\"\r\n                [options]=\"{\r\n                  lineNumbers: true,\r\n                  theme: 'material',\r\n                  mode: 'text/x-c++src',\r\n                  indentUnit: 4,\r\n                  indentWithTabs: true,\r\n                  autoCloseBrackets: true\r\n                }\">{{solution_code}}</ngx-codemirror>\r\n<br/>\r\n<div *ngIf=\"failed != true; else elseBlock\">\r\n  <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\r\n</div>\r\n<ng-template #elseBlock>\r\n  <button type=\"button\" class=\"btn btn-primary\" routerLink=\"/test\">Back to Test Menu</button>\r\n</ng-template>\r\n<br/>\r\n<div *ngIf=\"isSuccess != undefined\">{{feedback_msg}}</div>\r\n<div *ngIf=\"isSuccess == true && (cur_prob!=(num_problems-1))\">\r\n  <hr class=\"my-4\">\r\n  <div class=\"text-center\">\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"nextProblem()\">Next</button>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"isSuccess == true && (cur_prob==(num_problems-1))\">\r\n  <hr class=\"my-4\">\r\n  <p style=\"text-align: center\">========================================You Did It!!!!==============================================</p>\r\n</div>\r\n\r\n"
+module.exports = "<br/>\r\n<h1 class=\"text-center\">Problem {{cur_prob+1}} of {{num_problems}}</h1>\r\n<div class=\"progress\">\r\n  <div class=\"progress-bar\" role=\"progressbar\" [attr.aria-valuenow]=\"progress\" [style.width.%]=\"(num_problems != 0)?(progress*100)/num_problems:10\"\r\n       aria-valuemin=\"0\" [attr.aria-valuemax]=\"num_problems\"></div>\r\n</div>\r\n<hr class=\"my-4\">\r\n<h1>{{(problem === undefined)?'':problem.name}}</h1>\r\n<div *ngIf=\"problem?.type==='open'\">\r\n  <p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\r\n  <ngx-codemirror [(ngModel)]=\"solution_code\"\r\n                  [options]=\"{\r\n                  lineNumbers: true,\r\n                  theme: 'material',\r\n                  mode: 'text/x-c++src',\r\n                  indentUnit: 4,\r\n                  indentWithTabs: true,\r\n                  autoCloseBrackets: true\r\n                }\">{{solution_code}}</ngx-codemirror>\r\n  <br/>\r\n  <div *ngIf=\"failed != true; else elseBlock\">\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\r\n  </div>\r\n  <ng-template #elseBlock>\r\n    <button type=\"button\" class=\"btn btn-primary\" routerLink=\"/test\">Back to Test Menu</button>\r\n  </ng-template>\r\n  <br/>\r\n  <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n  <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"problem?.type==='close'\">\r\n  <p style=\"white-space: pre-wrap;\">{{problem.paragraph}}</p>\r\n  <table class=\"table table-hover\">\r\n    <tbody>\r\n    <tr *ngFor=\"let sol of problem.solutions\" (click)=\"onSolveClosed(sol)\" class=\"change-cursor\">\r\n      <button type=\"button\" class=\"btn btn-primary btn-lg btn-block\">{{ sol }}</button>\r\n    </tr>\r\n    </tbody>\r\n  </table>\r\n  <br/>\r\n  <div *ngIf=\"failed == true\">\r\n    <button type=\"button\" class=\"btn btn-primary\" routerLink=\"/test\">Back to Test Menu</button>\r\n  </div>\r\n  <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n  <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"isSuccess == true && (cur_prob!=(num_problems-1))\">\r\n  <hr class=\"my-4\">\r\n  <div class=\"text-center\">\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"nextProblem()\">Next</button>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"isSuccess == true && (cur_prob==(num_problems-1))\">\r\n  <hr class=\"my-4\">\r\n  <p style=\"text-align: center\">========================================You Did It!!!!==============================================</p>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1348,7 +1435,7 @@ var TestProblemComponent = /** @class */ (function () {
             }
             _this.shuffle(filteredProblems);
             _this.problems = filteredProblems;
-            if (_this.problems.length == 0) {
+            if (_this.problems.length === 0) {
                 _this.router.navigate(['/test']);
                 return;
             }
@@ -1371,7 +1458,7 @@ var TestProblemComponent = /** @class */ (function () {
     };
     TestProblemComponent.prototype.onSubmitSolution = function (submitted_code) {
         var _this = this;
-        this.problemService.testTestSolution(this.problem.name, submitted_code).subscribe(function (res) {
+        this.problemService.checkOpenSolutionInTest(this.problem.name, submitted_code).subscribe(function (res) {
             _this.isSuccess = res.success;
             _this.feedback_msg = res.msg;
             if (_this.isSuccess)
@@ -1380,12 +1467,27 @@ var TestProblemComponent = /** @class */ (function () {
                 _this.failed = true;
         });
     };
+    TestProblemComponent.prototype.onSolveClosed = function (solution) {
+        var _this = this;
+        if (this.failed !== true) {
+            this.problemService.checkCloseSolutionInTest(this.problem.name, solution).subscribe(function (res) {
+                _this.isSuccess = res.success;
+                _this.feedback_msg = res.msg;
+                if (_this.isSuccess)
+                    _this.progress++;
+                else if (_this.feedback_msg === 'Incorrect!')
+                    _this.failed = true;
+            });
+        }
+    };
     TestProblemComponent.prototype.nextProblem = function () {
         this.isSuccess = undefined;
         this.feedback_msg = undefined;
         this.cur_prob += 1;
         this.problem = this.problems[this.cur_prob];
-        this.solution_code = this.problem.code;
+        if (this.problem.type === 'open') {
+            this.solution_code = this.problem.code;
+        }
     };
     TestProblemComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1422,7 +1524,7 @@ module.exports = ".page-header{\r\n  text-align: center;\r\n  margin-top: 5px;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<div class=\"jumbotron\" style=\"border-color: black; border-style: dotted; border-radius: 5px\">\n  <h2 class=\"page-header\">Setup Test</h2>\n  <hr class=\"my-4\">\n  <h4 class=\"subheader\">Select the categories of the test:</h4>\n  <div class=\"filters\">\n    <fieldset>\n      <div class=\"form-group\">\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category1\" [(ngModel)]=\"filterDCL\">\n          <label class=\"custom-control-label\" for=\"category1\">Declarations and Initialization</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category2\" [(ngModel)]=\"filterEXP\">\n          <label class=\"custom-control-label\" for=\"category2\">Expressions</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category3\" [(ngModel)]=\"filterINT\">\n          <label class=\"custom-control-label\" for=\"category3\">Integers</label>\n        </div>\n      </div>\n    </fieldset>\n  </div>\n  <hr class=\"my-4\">\n  <h4 class=\"subheader\">Select number of problems:</h4>\n  <div class=\"form-group num-questions-form\">\n    <select [(ngModel)]=\"numProblems\" class=\"custom-select\">\n      <option value=\"5\">5</option>\n      <option value=\"10\">10</option>\n      <option value=\"15\">15</option>\n    </select>\n  </div>\n  <hr class=\"my-4\">\n  <div class=\"text-center\">\n    <a class=\"btn btn-primary\" (click)=\"startTest()\">Start Test!</a>\n  </div>\n</div>\n\n"
+module.exports = "<br/>\n<div class=\"jumbotron\" style=\"border-color: black; border-style: dotted; border-radius: 5px\">\n  <h2 class=\"page-header\">Setup Test</h2>\n  <hr class=\"my-4\">\n  <h4 class=\"subheader\">Select the categories of the test:</h4>\n  <div class=\"filters\">\n    <fieldset>\n      <div class=\"form-group\">\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category1\" [(ngModel)]=\"filterDCL\">\n          <label class=\"custom-control-label\" for=\"category1\">Declarations and Initialization</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category2\" [(ngModel)]=\"filterEXP\">\n          <label class=\"custom-control-label\" for=\"category2\">Expressions</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category3\" [(ngModel)]=\"filterINT\">\n          <label class=\"custom-control-label\" for=\"category3\">Integers</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category4\" [(ngModel)]=\"filterCTR\">\n          <label class=\"custom-control-label\" for=\"category4\">Containers</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category5\" [(ngModel)]=\"filterSTR\">\n          <label class=\"custom-control-label\" for=\"category5\">Characters and Strings</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category6\" [(ngModel)]=\"filterMEM\">\n          <label class=\"custom-control-label\" for=\"category6\">Memory Management</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category7\" [(ngModel)]=\"filterFIO\">\n          <label class=\"custom-control-label\" for=\"category7\">Input Output</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category8\" [(ngModel)]=\"filterERR\">\n          <label class=\"custom-control-label\" for=\"category8\">Exceptions and Error Handling</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category9\" [(ngModel)]=\"filterOOP\">\n          <label class=\"custom-control-label\" for=\"category9\">Object Oriented Programming</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category10\" [(ngModel)]=\"filterCON\">\n          <label class=\"custom-control-label\" for=\"category10\">Concurrency</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category11\" [(ngModel)]=\"filterMSC\">\n          <label class=\"custom-control-label\" for=\"category11\">Miscellaneous</label>\n        </div>\n      </div>\n    </fieldset>\n  </div>\n  <hr class=\"my-4\">\n  <h4 class=\"subheader\">Select number of problems:</h4>\n  <div class=\"form-group num-questions-form\">\n    <select [(ngModel)]=\"numProblems\" class=\"custom-select\">\n      <option value=\"5\">5</option>\n      <option value=\"10\">10</option>\n      <option value=\"15\">15</option>\n    </select>\n  </div>\n  <hr class=\"my-4\">\n  <div class=\"text-center\">\n    <a class=\"btn btn-primary\" (click)=\"startTest()\">Start Test!</a>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -1459,6 +1561,30 @@ var TestComponent = /** @class */ (function () {
         }
         if (this.filterEXP) {
             filters.push('EXP');
+        }
+        if (this.filterCTR) {
+            filters.push('CTR');
+        }
+        if (this.filterSTR) {
+            filters.push('STR');
+        }
+        if (this.filterMEM) {
+            filters.push('MEM');
+        }
+        if (this.filterFIO) {
+            filters.push('FIO');
+        }
+        if (this.filterERR) {
+            filters.push('ERR');
+        }
+        if (this.filterOOP) {
+            filters.push('OOP');
+        }
+        if (this.filterCON) {
+            filters.push('CON');
+        }
+        if (this.filterMSC) {
+            filters.push('MSC');
         }
         this.testService.beginTest(this.numProblems, filters);
         this.router.navigate(['/test/problem']);
@@ -1817,7 +1943,7 @@ var ProblemService = /** @class */ (function () {
         };
         return this.http.post(problemsUrl + "/checkProblemSolution", problemRequest, httpOptions);
     };
-    ProblemService.prototype.testTestSolution = function (name, solution) {
+    ProblemService.prototype.checkOpenSolutionInTest = function (name, solution) {
         var authToken = this.authService.getToken();
         var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': authToken, 'Content-Type': 'application/json' })
@@ -1827,6 +1953,28 @@ var ProblemService = /** @class */ (function () {
             solution: solution
         };
         return this.http.post(problemsUrl + "/checkTestSolution", problemRequest, httpOptions);
+    };
+    ProblemService.prototype.checkCloseSolutionInTest = function (name, solution) {
+        var authToken = this.authService.getToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': authToken, 'Content-Type': 'application/json' })
+        };
+        var problemRequest = {
+            name: name,
+            solution: solution
+        };
+        return this.http.post(problemsUrl + "/checkClosedTestSolution", problemRequest, httpOptions);
+    };
+    ProblemService.prototype.checkCloseProblemSolution = function (name, solution) {
+        var authToken = this.authService.getToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': authToken, 'Content-Type': 'application/json' })
+        };
+        var problemRequest = {
+            name: name,
+            solution: solution
+        };
+        return this.http.post(problemsUrl + "/checkClosedProblemSolution", problemRequest, httpOptions);
     };
     ProblemService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

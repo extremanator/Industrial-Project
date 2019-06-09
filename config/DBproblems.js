@@ -583,5 +583,83 @@ module.exports = [
             'Moshe From Rafael ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\n'
       }
     ]
+  }),
+  new Problem({
+    name: 'Multithreading 1',
+    difficulty: 'Easy',
+    points: 5,
+    category: ['cpp', 'easy', 'CON'],
+    paragraph:
+        'Bob wrote the following code for his top secret long-range missile:\n' +
+        '\n' +
+        '#include <mutex>\n' +
+        '\n' +
+        'struct Flags {\n' +
+        '\tunsigned int flag1 : 2;\n' +
+        '\tunsigned int flag2 : 2;\n' +
+        '};\n' +
+        '\n' +
+        'void thread1(bool a, bool b) {\n' +
+        '\tif(a == 0){\n' +
+        '\t\tflags.flag1 = 1;\n' +
+        '\t} else {\n' +
+        '\t\tif(b > 0){\n' +
+        '\t\t\tflags.flag1 = 0;\n' +
+        '\t\t}\n' +
+        '\t}\n' +
+        '}\n' +
+        '  \n' +
+        'void thread2() {\n' +
+        '\tflags.flag2 = 2;\n' +
+        '}\n' +
+        '\n' +
+        'Tomorrow they are planning to test the missile launch (uh oh). Will the test pass with 100% certainty (assuming all other code is perfect)?',
+    code: ' ',
+    type: 'close',
+    num_solved: 0,
+    num_attempted: 0,
+    tests: [{code: ''}],
+    solutions: [
+      'Yes, because the threads access different flags',
+      'No, because you always have to use a lock when accessing shared variables',
+      'Yes, because each thread will always get it\'s own copy of the flags',
+      'No, the threads may calculate with the flags at the same time causing undefined behaviour'
+    ],
+    solution: 'No, the threads may calculate with the flags at the same time causing undefined behaviour'
+  }),
+  new Problem({
+    name: 'Const 1',
+    difficulty: 'Medium',
+    points: 10,
+    category: ['cpp', 'easy', 'MSC'],
+    paragraph:
+        'Examine the following code:\n' +
+        '\n' +
+        '#include <iostream> \n' +
+        'using namespace std; \n' +
+        'int main() \n' +
+        '{\n' +
+        '\tconst char* p = "abcde"; \n' +
+        '\tconst char **q = &p; \n' +
+        '\t*q = "12345"; \n' +
+        '\tconst char *s = ++p; \n' +
+        '\tp = "XYZWVU"; \n' +
+        '\tcout << *++s; \n' +
+        '\treturn 0; \n' +
+        '}\n' +
+        '\n' +
+        'What will be the output of the program?',
+    code: ' ',
+    type: 'close',
+    num_solved: 0,
+    num_attempted: 0,
+    tests: [{code: ''}],
+    solutions: [
+      'Garbage value',
+      'Compilation Error',
+      '3',
+      '2'
+    ],
+    solution: '3'
   })
 ];
