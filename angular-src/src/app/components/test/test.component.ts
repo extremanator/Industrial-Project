@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TestService } from "../../services/test.service";
-import { Router } from "@angular/router";
+import { TestService } from '../../services/test.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -24,39 +24,39 @@ export class TestComponent implements OnInit {
   constructor(private testService: TestService,
               private router: Router) { }
 
-  startTest(){
-    let filters = [];
-    if (this.filterDCL){
+  startTest() {
+    const filters = [];
+    if (this.filterDCL) {
       filters.push('DCL');
     }
-    if (this.filterINT){
+    if (this.filterINT) {
       filters.push('INT');
     }
-    if (this.filterEXP){
+    if (this.filterEXP) {
       filters.push('EXP');
     }
-    if (this.filterCTR){
+    if (this.filterCTR) {
       filters.push('CTR');
     }
-    if (this.filterSTR){
+    if (this.filterSTR) {
       filters.push('STR');
     }
-    if (this.filterMEM){
+    if (this.filterMEM) {
       filters.push('MEM');
     }
-    if (this.filterFIO){
+    if (this.filterFIO) {
       filters.push('FIO');
     }
-    if (this.filterERR){
+    if (this.filterERR) {
       filters.push('ERR');
     }
-    if (this.filterOOP){
+    if (this.filterOOP) {
       filters.push('OOP');
     }
-    if (this.filterCON){
+    if (this.filterCON) {
       filters.push('CON');
     }
-    if (this.filterMSC){
+    if (this.filterMSC) {
       filters.push('MSC');
     }
     this.testService.beginTest(this.numProblems, filters);

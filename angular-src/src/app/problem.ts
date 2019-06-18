@@ -8,4 +8,7 @@ export class Problem {
   type: string;
   tests: object[];
   solutions: string[];
+  solved_by: Map<string, object>;
+  num_solved: number;
+  num_attempted: number;
 }

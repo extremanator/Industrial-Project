@@ -1,11 +1,34 @@
 .list {
-  float: left;
+  width: 25%;
 }
 
 .info {
-  float: left;
-  width: 70%;
-  height: 1000px;
+  width: 75%;
+  height: 1200px;
 }
+
+.sub-table{
+  background-color: #f5f5f5;
+}
+
+.my-dropdown::after{
+  content: '˅';
+  font-family: "Courier New", serif;
+  float: right;
+}
+
+.custom-radio{
+  float: left;
+  margin-left: 20px;
+}
+
+.radio-label{
+  float: left;
+}
+
+.search-results{
+  margin-top: 0;
+}
+
 
 

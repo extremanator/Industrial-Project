@@ -1,31 +1,170 @@
-<div class="list">
-  <table class="table table-hover">
-    <tbody class="body">
-    <tr class="change-cursor" (click)="onClickGeneral()" [class.table-active]="'General' === selected.name">
-      <th scope="row">General</th>
-    </tr>
-    <tr *ngFor="let info of problemsInfo" (click)="onClickProblem(info)" class="change-cursor" [class.table-active]="info.name === selected.name">
-      <th scope="row">{{info.name}}</th>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<div class="info">
-  <br/>
-  <h2 align="center">{{selected.name}}</h2>
-  <div *ngIf="selected.name === 'General'; else elseBlock" class="jumbotron">
-    <p class="lead">The number of users in the system is: {{selected.numUsers}}</p>
-    <hr class="my-4">
-    <p>More interesting statistics. <i>Maybe leaderboard?!</i></p>
+<div style="display: flex; height: 2000px">
+  <div class="list">
+    <table class="table table-hover">
+      <tbody class="body">
+      <tr class="change-cursor" (click)="onClickGeneral()" [class.table-success]="clickedGeneral">
+        <th class="my-dropdown" scope="row">General</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedGeneral" (click)="onClickUsers('Users')" [class.table-active]="'Users' === selected.name">
+        <th scope="row">&emsp;Users</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedGeneral" (click)="onClickProblems('Problems')" [class.table-active]="'Problems' === selected.name">
+        <th scope="row">&emsp;Problems</th>
+      </tr>
+      <tr class="change-cursor" (click)="onClickCategories()" [class.table-success]="clickedCategories">
+        <th class="my-dropdown" scope="row">Categories</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Declarations and Initialization')" [class.table-active]="'Declarations and Initialization' === selected.name">
+        <th scope="row">&emsp;Declarations and Initialization</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Expressions')" [class.table-active]="'Expressions' === selected.name">
+        <th scope="row">&emsp;Expressions</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Integers')" [class.table-active]="'Integers' === selected.name">
+        <th scope="row">&emsp;Integers</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Containers')" [class.table-active]="'Containers' === selected.name">
+        <th scope="row">&emsp;Containers</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Characters and Strings')" [class.table-active]="'Characters and Strings' === selected.name">
+        <th scope="row">&emsp;Characters and Strings</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Memory Management')" [class.table-active]="'Memory Management' === selected.name">
+        <th scope="row">&emsp;Memory Management</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Input Output')" [class.table-active]="'Input Output' === selected.name">
+        <th scope="row">&emsp;Input Output</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Exceptions and Error Handling')" [class.table-active]="'Exceptions and Error Handling' === selected.name">
+        <th scope="row">&emsp;Exceptions and Error Handling</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Object Oriented Programming')" [class.table-active]="'Object Oriented Programming' === selected.name">
+        <th scope="row">&emsp;Object Oriented Programming</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Concurrency')" [class.table-active]="'Concurrency' === selected.name">
+        <th scope="row">&emsp;Concurrency</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedCategories" (click)="onClickCategory('Miscellaneous')" [class.table-active]="'Miscellaneous' === selected.name">
+        <th scope="row">&emsp;Miscellaneous</th>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  <ng-template #elseBlock>
-    <div class="jumbotron">
-      <p class="lead" style="white-space: pre-line">{{selected.num_attempted}}<br>The number of users who solved the problem is: {{selected.num_solved}}.<br>
-        {{selected.solvingUsers}}
-        Average number of attempts until solution is: {{selected.avg_attempts}}.<br>
-        {{selected.solved_percent}}% of users have solved this problem.</p>
+  <div class="info" *ngIf="selected.name !== undefined">
+    <br/>
+    <h2 align="center">{{selected.name}}</h2>
+    <div *ngIf="selected.name === 'Users'" class="jumbotron">
+      <p class="lead">The number of users in the system is: {{numUsers}}</p>
       <hr class="my-4">
-      <p>More interesting statistics.</p>
+      <div class="form-group">
+        <input type="text" [(ngModel)]="searchUsername" [ngModelOptions]="{standalone:true}" class="form-control mr-sm-2" placeholder="Search for username" autocomplete="off" (input)="onSearchUser(searchUsername)">
+      </div>
+      <ul class="list-group search-results">
+        <li class="list-group-item d-flex justify-content-between align-items-center change-cursor" *ngFor="let user of searchUsers$ | async" (click)="onSelectUser(user)">
+            {{user.username}}
+        </li>
+      </ul>
+      <div *ngIf="selectedUser !== undefined">
+        <br/>
+        <h2 class="page-header">{{selectedUser.name}}</h2>
+        <ul class="list-group">
+          <li class="list-group-item">Username: {{selectedUser.username}}</li>
+          <li class="list-group-item">Email: {{selectedUser.email}}</li>
+          <li class="list-group-item">Join Date: {{selectedUser.join_date}}</li>
+          <li class="list-group-item">Number of Solved Problems: {{selectedUser.num_solved}}</li>
+          <li class="list-group-item">Number of Solution Attempts: {{selectedUser.num_attempted}}</li>
+          <li class="list-group-item">User has solved: {{selectedUser.attempts}}</li>
+          <li class="list-group-item">User has attempted: {{selectedUser.solved}}</li>
+        </ul>
+        <br/>
+        <button type="button" class="btn btn-danger" (click)="onClickRemoveUser(selectedUser)">Remove User</button>
+        <hr class="my-4">
+        <p>And even more possible commands to apply to the user! <i>Maybe give test?!</i></p>
+      </div>
     </div>
-  </ng-template>
+    <div *ngIf="selected.name === 'Problems'" class="jumbotron">
+      <p class="lead">The number of problems in the system is: {{numProblems}}</p>
+      <ul class="list-group">
+        <li class="list-group-item">Most solved problems: {{maxProblemsText}}</li>
+        <li class="list-group-item">Number of users that solved: {{maxSolutions}}</li>
+        <li class="list-group-item">Least solved problems: {{minProblemsText}}</li>
+        <li class="list-group-item">Number of users that solved: {{minSolutions}}</li>
+      </ul>
+      <hr class="my-4">
+      <div class="form-group">
+        <input type="text" [(ngModel)]="searchProblem" [ngModelOptions]="{standalone:true}" class="form-control mr-sm-2" placeholder="Search for problem name" autocomplete="off" (input)="onSearchProblem(searchProblem)">
+      </div>
+      <ul class="list-group search-results">
+        <li class="list-group-item d-flex justify-content-between align-items-center change-cursor" *ngFor="let problem of searchProblems$ | async" (click)="onSelectProblem(problem)">
+          {{problem.name}}
+        </li>
+      </ul>
+      <div *ngIf="selectedProblem !== undefined">
+        <br/>
+        <h2 class="page-header">{{selectedProblem.name}}</h2>
+        <ul class="list-group">
+          <li class="list-group-item">Name: {{selectedProblem.name}}</li>
+          <li class="list-group-item">Difficulty: {{selectedProblem.difficulty}}</li>
+          <li class="list-group-item">Categories: {{selectedProblem.category}}</li>
+          <li class="list-group-item">Point value: {{selectedProblem.points}}</li>
+          <li class="list-group-item">Type: {{selectedProblem.type_text}}</li>
+          <li class="list-group-item">Number of users that solved the problem: {{selectedProblem.num_solved}}</li>
+          <li class="list-group-item">Number of attempts to solve the problem: {{selectedProblem.num_attempted}}</li>
+          <li class="list-group-item">Percent of users that solved: {{selectedProblem.solved_percent}}</li>
+          <li class="list-group-item">Solving users: {{selectedProblem.solvingUsers}}</li>
+          <li class="list-group-item">Avg attempts until first solution: {{selectedProblem.avg_attempts}}</li>
+        </ul>
+        <br/>
+        <button type="button" class="btn btn-danger" (click)="onClickRemoveProblem(selectedProblem)">Remove Problem</button>
+        <hr class="my-4">
+        <p>And even more possible commands to apply to the problem!</p>
+      </div>
+    </div>
+    <div *ngIf="selected.name !== 'Users' && selected.name !== 'Problems'" class="jumbotron">
+      <p class="lead" style="white-space: pre-line">
+        The number of attempts of problems from this category is: {{selected.num_attempted}}<br>
+        The number of times a problem from this category has been solved is: {{selected.num_solved}}<br>
+      </p>
+      <hr class="my-4">
+      <p class="lead">List of problems from this category:</p>
+      <p class="radio-label">Order by: </p>
+      <fieldset>
+        <div class="form-group">
+          <div class="custom-control custom-radio">
+            <input type="radio" id="order1" name="order" class="custom-control-input" checked="" (change)="onChangeOrder('attempts')">
+            <label class="custom-control-label" for="order1">Number of attempts</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="order2" name="order" class="custom-control-input"  (change)="onChangeOrder('solutions')">
+            <label class="custom-control-label" for="order2">Number of solutions</label>
+          </div>
+        </div>
+      </fieldset>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Difficulty</th>
+          <th scope="col"># Attempts</th>
+          <th scope="col"># Solutions</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let problem of displayedProblems">
+          <th scope="row">{{problem.name}}</th>
+          <td>{{problem.difficulty}}</td>
+          <td>{{problem.num_attempted}}</td>
+          <td>{{problem.num_solved}}</td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="onClickRemoveProblem(problem)">Remove</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
+<!--
+        {{selected.solved_percent}}% of users have solved this problem.</p>-->

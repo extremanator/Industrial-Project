@@ -41,7 +41,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n</div>\n"
+module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n</div>\n<app-footer></app-footer>\n"
 
 /***/ }),
 
@@ -113,10 +113,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_test_test_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/test/test.component */ "./src/app/components/test/test.component.ts");
 /* harmony import */ var _components_test_problem_test_problem_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/test-problem/test-problem.component */ "./src/app/components/test-problem/test-problem.component.ts");
 /* harmony import */ var _guards_test_guard__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./guards/test.guard */ "./src/app/guards/test.guard.ts");
-/* harmony import */ var codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! codemirror/mode/clike/clike */ "./node_modules/codemirror/mode/clike/clike.js");
-/* harmony import */ var codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_25__);
-/* harmony import */ var codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! codemirror/addon/edit/closebrackets */ "./node_modules/codemirror/addon/edit/closebrackets.js");
-/* harmony import */ var codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_26__);
+/* harmony import */ var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/footer/footer.component */ "./src/app/components/footer/footer.component.ts");
+/* harmony import */ var ngx_ui_loader__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ngx-ui-loader */ "./node_modules/ngx-ui-loader/fesm5/ngx-ui-loader.js");
+/* harmony import */ var codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! codemirror/mode/clike/clike */ "./node_modules/codemirror/mode/clike/clike.js");
+/* harmony import */ var codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_27___default = /*#__PURE__*/__webpack_require__.n(codemirror_mode_clike_clike__WEBPACK_IMPORTED_MODULE_27__);
+/* harmony import */ var codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! codemirror/addon/edit/closebrackets */ "./node_modules/codemirror/addon/edit/closebrackets.js");
+/* harmony import */ var codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(codemirror_addon_edit_closebrackets__WEBPACK_IMPORTED_MODULE_28__);
+
+
 
 
 
@@ -178,6 +182,7 @@ var AppModule = /** @class */ (function () {
                 _components_language_language_component__WEBPACK_IMPORTED_MODULE_20__["LanguageComponent"],
                 _components_test_test_component__WEBPACK_IMPORTED_MODULE_22__["TestComponent"],
                 _components_test_problem_test_problem_component__WEBPACK_IMPORTED_MODULE_23__["TestProblemComponent"],
+                _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_25__["FooterComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -185,7 +190,8 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormsModule"],
                 angular2_flash_messages__WEBPACK_IMPORTED_MODULE_12__["FlashMessagesModule"].forRoot(),
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_13__["HttpClientModule"],
-                _ctrl_ngx_codemirror__WEBPACK_IMPORTED_MODULE_16__["CodemirrorModule"]
+                _ctrl_ngx_codemirror__WEBPACK_IMPORTED_MODULE_16__["CodemirrorModule"],
+                ngx_ui_loader__WEBPACK_IMPORTED_MODULE_26__["NgxUiLoaderModule"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
@@ -216,7 +222,7 @@ module.exports = "tr {\r\n  background: #ededed;\r\n  border: 1px solid #ccc;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\r\n\r\n<h1>{{(problem === undefined)?'':problem.name}}</h1>\r\n<div *ngIf=\"problem?.type==='open'\">\r\n  <p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\r\n  <ngx-codemirror [(ngModel)]=\"solution_code\"\r\n                  [options]=\"{\r\n                  lineNumbers: true,\r\n                  theme: 'material',\r\n                  mode: 'text/x-c++src',\r\n                  indentUnit: 4,\r\n                  indentWithTabs: true,\r\n                  autoCloseBrackets: true\r\n                }\">{{solution_code}}</ngx-codemirror>\r\n  <br/>\r\n  <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\r\n  <br/>\r\n  <br/>\r\n  <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n  <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"problem?.type==='close'\">\r\n  <p style=\"white-space: pre-wrap;\">{{problem.paragraph}}</p>\r\n  <table class=\"table table-hover\">\r\n    <tbody>\r\n    <tr *ngFor=\"let sol of problem.solutions\" (click)=\"onSolveClosed(sol)\" class=\"change-cursor\">\r\n      <button type=\"button\" class=\"btn btn-primary btn-lg btn-block\">{{ sol }}</button>\r\n    </tr>\r\n    </tbody>\r\n  </table>\r\n  <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n  <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<br/>\r\n\r\n<h1>{{(problem === undefined)?'':problem.name}}</h1>\r\n<div *ngIf=\"problem?.type==='open'\">\r\n  <p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\r\n  <ngx-codemirror [(ngModel)]=\"solution_code\"\r\n                  [options]=\"{\r\n                  lineNumbers: true,\r\n                  theme: 'material',\r\n                  mode: 'text/x-c++src',\r\n                  indentUnit: 4,\r\n                  indentWithTabs: true,\r\n                  autoCloseBrackets: true\r\n                }\">{{solution_code}}</ngx-codemirror>\r\n  <br/>\r\n  <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\r\n  <br/>\r\n  <br/>\r\n  <div style=\"position: relative; background-color: white; height: 50px; width: 100%\">\r\n    <ngx-ui-loader [loaderId]=\"'resultLoader'\" [fgsSize]=\"30\"></ngx-ui-loader>\r\n    <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n      <strong>{{feedback_msg}}</strong>\r\n    </div>\r\n    <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n      <strong>{{feedback_msg}}</strong>\r\n    </div>\r\n  </div>\r\n  <br/>\r\n</div>\r\n\r\n<div *ngIf=\"problem?.type==='close'\">\r\n  <p style=\"white-space: pre-wrap;\">{{problem.paragraph}}</p>\r\n  <ngx-codemirror *ngIf=\"solution_code\" [(ngModel)]=\"solution_code\"\r\n                  [options]=\"{\r\n                    lineNumbers: true,\r\n                    theme: 'material',\r\n                    mode: 'text/x-c++src',\r\n                    indentUnit: 4,\r\n                    indentWithTabs: true,\r\n                    readOnly: true\r\n                  }\">{{solution_code}}</ngx-codemirror>\r\n  <br *ngIf=\"solution_code\"/>\r\n  <table class=\"table table-hover\">\r\n    <tbody>\r\n    <tr *ngFor=\"let sol of problem.solutions\" (click)=\"onSolveClosed(sol)\" class=\"change-cursor\">\r\n      <button type=\"button\" class=\"btn btn-primary btn-lg btn-block\">{{ sol }}</button>\r\n    </tr>\r\n    </tbody>\r\n  </table>\r\n  <div style=\"position: relative; background-color: white; height: 50px; width: 100%\">\r\n    <ngx-ui-loader [loaderId]=\"'resultLoader'\" [fgsSize]=\"30\"></ngx-ui-loader>\r\n    <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n      <strong>{{feedback_msg}}</strong>\r\n    </div>\r\n    <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n      <strong>{{feedback_msg}}</strong>\r\n    </div>\r\n  </div>\r\n  <br/>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -234,37 +240,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_problem_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/problem.service */ "./src/app/services/problem.service.ts");
+/* harmony import */ var ngx_ui_loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-ui-loader */ "./node_modules/ngx-ui-loader/fesm5/ngx-ui-loader.js");
+
 
 
 
 
 var CodeProblemComponent = /** @class */ (function () {
-    function CodeProblemComponent(route, problemService) {
+    function CodeProblemComponent(route, problemService, spinnerService) {
         this.route = route;
         this.problemService = problemService;
+        this.spinnerService = spinnerService;
     }
     CodeProblemComponent.prototype.getProblem = function () {
         var _this = this;
         var name = this.route.snapshot.paramMap.get('name');
         this.problemService.getProblem(name).subscribe(function (problemWrapper) {
             _this.problem = problemWrapper.problem;
-            if (_this.problem.type === 'open') {
+            if (_this.problem.code !== undefined) {
                 _this.solution_code = _this.problem.code;
             }
         });
     };
     CodeProblemComponent.prototype.onSubmitSolution = function (submitted_code) {
         var _this = this;
+        this.spinnerService.startLoader('resultLoader');
+        window.scroll({
+            top: 1000,
+            behavior: 'smooth'
+        });
         this.problemService.testProblemSolution(this.problem.name, submitted_code).subscribe(function (res) {
             _this.isSuccess = res.success;
             _this.feedback_msg = res.msg;
+            _this.spinnerService.stopLoader('resultLoader');
         });
     };
     CodeProblemComponent.prototype.onSolveClosed = function (solution) {
         var _this = this;
+        this.spinnerService.startLoader('resultLoader');
+        window.scroll({
+            top: 1000,
+            behavior: 'smooth'
+        });
         this.problemService.checkCloseProblemSolution(this.problem.name, solution).subscribe(function (res) {
             _this.isSuccess = res.success;
             _this.feedback_msg = res.msg;
+            _this.spinnerService.stopLoader('resultLoader');
         });
     };
     CodeProblemComponent.prototype.ngOnInit = function () {
@@ -277,7 +298,8 @@ var CodeProblemComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./code-problem.component.css */ "./src/app/components/code-problem/code-problem.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            _services_problem_service__WEBPACK_IMPORTED_MODULE_3__["ProblemService"]])
+            _services_problem_service__WEBPACK_IMPORTED_MODULE_3__["ProblemService"],
+            ngx_ui_loader__WEBPACK_IMPORTED_MODULE_4__["NgxUiLoaderService"]])
     ], CodeProblemComponent);
     return CodeProblemComponent;
 }());
@@ -304,7 +326,7 @@ module.exports = ".page-header{\r\n  text-align: center;\r\n}\r\n.language-name{
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\r\n<h2 class=\"page-header\">Programming Languages</h2>\r\n<div class=\"jumbotron cpp change-cursor\" routerLink=\"/language/cpp/::\">\r\n  <h2 class=\"language-name\">C++</h2>\r\n</div>\r\n<div class=\"jumbotron java change-cursor\" routerLink=\"/language/java/::\">\r\n  <h2 class=\"language-name\">Java</h2>\r\n</div>\r\n"
+module.exports = "<br/>\r\n<h2 class=\"page-header\">Programming Languages</h2>\r\n<div class=\"jumbotron cpp change-cursor\" routerLink=\"/language/cpp/::\">\r\n  <h2 class=\"language-name\">C++</h2>\r\n</div>\r\n<div class=\"jumbotron java change-cursor\" routerLink=\"/language/java/::\">\r\n  <h2 class=\"language-name\">Java</h2>\r\n</div>\r\n<div class=\"jumbotron c# change-cursor\" routerLink=\"/language/c#/::\">\r\n  <h2 class=\"language-name\">C#</h2>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -342,6 +364,62 @@ var DashboardComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/footer/footer.component.css":
+/*!********************************************************!*\
+  !*** ./src/app/components/footer/footer.component.css ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".card-footer{\r\n  background-color: darkslategrey;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9mb290ZXIvZm9vdGVyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSwrQkFBK0I7QUFDakMiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2Zvb3Rlci9mb290ZXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jYXJkLWZvb3RlcntcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiBkYXJrc2xhdGVncmV5O1xyXG59XHJcbiJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/components/footer/footer.component.html":
+/*!*********************************************************!*\
+  !*** ./src/app/components/footer/footer.component.html ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<footer class=\"card-footer\">\n  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br/>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br/>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br/>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n</footer>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/footer/footer.component.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/components/footer/footer.component.ts ***!
+  \*******************************************************/
+/*! exports provided: FooterComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FooterComponent", function() { return FooterComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var FooterComponent = /** @class */ (function () {
+    function FooterComponent() {
+    }
+    FooterComponent.prototype.ngOnInit = function () {
+    };
+    FooterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-footer',
+            template: __webpack_require__(/*! ./footer.component.html */ "./src/app/components/footer/footer.component.html"),
+            styles: [__webpack_require__(/*! ./footer.component.css */ "./src/app/components/footer/footer.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], FooterComponent);
+    return FooterComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/home/home.component.css":
 /*!****************************************************!*\
   !*** ./src/app/components/home/home.component.css ***!
@@ -360,7 +438,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron text-center\">\r\n  <h1>Cyber-Trainer</h1>\r\n  <p class=\"lead\">Welcome to our project</p>\r\n  <div>\r\n    <a *ngIf=\"user === undefined\" class=\"btn btn-primary\" [routerLink]=\"['/register']\">Register</a> <a *ngIf=\"user === undefined\" class=\"btn btn-default\" [routerLink]=\"['/login']\">Login</a>\r\n    <p *ngIf=\"user !== undefined\">Welcome, {{ user.name }}</p>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-4\">\r\n    <h3>Express Backend</h3>\r\n    <p>A rock solid blah</p>\r\n  </div>\r\n  <div class=\"col-md-4\">\r\n    <h3>Angular-CLI</h3>\r\n    <p>A paper solid blahh</p>\r\n  </div>\r\n  <div class=\"col-md-4\">\r\n    <h3>JWT Tokens</h3>\r\n    <p>A scissors solid blah</p>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"jumbotron text-center\">\r\n  <h1>Cyber-Trainer</h1>\r\n  <p class=\"lead\">Welcome to our project</p>\r\n  <div>\r\n    <a *ngIf=\"user === undefined\" class=\"btn btn-primary\" [routerLink]=\"['/register']\">Register</a> <a *ngIf=\"user === undefined\" class=\"btn btn-default\" [routerLink]=\"['/login']\">Login</a>\r\n    <p *ngIf=\"user !== undefined\">Welcome, {{ user.name }}</p>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-4\">\r\n    <h3>Express Backend</h3>\r\n    <p>A rock solid blah</p>\r\n  </div>\r\n  <div class=\"col-md-4\">\r\n    <h3>Angular-CLI</h3>\r\n    <p>A paper solid blahh</p>\r\n  </div>\r\n  <div class=\"col-md-4\">\r\n    <h3>JWT Tokens</h3>\r\n    <p>A scissors solid blah</p>\r\n  </div>\r\n</div>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n"
 
 /***/ }),
 
@@ -415,7 +493,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".problems{\r\n  display: table-cell;\r\n  width: 80%;\r\n}\r\n\r\n.filters{\r\n  display: table-cell;\r\n  margin-left: 20px;\r\n  width: auto;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sYW5ndWFnZS9sYW5ndWFnZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQW1CO0VBQ25CLFVBQVU7QUFDWjs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQixpQkFBaUI7RUFDakIsV0FBVztBQUNiIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sYW5ndWFnZS9sYW5ndWFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2JsZW1ze1xyXG4gIGRpc3BsYXk6IHRhYmxlLWNlbGw7XHJcbiAgd2lkdGg6IDgwJTtcclxufVxyXG5cclxuLmZpbHRlcnN7XHJcbiAgZGlzcGxheTogdGFibGUtY2VsbDtcclxuICBtYXJnaW4tbGVmdDogMjBweDtcclxuICB3aWR0aDogYXV0bztcclxufVxyXG4iXX0= */"
+module.exports = ".problems{\r\n  display: table-cell;\r\n  width: 80%;\r\n}\r\n\r\n.filters{\r\n  display: table-cell;\r\n  padding-left: 20px;\r\n  width: auto;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sYW5ndWFnZS9sYW5ndWFnZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQW1CO0VBQ25CLFVBQVU7QUFDWjs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQixrQkFBa0I7RUFDbEIsV0FBVztBQUNiIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sYW5ndWFnZS9sYW5ndWFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2JsZW1ze1xyXG4gIGRpc3BsYXk6IHRhYmxlLWNlbGw7XHJcbiAgd2lkdGg6IDgwJTtcclxufVxyXG5cclxuLmZpbHRlcnN7XHJcbiAgZGlzcGxheTogdGFibGUtY2VsbDtcclxuICBwYWRkaW5nLWxlZnQ6IDIwcHg7XHJcbiAgd2lkdGg6IGF1dG87XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -768,7 +846,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<h2 class=\"page-header\">Login</h2>\n<form (submit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n</form>\n"
+module.exports = "<br/>\n<h2 class=\"page-header\">Login</h2>\n<form (submit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n  <br/>\n</form>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n"
 
 /***/ }),
 
@@ -945,7 +1023,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<div *ngIf=\"user\">\n  <h2 class=\"page-header\">{{user.name}}</h2>\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\">Username: {{user.username}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n    <li class=\"list-group-item\">Join Date: {{user.join_date}}</li>\n    <li class=\"list-group-item\">Number of Solved Problems: {{user.num_solved}}</li>\n    <li class=\"list-group-item\">Number of Solution Attempts: {{user.num_attempted}}</li>\n  </ul>\n</div>\n"
+module.exports = "<br/>\n<div *ngIf=\"user\">\n  <h2 class=\"page-header\">{{user.name}}</h2>\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\">Username: {{user.username}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n    <li class=\"list-group-item\">Join Date: {{user.join_date}}</li>\n    <li class=\"list-group-item\">Number of Solved Problems: {{user.num_solved}}</li>\n    <li class=\"list-group-item\">Number of Solution Attempts: {{user.num_attempted}}</li>\n  </ul>\n</div>\n<br/>\n"
 
 /***/ }),
 
@@ -1127,7 +1205,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<h2 class=\"page-header\">Register</h2>\n<form (submit)=\"onRegisterSubmit()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Email</label>\n    <input type=\"text\" [(ngModel)]=\"email\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">\n</form>\n"
+module.exports = "<br/>\n<h2 class=\"page-header\">Register</h2>\n<form (submit)=\"onRegisterSubmit()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Email</label>\n    <input type=\"text\" [(ngModel)]=\"email\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">\n  <br/>\n</form>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n"
 
 /***/ }),
 
@@ -1218,7 +1296,7 @@ var RegisterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".list {\r\n  float: left;\r\n}\r\n\r\n.info {\r\n  float: left;\r\n  width: 70%;\r\n  height: 1000px;\r\n}\r\n\r\n\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9zdGF0aXN0aWNzL3N0YXRpc3RpY3MuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxVQUFVO0VBQ1YsY0FBYztBQUNoQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvc3RhdGlzdGljcy9zdGF0aXN0aWNzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubGlzdCB7XHJcbiAgZmxvYXQ6IGxlZnQ7XHJcbn1cclxuXHJcbi5pbmZvIHtcclxuICBmbG9hdDogbGVmdDtcclxuICB3aWR0aDogNzAlO1xyXG4gIGhlaWdodDogMTAwMHB4O1xyXG59XHJcblxyXG5cclxuIl19 */"
+module.exports = ".list {\r\n  width: 25%;\r\n}\r\n\r\n.info {\r\n  width: 75%;\r\n  height: 1200px;\r\n}\r\n\r\n.sub-table{\r\n  background-color: #f5f5f5;\r\n}\r\n\r\n.my-dropdown::after{\r\n  content: '˅';\r\n  font-family: \"Courier New\", serif;\r\n  float: right;\r\n}\r\n\r\n.custom-radio{\r\n  float: left;\r\n  margin-left: 20px;\r\n}\r\n\r\n.radio-label{\r\n  float: left;\r\n}\r\n\r\n.search-results{\r\n  margin-top: 0;\r\n}\r\n\r\n\r\n\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9zdGF0aXN0aWNzL3N0YXRpc3RpY3MuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFVBQVU7QUFDWjs7QUFFQTtFQUNFLFVBQVU7RUFDVixjQUFjO0FBQ2hCOztBQUVBO0VBQ0UseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGlDQUFpQztFQUNqQyxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsV0FBVztBQUNiOztBQUVBO0VBQ0UsYUFBYTtBQUNmIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9zdGF0aXN0aWNzL3N0YXRpc3RpY3MuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5saXN0IHtcclxuICB3aWR0aDogMjUlO1xyXG59XHJcblxyXG4uaW5mbyB7XHJcbiAgd2lkdGg6IDc1JTtcclxuICBoZWlnaHQ6IDEyMDBweDtcclxufVxyXG5cclxuLnN1Yi10YWJsZXtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjVmNWY1O1xyXG59XHJcblxyXG4ubXktZHJvcGRvd246OmFmdGVye1xyXG4gIGNvbnRlbnQ6ICfLhSc7XHJcbiAgZm9udC1mYW1pbHk6IFwiQ291cmllciBOZXdcIiwgc2VyaWY7XHJcbiAgZmxvYXQ6IHJpZ2h0O1xyXG59XHJcblxyXG4uY3VzdG9tLXJhZGlve1xyXG4gIGZsb2F0OiBsZWZ0O1xyXG4gIG1hcmdpbi1sZWZ0OiAyMHB4O1xyXG59XHJcblxyXG4ucmFkaW8tbGFiZWx7XHJcbiAgZmxvYXQ6IGxlZnQ7XHJcbn1cclxuXHJcbi5zZWFyY2gtcmVzdWx0c3tcclxuICBtYXJnaW4tdG9wOiAwO1xyXG59XHJcblxyXG5cclxuXHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -1229,7 +1307,7 @@ module.exports = ".list {\r\n  float: left;\r\n}\r\n\r\n.info {\r\n  float: left
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list\">\n  <table class=\"table table-hover\">\n    <tbody class=\"body\">\n    <tr class=\"change-cursor\" (click)=\"onClickGeneral()\" [class.table-active]=\"'General' === selected.name\">\n      <th scope=\"row\">General</th>\n    </tr>\n    <tr *ngFor=\"let info of problemsInfo\" (click)=\"onClickProblem(info)\" class=\"change-cursor\" [class.table-active]=\"info.name === selected.name\">\n      <th scope=\"row\">{{info.name}}</th>\n    </tr>\n    </tbody>\n  </table>\n</div>\n<div class=\"info\">\n  <br/>\n  <h2 align=\"center\">{{selected.name}}</h2>\n  <div *ngIf=\"selected.name === 'General'; else elseBlock\" class=\"jumbotron\">\n    <p class=\"lead\">The number of users in the system is: {{selected.numUsers}}</p>\n    <hr class=\"my-4\">\n    <p>More interesting statistics. <i>Maybe leaderboard?!</i></p>\n  </div>\n  <ng-template #elseBlock>\n    <div class=\"jumbotron\">\n      <p class=\"lead\" style=\"white-space: pre-line\">{{selected.num_attempted}}<br>The number of users who solved the problem is: {{selected.num_solved}}.<br>\n        {{selected.solvingUsers}}\n        Average number of attempts until solution is: {{selected.avg_attempts}}.<br>\n        {{selected.solved_percent}}% of users have solved this problem.</p>\n      <hr class=\"my-4\">\n      <p>More interesting statistics.</p>\n    </div>\n  </ng-template>\n</div>\n"
+module.exports = "<div style=\"display: flex; height: 2000px\">\n  <div class=\"list\">\n    <table class=\"table table-hover\">\n      <tbody class=\"body\">\n      <tr class=\"change-cursor\" (click)=\"onClickGeneral()\" [class.table-success]=\"clickedGeneral\">\n        <th class=\"my-dropdown\" scope=\"row\">General</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedGeneral\" (click)=\"onClickUsers('Users')\" [class.table-active]=\"'Users' === selected.name\">\n        <th scope=\"row\">&emsp;Users</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedGeneral\" (click)=\"onClickProblems('Problems')\" [class.table-active]=\"'Problems' === selected.name\">\n        <th scope=\"row\">&emsp;Problems</th>\n      </tr>\n      <tr class=\"change-cursor\" (click)=\"onClickCategories()\" [class.table-success]=\"clickedCategories\">\n        <th class=\"my-dropdown\" scope=\"row\">Categories</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Declarations and Initialization')\" [class.table-active]=\"'Declarations and Initialization' === selected.name\">\n        <th scope=\"row\">&emsp;Declarations and Initialization</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Expressions')\" [class.table-active]=\"'Expressions' === selected.name\">\n        <th scope=\"row\">&emsp;Expressions</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Integers')\" [class.table-active]=\"'Integers' === selected.name\">\n        <th scope=\"row\">&emsp;Integers</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Containers')\" [class.table-active]=\"'Containers' === selected.name\">\n        <th scope=\"row\">&emsp;Containers</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Characters and Strings')\" [class.table-active]=\"'Characters and Strings' === selected.name\">\n        <th scope=\"row\">&emsp;Characters and Strings</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Memory Management')\" [class.table-active]=\"'Memory Management' === selected.name\">\n        <th scope=\"row\">&emsp;Memory Management</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Input Output')\" [class.table-active]=\"'Input Output' === selected.name\">\n        <th scope=\"row\">&emsp;Input Output</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Exceptions and Error Handling')\" [class.table-active]=\"'Exceptions and Error Handling' === selected.name\">\n        <th scope=\"row\">&emsp;Exceptions and Error Handling</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Object Oriented Programming')\" [class.table-active]=\"'Object Oriented Programming' === selected.name\">\n        <th scope=\"row\">&emsp;Object Oriented Programming</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Concurrency')\" [class.table-active]=\"'Concurrency' === selected.name\">\n        <th scope=\"row\">&emsp;Concurrency</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Miscellaneous')\" [class.table-active]=\"'Miscellaneous' === selected.name\">\n        <th scope=\"row\">&emsp;Miscellaneous</th>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n  <div class=\"info\" *ngIf=\"selected.name !== undefined\">\n    <br/>\n    <h2 align=\"center\">{{selected.name}}</h2>\n    <div *ngIf=\"selected.name === 'Users'\" class=\"jumbotron\">\n      <p class=\"lead\">The number of users in the system is: {{numUsers}}</p>\n      <hr class=\"my-4\">\n      <div class=\"form-group\">\n        <input type=\"text\" [(ngModel)]=\"searchUsername\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control mr-sm-2\" placeholder=\"Search for username\" autocomplete=\"off\" (input)=\"onSearchUser(searchUsername)\">\n      </div>\n      <ul class=\"list-group search-results\">\n        <li class=\"list-group-item d-flex justify-content-between align-items-center change-cursor\" *ngFor=\"let user of searchUsers$ | async\" (click)=\"onSelectUser(user)\">\n            {{user.username}}\n        </li>\n      </ul>\n      <div *ngIf=\"selectedUser !== undefined\">\n        <br/>\n        <h2 class=\"page-header\">{{selectedUser.name}}</h2>\n        <ul class=\"list-group\">\n          <li class=\"list-group-item\">Username: {{selectedUser.username}}</li>\n          <li class=\"list-group-item\">Email: {{selectedUser.email}}</li>\n          <li class=\"list-group-item\">Join Date: {{selectedUser.join_date}}</li>\n          <li class=\"list-group-item\">Number of Solved Problems: {{selectedUser.num_solved}}</li>\n          <li class=\"list-group-item\">Number of Solution Attempts: {{selectedUser.num_attempted}}</li>\n          <li class=\"list-group-item\">User has solved: {{selectedUser.attempts}}</li>\n          <li class=\"list-group-item\">User has attempted: {{selectedUser.solved}}</li>\n        </ul>\n        <br/>\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickRemoveUser(selectedUser)\">Remove User</button>\n        <hr class=\"my-4\">\n        <p>And even more possible commands to apply to the user! <i>Maybe give test?!</i></p>\n      </div>\n    </div>\n    <div *ngIf=\"selected.name === 'Problems'\" class=\"jumbotron\">\n      <p class=\"lead\">The number of problems in the system is: {{numProblems}}</p>\n      <ul class=\"list-group\">\n        <li class=\"list-group-item\">Most solved problems: {{maxProblemsText}}</li>\n        <li class=\"list-group-item\">Number of users that solved: {{maxSolutions}}</li>\n        <li class=\"list-group-item\">Least solved problems: {{minProblemsText}}</li>\n        <li class=\"list-group-item\">Number of users that solved: {{minSolutions}}</li>\n      </ul>\n      <hr class=\"my-4\">\n      <div class=\"form-group\">\n        <input type=\"text\" [(ngModel)]=\"searchProblem\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control mr-sm-2\" placeholder=\"Search for problem name\" autocomplete=\"off\" (input)=\"onSearchProblem(searchProblem)\">\n      </div>\n      <ul class=\"list-group search-results\">\n        <li class=\"list-group-item d-flex justify-content-between align-items-center change-cursor\" *ngFor=\"let problem of searchProblems$ | async\" (click)=\"onSelectProblem(problem)\">\n          {{problem.name}}\n        </li>\n      </ul>\n      <div *ngIf=\"selectedProblem !== undefined\">\n        <br/>\n        <h2 class=\"page-header\">{{selectedProblem.name}}</h2>\n        <ul class=\"list-group\">\n          <li class=\"list-group-item\">Name: {{selectedProblem.name}}</li>\n          <li class=\"list-group-item\">Difficulty: {{selectedProblem.difficulty}}</li>\n          <li class=\"list-group-item\">Categories: {{selectedProblem.category}}</li>\n          <li class=\"list-group-item\">Point value: {{selectedProblem.points}}</li>\n          <li class=\"list-group-item\">Type: {{selectedProblem.type_text}}</li>\n          <li class=\"list-group-item\">Number of users that solved the problem: {{selectedProblem.num_solved}}</li>\n          <li class=\"list-group-item\">Number of attempts to solve the problem: {{selectedProblem.num_attempted}}</li>\n          <li class=\"list-group-item\">Percent of users that solved: {{selectedProblem.solved_percent}}</li>\n          <li class=\"list-group-item\">Solving users: {{selectedProblem.solvingUsers}}</li>\n          <li class=\"list-group-item\">Avg attempts until first solution: {{selectedProblem.avg_attempts}}</li>\n        </ul>\n        <br/>\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickRemoveProblem(selectedProblem)\">Remove Problem</button>\n        <hr class=\"my-4\">\n        <p>And even more possible commands to apply to the problem!</p>\n      </div>\n    </div>\n    <div *ngIf=\"selected.name !== 'Users' && selected.name !== 'Problems'\" class=\"jumbotron\">\n      <p class=\"lead\" style=\"white-space: pre-line\">\n        The number of attempts of problems from this category is: {{selected.num_attempted}}<br>\n        The number of times a problem from this category has been solved is: {{selected.num_solved}}<br>\n      </p>\n      <hr class=\"my-4\">\n      <p class=\"lead\">List of problems from this category:</p>\n      <p class=\"radio-label\">Order by: </p>\n      <fieldset>\n        <div class=\"form-group\">\n          <div class=\"custom-control custom-radio\">\n            <input type=\"radio\" id=\"order1\" name=\"order\" class=\"custom-control-input\" checked=\"\" (change)=\"onChangeOrder('attempts')\">\n            <label class=\"custom-control-label\" for=\"order1\">Number of attempts</label>\n          </div>\n          <div class=\"custom-control custom-radio\">\n            <input type=\"radio\" id=\"order2\" name=\"order\" class=\"custom-control-input\"  (change)=\"onChangeOrder('solutions')\">\n            <label class=\"custom-control-label\" for=\"order2\">Number of solutions</label>\n          </div>\n        </div>\n      </fieldset>\n      <table class=\"table table-hover\">\n        <thead>\n        <tr>\n          <th scope=\"col\">Name</th>\n          <th scope=\"col\">Difficulty</th>\n          <th scope=\"col\"># Attempts</th>\n          <th scope=\"col\"># Solutions</th>\n          <th scope=\"col\"></th>\n        </tr>\n        </thead>\n        <tbody>\n        <tr *ngFor=\"let problem of displayedProblems\">\n          <th scope=\"row\">{{problem.name}}</th>\n          <td>{{problem.difficulty}}</td>\n          <td>{{problem.num_attempted}}</td>\n          <td>{{problem.num_solved}}</td>\n          <td>\n            <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickRemoveProblem(problem)\">Remove</button>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n\n<!--\n        {{selected.solved_percent}}% of users have solved this problem.</p>-->\n"
 
 /***/ }),
 
@@ -1247,6 +1325,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_problem_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/problem.service */ "./src/app/services/problem.service.ts");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
 
 
 
@@ -1255,90 +1337,273 @@ var StatisticsComponent = /** @class */ (function () {
     function StatisticsComponent(problemService, authService) {
         this.problemService = problemService;
         this.authService = authService;
+        this.userSearchTerms = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
+        this.problemSearchTerms = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
     }
-    StatisticsComponent.prototype.getAllProblems = function () {
+    StatisticsComponent.prototype.getAllInfo = function () {
         var _this = this;
         this.problemService.getAllProblems().subscribe(function (problemsWrapper) {
             _this.problems = problemsWrapper.problems;
-            var temp_info = [];
-            _this.authService.getNumUsers().subscribe(function (data) {
-                _this.numUsers = data.num_users;
+            _this.numProblems = _this.problems.length;
+            _this.authService.getAllUsers().subscribe(function (users) {
+                _this.users = users;
+                _this.numUsers = _this.users.length;
+                var maxProblems = [];
+                var minProblems = [];
+                _this.maxSolutions = null;
+                _this.minSolutions = null;
                 for (var _i = 0, _a = _this.problems; _i < _a.length; _i++) {
                     var problem = _a[_i];
-                    var tot_attempts = 0;
-                    var solvingUsers = '';
-                    if (problem.solved_by !== undefined) {
-                        if (problem.num_solved > 1) {
-                            var i = 1;
-                            solvingUsers += 'The users are: ';
-                            for (var name_1 in problem.solved_by) {
-                                if (solvingUsers === "The users are: ") {
-                                    solvingUsers += name_1;
-                                }
-                                else if (i === problem.num_solved) {
-                                    if (problem.num_solved !== 2)
-                                        solvingUsers += ',';
-                                    solvingUsers += " and " + name_1;
-                                }
-                                else {
-                                    solvingUsers += ", " + name_1;
-                                }
-                                i++;
-                                tot_attempts += problem.solved_by[name_1];
-                            }
-                            solvingUsers += '.\n';
-                        }
-                        else if (problem.num_solved === 1) {
-                            solvingUsers += 'The user is: ';
-                            for (var name_2 in problem.solved_by) {
-                                solvingUsers += name_2;
-                                tot_attempts += problem.solved_by[name_2];
-                            }
-                            solvingUsers += '.\n';
-                        }
-                        else {
-                            solvingUsers += '\n';
-                        }
+                    if (_this.maxSolutions === null || _this.maxSolutions < problem.num_solved) {
+                        maxProblems = [problem.name];
+                        _this.maxSolutions = problem.num_solved;
                     }
-                    var text1 = void 0;
-                    if (problem.num_attempted !== 1) {
-                        text1 = "So far their have been " + problem.num_attempted + " attempts to solve the problem.";
+                    else if (_this.maxSolutions === problem.num_solved) {
+                        maxProblems.push(problem.name);
+                    }
+                    if (_this.minSolutions === null || _this.minSolutions > problem.num_solved) {
+                        minProblems = [problem.name];
+                        _this.minSolutions = problem.num_solved;
+                    }
+                    else if (_this.minSolutions === problem.num_solved) {
+                        minProblems.push(problem.name);
+                    }
+                }
+                minProblems.sort(function (name1, name2) {
+                    return (name1 > name2) ? 1 : -1;
+                });
+                maxProblems.sort(function (name1, name2) {
+                    return (name1 > name2) ? 1 : -1;
+                });
+                _this.maxProblemsText = '';
+                for (var _b = 0, maxProblems_1 = maxProblems; _b < maxProblems_1.length; _b++) {
+                    var name_1 = maxProblems_1[_b];
+                    if (_this.maxProblemsText === '') {
+                        _this.maxProblemsText += name_1;
                     }
                     else {
-                        text1 = "So far their has been " + problem.num_attempted + " attempt to solve the problem.";
+                        _this.maxProblemsText += ", " + name_1;
                     }
-                    temp_info.push({
-                        name: problem.name,
-                        solved_percent: ((problem.num_solved * 100) / _this.numUsers),
-                        avg_attempts: (problem.num_solved === 0) ? 0 : tot_attempts / problem.num_solved,
-                        num_solved: problem.num_solved,
-                        num_attempted: text1,
-                        solvingUsers: solvingUsers
-                    });
-                    _this.generalInfo = { name: 'General', numUsers: data.num_users };
-                    _this.selected = _this.generalInfo;
                 }
-                temp_info.sort(function (obj1, obj2) { if (obj1.name > obj2.name)
-                    return 1;
-                else
-                    return -1; });
+                _this.minProblemsText = '';
+                for (var _c = 0, minProblems_1 = minProblems; _c < minProblems_1.length; _c++) {
+                    var name_2 = minProblems_1[_c];
+                    if (_this.minProblemsText === '') {
+                        _this.minProblemsText += name_2;
+                    }
+                    else {
+                        _this.minProblemsText += ", " + name_2;
+                    }
+                }
             });
-            _this.problemsInfo = temp_info;
         });
     };
-    StatisticsComponent.prototype.onClickGeneral = function () {
-        this.selected = this.generalInfo;
+    StatisticsComponent.prototype.onSearchUser = function (username) {
+        this.userSearchTerms.next(username);
     };
-    StatisticsComponent.prototype.onClickProblem = function (name) {
-        this.selected = name;
+    StatisticsComponent.prototype.onSearchProblem = function (name) {
+        this.problemSearchTerms.next(name);
+    };
+    StatisticsComponent.prototype.onSelectUser = function (user) {
+        this.selectedUser = user;
+        this.selectedUser.attempts = '';
+        this.selectedUser.solved = '';
+        for (var name_3 in user.attempted_problems) {
+            if (this.selectedUser.attempts === '') {
+                this.selectedUser.attempts += name_3;
+            }
+            else {
+                this.selectedUser.attempts += ", " + name_3;
+            }
+            if (user.attempted_problems[name_3].solved) {
+                if (this.selectedUser.solved === '') {
+                    this.selectedUser.solved += name_3;
+                }
+                else {
+                    this.selectedUser.solved += ", " + name_3;
+                }
+            }
+        }
+        if (this.selectedUser.attempts === '') {
+            this.selectedUser.attempts = 'None';
+        }
+        if (this.selectedUser.solved === '') {
+            this.selectedUser.solved = 'None';
+        }
+    };
+    StatisticsComponent.prototype.onSelectProblem = function (problem) {
+        this.selectedProblem = problem;
+        this.selectedProblem.solved_percent = ((problem.num_solved * 100) / this.numUsers);
+        this.selectedProblem.type_text = (problem.type === 'open') ? 'Open Problem' : 'Multiple Choice Problem';
+        var totAttempts = 0;
+        this.selectedProblem.solvingUsers = '';
+        if (problem.solved_by !== undefined) {
+            for (var name_4 in problem.solved_by) {
+                if (this.selectedProblem.solvingUsers === '') {
+                    this.selectedProblem.solvingUsers += name_4;
+                }
+                else {
+                    this.selectedProblem.solvingUsers += ", " + name_4;
+                }
+                totAttempts += problem.solved_by[name_4];
+            }
+        }
+        if (this.selectedProblem.solvingUsers === '') {
+            this.selectedProblem.solvingUsers = 'None';
+        }
+        this.selectedProblem.avg_attempts = (problem.num_solved === 0) ? 0 : totAttempts / problem.num_solved;
+    };
+    StatisticsComponent.prototype.onClickGeneral = function () {
+        this.clickedGeneral = !this.clickedGeneral;
+    };
+    StatisticsComponent.prototype.onClickCategories = function () {
+        this.clickedCategories = !this.clickedCategories;
+    };
+    StatisticsComponent.prototype.onClickUsers = function (name) {
+        this.selected.name = name;
+        this.selectedUser = undefined;
+    };
+    StatisticsComponent.prototype.onClickProblems = function (name) {
+        this.selected.name = name;
+        this.selectedProblem = undefined;
+    };
+    StatisticsComponent.prototype.onClickCategory = function (name) {
+        this.displayedProblems = [];
+        this.selected.name = name;
+        var category = this.getCategory(name);
+        this.selected.num_attempted = 0;
+        this.selected.num_solved = 0;
+        for (var _i = 0, _a = this.problems; _i < _a.length; _i++) {
+            var problem = _a[_i];
+            if (problem.category.includes(category)) {
+                this.selected.num_attempted += problem.num_attempted;
+                this.selected.num_solved += problem.num_solved;
+                this.displayedProblems.push(problem);
+            }
+        }
+        if (this.displayOrder === 'Number of attempts') {
+            this.displayedProblems.sort(function (prob1, prob2) {
+                var dif = (prob2.num_attempted - prob1.num_attempted);
+                if (dif === 0) {
+                    return (prob1.name > prob2.name) ? 1 : -1;
+                }
+                return dif;
+            });
+        }
+        else {
+            this.displayedProblems.sort(function (prob1, prob2) {
+                var dif = (prob2.num_solved - prob1.num_solved);
+                if (dif === 0) {
+                    return (prob1.name > prob2.name) ? 1 : -1;
+                }
+                return dif;
+            });
+        }
+    };
+    StatisticsComponent.prototype.onChangeOrder = function (order) {
+        if (order === 'attempts') {
+            this.displayOrder = 'Number of attempts';
+            this.displayedProblems.sort(function (prob1, prob2) {
+                var dif = (prob2.num_attempted - prob1.num_attempted);
+                if (dif === 0) {
+                    return (prob1.name > prob2.name) ? 1 : -1;
+                }
+                return dif;
+            });
+        }
+        else {
+            this.displayOrder = 'Number of solutions';
+            this.displayedProblems.sort(function (prob1, prob2) {
+                var dif = (prob2.num_solved - prob1.num_solved);
+                if (dif === 0) {
+                    return (prob1.name > prob2.name) ? 1 : -1;
+                }
+                return dif;
+            });
+        }
+    };
+    StatisticsComponent.prototype.getCategory = function (name) {
+        switch (name) {
+            case 'Declarations and Initialization':
+                return 'DCL';
+            case 'Expressions':
+                return 'EXP';
+            case 'Integers':
+                return 'INT';
+            case 'Containers':
+                return 'CTR';
+            case 'Characters and Strings':
+                return 'STR';
+            case 'Memory Management':
+                return 'MEM';
+            case 'Input Output':
+                return 'FIO';
+            case 'Exceptions and Error Handling':
+                return 'ERR';
+            case 'Object Oriented Programming':
+                return 'OOP';
+            case 'Concurrency':
+                return 'CON';
+            case 'Miscellaneous':
+                return 'MSC';
+        }
+    };
+    StatisticsComponent.prototype.onClickRemoveProblem = function (problem) {
+        console.log('Removing ' + problem.name);
+    };
+    StatisticsComponent.prototype.onClickRemoveUser = function (user) {
+        console.log('Removing ' + user.username);
     };
     StatisticsComponent.prototype.ngOnInit = function () {
-        this.generalInfo = {};
+        var _this = this;
+        this.getAllInfo();
+        this.clickedGeneral = false;
+        this.clickedCategories = false;
         this.selected = {};
-        this.getAllProblems();
-    };
-    StatisticsComponent.prototype.test = function () {
-        alert("hi");
+        this.displayedProblems = [];
+        this.displayOrder = 'Number of attempts';
+        this.searchUsers$ = [];
+        this.searchUsers$ = this.userSearchTerms.pipe(
+        // wait 300ms after each keystroke before considering the term
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["debounceTime"])(300), 
+        // ignore new term if same as previous term
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["distinctUntilChanged"])(), 
+        // switch to new search observable each time the term changes
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (term) {
+            if (!term.trim()) {
+                // if not search term, return empty user array.
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])([]);
+            }
+            var result = [];
+            for (var _i = 0, _a = _this.users; _i < _a.length; _i++) {
+                var user = _a[_i];
+                if (user.username.includes(term)) {
+                    result.push(user);
+                }
+            }
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])(result);
+        }));
+        this.searchProblems$ = [];
+        this.searchProblems$ = this.problemSearchTerms.pipe(
+        // wait 300ms after each keystroke before considering the term
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["debounceTime"])(300), 
+        // ignore new term if same as previous term
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["distinctUntilChanged"])(), 
+        // switch to new search observable each time the term changes
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (term) {
+            if (!term.trim()) {
+                // if not search term, return empty user array.
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])([]);
+            }
+            var result = [];
+            for (var _i = 0, _a = _this.problems; _i < _a.length; _i++) {
+                var problem = _a[_i];
+                if (problem.name.includes(term)) {
+                    result.push(problem);
+                }
+            }
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])(result);
+        }));
     };
     StatisticsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1374,7 +1639,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\r\n<h1 class=\"text-center\">Problem {{cur_prob+1}} of {{num_problems}}</h1>\r\n<div class=\"progress\">\r\n  <div class=\"progress-bar\" role=\"progressbar\" [attr.aria-valuenow]=\"progress\" [style.width.%]=\"(num_problems != 0)?(progress*100)/num_problems:10\"\r\n       aria-valuemin=\"0\" [attr.aria-valuemax]=\"num_problems\"></div>\r\n</div>\r\n<hr class=\"my-4\">\r\n<h1>{{(problem === undefined)?'':problem.name}}</h1>\r\n<div *ngIf=\"problem?.type==='open'\">\r\n  <p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\r\n  <ngx-codemirror [(ngModel)]=\"solution_code\"\r\n                  [options]=\"{\r\n                  lineNumbers: true,\r\n                  theme: 'material',\r\n                  mode: 'text/x-c++src',\r\n                  indentUnit: 4,\r\n                  indentWithTabs: true,\r\n                  autoCloseBrackets: true\r\n                }\">{{solution_code}}</ngx-codemirror>\r\n  <br/>\r\n  <div *ngIf=\"failed != true; else elseBlock\">\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\r\n  </div>\r\n  <ng-template #elseBlock>\r\n    <button type=\"button\" class=\"btn btn-primary\" routerLink=\"/test\">Back to Test Menu</button>\r\n  </ng-template>\r\n  <br/>\r\n  <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n  <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"problem?.type==='close'\">\r\n  <p style=\"white-space: pre-wrap;\">{{problem.paragraph}}</p>\r\n  <table class=\"table table-hover\">\r\n    <tbody>\r\n    <tr *ngFor=\"let sol of problem.solutions\" (click)=\"onSolveClosed(sol)\" class=\"change-cursor\">\r\n      <button type=\"button\" class=\"btn btn-primary btn-lg btn-block\">{{ sol }}</button>\r\n    </tr>\r\n    </tbody>\r\n  </table>\r\n  <br/>\r\n  <div *ngIf=\"failed == true\">\r\n    <button type=\"button\" class=\"btn btn-primary\" routerLink=\"/test\">Back to Test Menu</button>\r\n  </div>\r\n  <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n  <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n    <strong>{{feedback_msg}}</strong>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"isSuccess == true && (cur_prob!=(num_problems-1))\">\r\n  <hr class=\"my-4\">\r\n  <div class=\"text-center\">\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"nextProblem()\">Next</button>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"isSuccess == true && (cur_prob==(num_problems-1))\">\r\n  <hr class=\"my-4\">\r\n  <p style=\"text-align: center\">========================================You Did It!!!!==============================================</p>\r\n</div>\r\n\r\n"
+module.exports = "<div *ngIf=\"!completed\">\r\n  <br/>\r\n  <h1 class=\"text-center\">Problem {{cur_prob+1}} of {{num_problems}}</h1>\r\n  <div class=\"progress\">\r\n    <div class=\"progress-bar\" role=\"progressbar\" [attr.aria-valuenow]=\"progress\" [style.width.%]=\"(num_problems != 0)?(progress*100)/num_problems:10\"\r\n         aria-valuemin=\"0\" [attr.aria-valuemax]=\"num_problems\"></div>\r\n  </div>\r\n  <hr class=\"my-4\">\r\n  <h1>{{(problem === undefined)?'':problem.name}}</h1>\r\n  <div *ngIf=\"problem?.type==='open'\">\r\n    <p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\r\n    <ngx-codemirror [(ngModel)]=\"solution_code\"\r\n                    [options]=\"{\r\n                    lineNumbers: true,\r\n                    theme: 'material',\r\n                    mode: 'text/x-c++src',\r\n                    indentUnit: 4,\r\n                    indentWithTabs: true,\r\n                    autoCloseBrackets: true\r\n                  }\">{{solution_code}}</ngx-codemirror>\r\n    <br/>\r\n    <div>\r\n      <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\r\n    </div>\r\n    <br/>\r\n    <div style=\"position: relative; background-color: white; height: 50px; width: 100%\">\r\n      <ngx-ui-loader [loaderId]=\"'testLoader1'\" [fgsSize]=\"30\"></ngx-ui-loader>\r\n      <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n      <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n    </div>\r\n    <br *ngIf=\"!showNext\" />\r\n  </div>\r\n  <div *ngIf=\"problem?.type==='close'\">\r\n    <p style=\"white-space: pre-wrap;\">{{problem.paragraph}}</p>\r\n    <ngx-codemirror *ngIf=\"solution_code\" [(ngModel)]=\"solution_code\"\r\n                    [options]=\"{\r\n                    lineNumbers: true,\r\n                    theme: 'material',\r\n                    mode: 'text/x-c++src',\r\n                    indentUnit: 4,\r\n                    indentWithTabs: true,\r\n                    readOnly: true\r\n                  }\">{{solution_code}}</ngx-codemirror>\r\n    <br *ngIf=\"solution_code\"/>\r\n    <table class=\"table table-hover\">\r\n      <tbody>\r\n      <tr *ngFor=\"let sol of problem.solutions\" (click)=\"onSolveClosed(sol)\" class=\"change-cursor\">\r\n        <button type=\"button\" class=\"btn btn-primary btn-lg btn-block\">{{ sol }}</button>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n    <br/>\r\n    <div style=\"position: relative; background-color: white; height: 50px; width: 100%\">\r\n      <ngx-ui-loader [loaderId]=\"'testLoader2'\" [fgsSize]=\"30\"></ngx-ui-loader>\r\n      <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n      <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n    </div>\r\n    <br *ngIf=\"!showNext\" />\r\n  </div>\r\n  <div *ngIf=\"showNext\">\r\n    <hr class=\"my-4\">\r\n    <div class=\"text-center\">\r\n      <button type=\"button\" class=\"btn btn-primary\" (click)=\"nextProblem()\">{{nextText}}</button>\r\n    </div>\r\n    <br/>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"completed\">\r\n  <br/>\r\n  <h1 class=\"text-center\">Test Results</h1>\r\n  <ul class=\"list-group\">\r\n    <li class=\"list-group-item\">You solved {{solvedProblems.length}} out of {{num_problems}}</li>\r\n    <li class=\"list-group-item\">Solved Problems: {{solvedText}}</li>\r\n    <li class=\"list-group-item\">Failed Problems: {{unsolvedText}}</li>\r\n  </ul>\r\n  <br/>\r\n  <div class=\"text-center\">\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"retakeTest()\">Retake Test</button>\r\n  </div>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n</div>\r\n<ngx-ui-loader></ngx-ui-loader>\r\n\r\n"
 
 /***/ }),
 
@@ -1393,24 +1658,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_problem_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/problem.service */ "./src/app/services/problem.service.ts");
 /* harmony import */ var _services_test_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/test.service */ "./src/app/services/test.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_ui_loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-ui-loader */ "./node_modules/ngx-ui-loader/fesm5/ngx-ui-loader.js");
+
 
 
 
 
 
 var TestProblemComponent = /** @class */ (function () {
-    function TestProblemComponent(problemService, testService, router) {
+    function TestProblemComponent(problemService, testService, router, spinnerService) {
         this.problemService = problemService;
         this.testService = testService;
         this.router = router;
+        this.spinnerService = spinnerService;
     }
     TestProblemComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.failed = false;
+        this.completed = false;
+        this.showNext = false;
         this.cur_prob = 0;
         this.progress = 0;
+        this.unsolvedProblems = [];
+        this.solvedProblems = [];
         this.num_problems = this.testService.getNumProblems();
         this.filters = this.testService.getFilters();
+        this.nextText = 'Next Problem';
         this.problemService.getAllProblems().subscribe(function (problemsArr) {
             var allProblems = problemsArr.problems;
             var filteredProblems = [];
@@ -1439,9 +1711,11 @@ var TestProblemComponent = /** @class */ (function () {
                 _this.router.navigate(['/test']);
                 return;
             }
-            _this.problem = _this.problems[0];
             _this.num_problems = Math.min(_this.num_problems, _this.problems.length);
-            _this.solution_code = _this.problem.code;
+            _this.problem = _this.problems[0];
+            if (_this.problem.code !== undefined) {
+                _this.solution_code = _this.problem.code;
+            }
         });
     };
     /**
@@ -1458,35 +1732,87 @@ var TestProblemComponent = /** @class */ (function () {
     };
     TestProblemComponent.prototype.onSubmitSolution = function (submitted_code) {
         var _this = this;
-        this.problemService.checkOpenSolutionInTest(this.problem.name, submitted_code).subscribe(function (res) {
-            _this.isSuccess = res.success;
-            _this.feedback_msg = res.msg;
-            if (_this.isSuccess)
-                _this.progress++;
-            else if (_this.feedback_msg === 'Incorrect Solution!')
-                _this.failed = true;
-        });
+        if (!this.showNext) {
+            this.spinnerService.startLoader('testLoader1');
+            window.scroll({
+                top: 1000,
+                behavior: 'smooth'
+            });
+            this.problemService.checkOpenSolutionInTest(this.problem.name, submitted_code).subscribe(function (res) {
+                _this.spinnerService.stopLoader('testLoader1');
+                _this.isSuccess = res.success;
+                _this.feedback_msg = res.msg;
+                if (_this.feedback_msg !== 'Compilation Error!') {
+                    _this.showNext = true;
+                    _this.progress++;
+                    if (_this.progress === _this.num_problems) {
+                        _this.nextText = 'See Results';
+                    }
+                    if (_this.isSuccess) {
+                        _this.solvedProblems.push(_this.problem.name);
+                    }
+                    if (_this.feedback_msg === 'Incorrect Solution!') {
+                        _this.unsolvedProblems.push(_this.problem.name);
+                    }
+                }
+            });
+        }
     };
     TestProblemComponent.prototype.onSolveClosed = function (solution) {
         var _this = this;
-        if (this.failed !== true) {
+        if (!this.showNext) {
+            this.spinnerService.startLoader('testLoader2');
+            window.scroll({
+                top: 1000,
+                behavior: 'smooth'
+            });
             this.problemService.checkCloseSolutionInTest(this.problem.name, solution).subscribe(function (res) {
+                _this.spinnerService.stopLoader('testLoader2');
+                _this.showNext = true;
                 _this.isSuccess = res.success;
                 _this.feedback_msg = res.msg;
-                if (_this.isSuccess)
-                    _this.progress++;
-                else if (_this.feedback_msg === 'Incorrect!')
-                    _this.failed = true;
+                _this.progress++;
+                if (_this.progress === _this.num_problems) {
+                    _this.nextText = 'See Results';
+                }
+                if (_this.isSuccess) {
+                    _this.solvedProblems.push(_this.problem.name);
+                }
+                if (_this.feedback_msg === 'Incorrect!') {
+                    _this.unsolvedProblems.push(_this.problem.name);
+                }
             });
+        }
+    };
+    TestProblemComponent.prototype.retakeTest = function () {
+        this.completed = false;
+        this.showNext = false;
+        this.cur_prob = 0;
+        this.progress = 0;
+        this.nextText = 'Next Problem';
+        this.unsolvedProblems = [];
+        this.solvedProblems = [];
+        this.problem = this.problems[0];
+        if (this.problem.code !== undefined) {
+            this.solution_code = this.problem.code;
         }
     };
     TestProblemComponent.prototype.nextProblem = function () {
         this.isSuccess = undefined;
         this.feedback_msg = undefined;
-        this.cur_prob += 1;
-        this.problem = this.problems[this.cur_prob];
-        if (this.problem.type === 'open') {
-            this.solution_code = this.problem.code;
+        this.solution_code = undefined;
+        this.showNext = false;
+        if (this.progress === this.num_problems) {
+            this.solvedText = (this.solvedProblems.length === 0) ? 'None' : this.solvedProblems.toString();
+            this.unsolvedText = (this.unsolvedProblems.length === 0) ? 'None' : this.unsolvedProblems.toString();
+            this.completed = true;
+        }
+        else {
+            this.cur_prob += 1;
+            this.problem = this.problems[this.cur_prob];
+            if (this.problem.code !== undefined) {
+                this.solution_code = this.problem.code;
+            }
         }
     };
     TestProblemComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1497,7 +1823,8 @@ var TestProblemComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_problem_service__WEBPACK_IMPORTED_MODULE_2__["ProblemService"],
             _services_test_service__WEBPACK_IMPORTED_MODULE_3__["TestService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            ngx_ui_loader__WEBPACK_IMPORTED_MODULE_5__["NgxUiLoaderService"]])
     ], TestProblemComponent);
     return TestProblemComponent;
 }());

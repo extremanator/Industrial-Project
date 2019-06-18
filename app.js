@@ -30,7 +30,7 @@ mongoose.connection.on('connected', () => {
         console.log('Initialized problems DB');
     });
     let admin = new User({
-        name: 'NaN',
+        name: 'admin',
         email: 'NaN',
         username: 'admin',
         password: 'admin',

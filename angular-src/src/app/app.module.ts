@@ -23,6 +23,8 @@ import { LeaderboardComponent } from './components/leaderboard/leaderboard.compo
 import { TestComponent } from './components/test/test.component';
 import { TestProblemComponent } from './components/test-problem/test-problem.component';
 import { TestGuard } from "./guards/test.guard";
+import { FooterComponent } from './components/footer/footer.component';
+import {NgxUiLoaderModule} from "ngx-ui-loader";
 
 import 'codemirror/mode/clike/clike';
 import 'codemirror/addon/edit/closebrackets';
@@ -59,6 +61,7 @@ const appRoutes: Routes = [
     LanguageComponent,
     TestComponent,
     TestProblemComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ const appRoutes: Routes = [
     FormsModule,
     FlashMessagesModule.forRoot(),
     HttpClientModule,
-    CodemirrorModule
+    CodemirrorModule,
+    NgxUiLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

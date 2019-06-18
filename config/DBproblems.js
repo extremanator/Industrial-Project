@@ -468,15 +468,15 @@ module.exports = [
     points: 5,
     category: ['cpp', 'easy', 'MSC'],
     paragraph:
-        'What is the value of size in the following program equal to?\n' +
+        'What is the value of size in the following program equal to?\n',
+    code:
         'void func(char s[]){\n' +
         '\tsize_t size = sizeof(s)/sizeof(s[0]);\n' +
         '}\n' +
         'int main(void){\n' +
         '\tchar str[] = "0123456789";\n' +
         '\tfunc(str);\n' +
-        '}',
-    code: ' ',
+        '}\n',
     type: 'close',
     num_solved: 0,
     num_attempted: 0,
@@ -496,7 +496,6 @@ module.exports = [
     category: ['cpp', 'easy', 'MSC'],
     paragraph:
         'Solve the following: 2*3+3 = ?',
-    code: ' ',
     type: 'close',
     num_solved: 0,
     num_attempted: 0,
@@ -590,8 +589,9 @@ module.exports = [
     points: 5,
     category: ['cpp', 'easy', 'CON'],
     paragraph:
-        'Bob wrote the following code for his top secret long-range missile:\n' +
-        '\n' +
+        'Bob wrote the code below for his top secret long-range missile.\n' +
+        'Tomorrow they are planning to test the missile launch (uh oh). Will the test pass with 100% certainty (assuming all other code is perfect)?',
+    code:
         '#include <mutex>\n' +
         '\n' +
         'struct Flags {\n' +
@@ -611,10 +611,7 @@ module.exports = [
         '  \n' +
         'void thread2() {\n' +
         '\tflags.flag2 = 2;\n' +
-        '}\n' +
-        '\n' +
-        'Tomorrow they are planning to test the missile launch (uh oh). Will the test pass with 100% certainty (assuming all other code is perfect)?',
-    code: ' ',
+        '}\n',
     type: 'close',
     num_solved: 0,
     num_attempted: 0,
@@ -633,8 +630,9 @@ module.exports = [
     points: 10,
     category: ['cpp', 'easy', 'MSC'],
     paragraph:
-        'Examine the following code:\n' +
-        '\n' +
+        'Examine the code below.\n' +
+        'What will be the output of the program?',
+    code:
         '#include <iostream> \n' +
         'using namespace std; \n' +
         'int main() \n' +
@@ -646,10 +644,7 @@ module.exports = [
         '\tp = "XYZWVU"; \n' +
         '\tcout << *++s; \n' +
         '\treturn 0; \n' +
-        '}\n' +
-        '\n' +
-        'What will be the output of the program?',
-    code: ' ',
+        '}\n',
     type: 'close',
     num_solved: 0,
     num_attempted: 0,

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Problem } from "../../problem";
-import { ProblemService } from "../../services/problem.service";
-import { TestService } from "../../services/test.service";
-import { Router } from "@angular/router";
+import { Problem } from '../../problem';
+import { ProblemService } from '../../services/problem.service';
+import { TestService } from '../../services/test.service';
+import { Router } from '@angular/router';
+import {NgxUiLoaderService} from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-test-problem',
@@ -19,27 +20,38 @@ export class TestProblemComponent implements OnInit {
   feedback_msg: any;
   num_problems: number;
   filters: Array<string>;
-  failed: boolean;
+  unsolvedProblems: string[];
+  solvedProblems: string[];
+  showNext: boolean;
+  completed: boolean;
+  nextText: string;
+  solvedText: string;
+  unsolvedText: string;
 
   constructor(private problemService: ProblemService,
               private testService: TestService,
-              private router: Router) { }
+              private router: Router,
+              private spinnerService: NgxUiLoaderService) { }
 
   ngOnInit() {
-    this.failed = false;
+    this.completed = false;
+    this.showNext = false;
     this.cur_prob = 0;
     this.progress = 0;
+    this.unsolvedProblems = [];
+    this.solvedProblems = [];
     this.num_problems = this.testService.getNumProblems();
     this.filters = this.testService.getFilters();
+    this.nextText = 'Next Problem';
     this.problemService.getAllProblems().subscribe((problemsArr) => {
-      let allProblems = problemsArr.problems;
-      let filteredProblems = [];
-      for (let problem of allProblems){
+      const allProblems = problemsArr.problems;
+      const filteredProblems = [];
+      for (const problem of allProblems) {
         let hasCategory = false;
-        if (this.filters.length === 0){
+        if (this.filters.length === 0) {
           hasCategory = true;
         } else {
-          for (let category of this.filters) {
+          for (const category of this.filters) {
             if (problem.category.includes(category)) {
               hasCategory = true;
               break;
@@ -52,13 +64,15 @@ export class TestProblemComponent implements OnInit {
       }
       this.shuffle(filteredProblems);
       this.problems = filteredProblems;
-      if(this.problems.length === 0){
+      if (this.problems.length === 0){
         this.router.navigate(['/test']);
         return;
       }
-      this.problem = this.problems[0];
       this.num_problems = Math.min(this.num_problems, this.problems.length);
-      this.solution_code = this.problem.code;
+      this.problem = this.problems[0];
+      if (this.problem.code !== undefined) {
+        this.solution_code = this.problem.code;
+      }
     });
   }
 
@@ -75,36 +89,88 @@ export class TestProblemComponent implements OnInit {
   }
 
   onSubmitSolution(submitted_code: string){
-    this.problemService.checkOpenSolutionInTest(this.problem.name, submitted_code).subscribe((res) => {
-      this.isSuccess = res.success;
-      this.feedback_msg = res.msg;
-      if(this.isSuccess)
-        this.progress++;
-      else if(this.feedback_msg === 'Incorrect Solution!')
-        this.failed = true;
-    });
-  }
-
-  onSolveClosed(solution: string) {
-    if(this.failed !== true) {
-      this.problemService.checkCloseSolutionInTest(this.problem.name, solution).subscribe((res) => {
+    if (!this.showNext) {
+      this.spinnerService.startLoader('testLoader1');
+      window.scroll({
+        top: 1000,
+        behavior: 'smooth'
+      });
+      this.problemService.checkOpenSolutionInTest(this.problem.name, submitted_code).subscribe((res) => {
+        this.spinnerService.stopLoader('testLoader1');
         this.isSuccess = res.success;
         this.feedback_msg = res.msg;
-        if (this.isSuccess)
+        if (this.feedback_msg !== 'Compilation Error!') {
+          this.showNext = true;
           this.progress++;
-        else if (this.feedback_msg === 'Incorrect!')
-          this.failed = true;
+          if (this.progress === this.num_problems) {
+            this.nextText = 'See Results';
+          }
+          if (this.isSuccess) {
+            this.solvedProblems.push(this.problem.name);
+          }
+          if (this.feedback_msg === 'Incorrect Solution!') {
+            this.unsolvedProblems.push(this.problem.name);
+          }
+        }
       });
     }
   }
 
-  nextProblem(){
+  onSolveClosed(solution: string) {
+    if (!this.showNext) {
+      this.spinnerService.startLoader('testLoader2');
+      window.scroll({
+        top: 1000,
+        behavior: 'smooth'
+      });
+      this.problemService.checkCloseSolutionInTest(this.problem.name, solution).subscribe((res) => {
+        this.spinnerService.stopLoader('testLoader2');
+        this.showNext = true;
+        this.isSuccess = res.success;
+        this.feedback_msg = res.msg;
+        this.progress++;
+        if (this.progress === this.num_problems) {
+          this.nextText = 'See Results';
+        }
+        if (this.isSuccess) {
+          this.solvedProblems.push(this.problem.name);
+        }
+        if (this.feedback_msg === 'Incorrect!') {
+          this.unsolvedProblems.push(this.problem.name);
+        }
+      });
+    }
+  }
+
+  retakeTest() {
+    this.completed = false;
+    this.showNext = false;
+    this.cur_prob = 0;
+    this.progress = 0;
+    this.nextText = 'Next Problem';
+    this.unsolvedProblems = [];
+    this.solvedProblems = [];
+    this.problem = this.problems[0];
+    if (this.problem.code !== undefined) {
+      this.solution_code = this.problem.code;
+    }
+  }
+
+  nextProblem() {
     this.isSuccess = undefined;
     this.feedback_msg = undefined;
-    this.cur_prob += 1;
-    this.problem = this.problems[this.cur_prob];
-    if(this.problem.type === 'open'){
-      this.solution_code = this.problem.code;
+    this.solution_code = undefined;
+    this.showNext = false;
+    if (this.progress === this.num_problems) {
+      this.solvedText = (this.solvedProblems.length === 0) ? 'None' : this.solvedProblems.toString();
+      this.unsolvedText = (this.unsolvedProblems.length === 0) ? 'None' : this.unsolvedProblems.toString();
+      this.completed = true;
+    } else {
+      this.cur_prob += 1;
+      this.problem = this.problems[this.cur_prob];
+      if (this.problem.code !== undefined) {
+        this.solution_code = this.problem.code;
+      }
     }
   }
 }

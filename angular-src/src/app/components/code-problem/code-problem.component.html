@@ -16,16 +16,30 @@
   <button type="button" class="btn btn-primary" (click)="onSubmitSolution(solution_code)">Submit</button>
   <br/>
   <br/>
-  <div *ngIf="isSuccess == true" class="alert alert-dismissible alert-success">
-    <strong>{{feedback_msg}}</strong>
+  <div style="position: relative; background-color: white; height: 50px; width: 100%">
+    <ngx-ui-loader [loaderId]="'resultLoader'" [fgsSize]="30"></ngx-ui-loader>
+    <div *ngIf="isSuccess == true" class="alert alert-dismissible alert-success">
+      <strong>{{feedback_msg}}</strong>
+    </div>
+    <div *ngIf="isSuccess == false" class="alert alert-dismissible alert-danger">
+      <strong>{{feedback_msg}}</strong>
+    </div>
   </div>
-  <div *ngIf="isSuccess == false" class="alert alert-dismissible alert-danger">
-    <strong>{{feedback_msg}}</strong>
-  </div>
+  <br/>
 </div>
 
 <div *ngIf="problem?.type==='close'">
   <p style="white-space: pre-wrap;">{{problem.paragraph}}</p>
+  <ngx-codemirror *ngIf="solution_code" [(ngModel)]="solution_code"
+                  [options]="{
+                    lineNumbers: true,
+                    theme: 'material',
+                    mode: 'text/x-c++src',
+                    indentUnit: 4,
+                    indentWithTabs: true,
+                    readOnly: true
+                  }">{{solution_code}}</ngx-codemirror>
+  <br *ngIf="solution_code"/>
   <table class="table table-hover">
     <tbody>
     <tr *ngFor="let sol of problem.solutions" (click)="onSolveClosed(sol)" class="change-cursor">
@@ -33,12 +47,16 @@
     </tr>
     </tbody>
   </table>
-  <div *ngIf="isSuccess == true" class="alert alert-dismissible alert-success">
-    <strong>{{feedback_msg}}</strong>
+  <div style="position: relative; background-color: white; height: 50px; width: 100%">
+    <ngx-ui-loader [loaderId]="'resultLoader'" [fgsSize]="30"></ngx-ui-loader>
+    <div *ngIf="isSuccess == true" class="alert alert-dismissible alert-success">
+      <strong>{{feedback_msg}}</strong>
+    </div>
+    <div *ngIf="isSuccess == false" class="alert alert-dismissible alert-danger">
+      <strong>{{feedback_msg}}</strong>
+    </div>
   </div>
-  <div *ngIf="isSuccess == false" class="alert alert-dismissible alert-danger">
-    <strong>{{feedback_msg}}</strong>
-  </div>
+  <br/>
 </div>
 
 
