@@ -1,19 +1,27 @@
 Features:
 - 
 
-## Nearest Goals
-#### Problem Writing  
-- Read the material found in the link: https://wiki.sei.cmu.edu/confluence/pages/viewpage.action?pageId=88046682.  
-- Write 10 simple problems for review.  
-  
+## Final Goals
+- When submitting a solution, make sure the feedback message is visible
+- When submitting a solution, a spinner should appear (until feedback)
+- In a Test:
+  + If there was a compilation error, another try will be given.
+    In any other case, we move on to the next question.
+  + There is no feedback displayed while taking the test.
+  + At the end of the test all questions with wrong solutions will be displayed.
+  + Possibly add a "retake test" option at the end.
+- Add new problems
+- Write all the documentation (manuals + code)
+- Prepare final presentation
+
   
 #### Software Development
-- Add problems list
-- Add problems by subjects
-- Add "Take a Test" option
-- Add solved problems history
-- Add Problem page
-- Add ability to search for users and see their stats
+- Add problems list                                   (done)
+- Add problems by subjects 
+- Add "Take a Test" option                            (done)
+- Add solved problems history                         (done)
+- Add Problem page                                    (done)
+- Add ability to search for users and see their stats (done)
 
 ## Estimated checkpoints
 - 10 example problems with the ability to check correctness of solution - 12.5

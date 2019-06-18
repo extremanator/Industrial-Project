@@ -13,6 +13,9 @@ You'll first need to install [NodeJS](https://nodejs.org/en/). Install the recom
 
 Next install a mongoDB server from [here](https://www.mongodb.com/download-center/community). Have MSI selected as the package. We are currently using version 4.0.9 and the community edition. **Remember the destination folder of the installation.**
 
+Also, you need to have installed a GCC compiler that can be run anywhere (e.g configured in the path variable). If you don't have this setup then for Windows you can install MinGW (a Windows GCC compiler) [here](http://tdm-gcc.tdragon.net/download).  
+Install the 32bit or 64bit version based on your computer specs (if in doubt it's usually 64bit). In the installation window no additional configuration is required (just click next). 
+
 ### Running
 
 Copy the repository to a project folder in your system (unzip the zip). 
