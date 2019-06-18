@@ -64,20 +64,6 @@ You can use commands like:
 * `db.users.deleteMany({})` will clear the db of all users
 * and many more you can find on [their site](https://docs.mongodb.com/manual/mongo/)
 
-## Running the tests
-
-**TODO**
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-**TODO**
-Explain what are these tests test and why
-
-```
-Give an example
-```
-
 ## Deployment
 
 **TODO**
@@ -92,10 +78,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-**TODO**
+* Emil Barel
+* Dan Aaronson
 
-## Acknowledgments
-
-Thanks to all the help from:
-* TBD
 
