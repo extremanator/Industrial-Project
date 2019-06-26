@@ -34,11 +34,11 @@
         <a class="nav-link" (click)="onLogoutClick()" href="#">Logout<span class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <div *ngIf="authService.isLoggedIn()">
+    <div *ngIf="authService.isLoggedIn()" (mouseenter)="changeSearchHover()" (mouseleave)="changeSearchHover()">
       <form class="form-inline my-2 my-lg-0">
-        <input #searchBox id="search-box" class="form-control mr-sm-2" type="text" placeholder="Search" autocomplete="off" (input)="search(searchBox.value)">
+        <input #searchBox id="search-box" class="form-control mr-sm-2" type="text" placeholder="Search" autocomplete="off" (input)="search(searchBox.value)" (focus)="changeSearchFocus()" (blur)="changeSearchFocus()">
       </form>
-      <ul class="list-group search-results">
+      <ul class="list-group search-results" *ngIf="isSearchInFocus || isHoveringSearch">
         <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let user of users$ | async" >
           <a routerLink="/user/{{user.username}}">
             {{user.username}}

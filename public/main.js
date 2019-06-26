@@ -41,7 +41,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n</div>\n<app-footer></app-footer>\n"
+module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n</div>\n"
 
 /***/ }),
 
@@ -269,7 +269,7 @@ var CodeProblemComponent = /** @class */ (function () {
             top: 1000,
             behavior: 'smooth'
         });
-        this.problemService.testProblemSolution(this.problem.name, submitted_code).subscribe(function (res) {
+        this.problemService.checkOpenSolutionAndUpdateCounters(this.problem.name, submitted_code).subscribe(function (res) {
             _this.isSuccess = res.success;
             _this.feedback_msg = res.msg;
             _this.spinnerService.stopLoader('resultLoader');
@@ -438,7 +438,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron text-center\">\r\n  <h1>Cyber-Trainer</h1>\r\n  <p class=\"lead\">Welcome to our project</p>\r\n  <div>\r\n    <a *ngIf=\"user === undefined\" class=\"btn btn-primary\" [routerLink]=\"['/register']\">Register</a> <a *ngIf=\"user === undefined\" class=\"btn btn-default\" [routerLink]=\"['/login']\">Login</a>\r\n    <p *ngIf=\"user !== undefined\">Welcome, {{ user.name }}</p>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-4\">\r\n    <h3>Express Backend</h3>\r\n    <p>A rock solid blah</p>\r\n  </div>\r\n  <div class=\"col-md-4\">\r\n    <h3>Angular-CLI</h3>\r\n    <p>A paper solid blahh</p>\r\n  </div>\r\n  <div class=\"col-md-4\">\r\n    <h3>JWT Tokens</h3>\r\n    <p>A scissors solid blah</p>\r\n  </div>\r\n</div>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n<br/>\r\n"
+module.exports = "<div class=\"jumbotron text-center\">\r\n  <h1>Cyber-Trainer</h1>\r\n  <p class=\"lead\">Welcome to our project</p>\r\n  <div>\r\n    <a *ngIf=\"user === undefined\" class=\"btn btn-primary\" [routerLink]=\"['/register']\">Register</a> <a *ngIf=\"user === undefined\" class=\"btn btn-default\" [routerLink]=\"['/login']\">Login</a>\r\n    <p *ngIf=\"user !== undefined\">Welcome, {{ user.name }}</p>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-4\">\r\n    <h3>Express Backend</h3>\r\n  </div>\r\n  <div class=\"col-md-4\">\r\n    <h3>Angular-CLI</h3>\r\n  </div>\r\n  <div class=\"col-md-4\">\r\n    <h3>JWT Tokens</h3>\r\n  </div>\r\n</div>\r\n<br/>\r\n"
 
 /***/ }),
 
@@ -595,13 +595,13 @@ var LanguageComponent = /** @class */ (function () {
     LanguageComponent.prototype.updateFilter = function () {
         var filters = ":";
         if (this.filterEasy) {
-            filters += 'easy:';
+            filters += 'Easy:';
         }
         if (this.filterMedium) {
-            filters += 'medium:';
+            filters += 'Medium:';
         }
         if (this.filterHard) {
-            filters += 'hard:';
+            filters += 'Hard:';
         }
         filters += ':';
         if (this.filterDCL) {
@@ -640,6 +640,10 @@ var LanguageComponent = /** @class */ (function () {
         this.router.navigate(["/language/" + this.routeLanguage + "/" + filters]);
     };
     LanguageComponent.prototype.getFilters = function (filters) {
+        var re = /(:[a-zA-Z0-9]+)*::([a-zA-Z0-9]+:)*/;
+        if (!matchExactRegEx(re, filters)) {
+            return { difficulties: [], categories: [] };
+        }
         var difficulties = [];
         var i;
         while (filters[1] != ':') {
@@ -673,15 +677,15 @@ var LanguageComponent = /** @class */ (function () {
                     break;
             }
             var filters = _this.getFilters(routeParams.filters);
-            if (filters.difficulties.includes('easy'))
+            if (filters.difficulties.includes('Easy'))
                 _this.filterEasy = true;
             else
                 _this.filterEasy = false;
-            if (filters.difficulties.includes('medium'))
+            if (filters.difficulties.includes('Medium'))
                 _this.filterMedium = true;
             else
                 _this.filterMedium = false;
-            if (filters.difficulties.includes('hard'))
+            if (filters.difficulties.includes('Hard'))
                 _this.filterHard = true;
             else
                 _this.filterHard = false;
@@ -746,6 +750,10 @@ var LanguageComponent = /** @class */ (function () {
     return LanguageComponent;
 }());
 
+function matchExactRegEx(r, str) {
+    var match = str.match(r);
+    return match && str === match[0];
+}
 
 
 /***/ }),
@@ -846,7 +854,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<h2 class=\"page-header\">Login</h2>\n<form (submit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n  <br/>\n</form>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n"
+module.exports = "<br/>\n<h2 class=\"page-header\">Login</h2>\n<form (submit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n  <br/>\n</form>\n<br/>\n"
 
 /***/ }),
 
@@ -933,7 +941,7 @@ module.exports = ".search-results{\r\n  position: absolute;\r\n  width: 204px;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\r\n  <a class=\"navbar-brand\" href=\"#\">Rafael-Project</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarColor02\" aria-controls=\"navbarColor02\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarColor02\">\r\n    <ul class=\"navbar-nav mr-auto navbar-left\">\r\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/']\">Home <span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/login']\">Login</a>\r\n      </li>\r\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/register']\">Register</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/problems']\">Problems</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/test']\">Tests</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/profile']\">Profile</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/leaderboard']\">Leaderboard</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn() && authService.isAdmin()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/stats']\">Stats</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">Logout<span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n    </ul>\r\n    <div *ngIf=\"authService.isLoggedIn()\">\r\n      <form class=\"form-inline my-2 my-lg-0\">\r\n        <input #searchBox id=\"search-box\" class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\" autocomplete=\"off\" (input)=\"search(searchBox.value)\">\r\n      </form>\r\n      <ul class=\"list-group search-results\">\r\n        <li class=\"list-group-item d-flex justify-content-between align-items-center\" *ngFor=\"let user of users$ | async\" >\r\n          <a routerLink=\"/user/{{user.username}}\">\r\n            {{user.username}}\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\r\n  <a class=\"navbar-brand\" href=\"#\">Rafael-Project</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarColor02\" aria-controls=\"navbarColor02\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarColor02\">\r\n    <ul class=\"navbar-nav mr-auto navbar-left\">\r\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/']\">Home <span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/login']\">Login</a>\r\n      </li>\r\n      <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/register']\">Register</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/problems']\">Problems</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/test']\">Tests</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/profile']\">Profile</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/leaderboard']\">Leaderboard</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn() && authService.isAdmin()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact: true}\" class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/stats']\">Stats</a>\r\n      </li>\r\n      <li *ngIf=\"authService.isLoggedIn()\" class=\"nav-item\">\r\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">Logout<span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n    </ul>\r\n    <div *ngIf=\"authService.isLoggedIn()\" (mouseenter)=\"changeSearchHover()\" (mouseleave)=\"changeSearchHover()\">\r\n      <form class=\"form-inline my-2 my-lg-0\">\r\n        <input #searchBox id=\"search-box\" class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\" autocomplete=\"off\" (input)=\"search(searchBox.value)\" (focus)=\"changeSearchFocus()\" (blur)=\"changeSearchFocus()\">\r\n      </form>\r\n      <ul class=\"list-group search-results\" *ngIf=\"isSearchInFocus || isHoveringSearch\">\r\n        <li class=\"list-group-item d-flex justify-content-between align-items-center\" *ngFor=\"let user of users$ | async\" >\r\n          <a routerLink=\"/user/{{user.username}}\">\r\n            {{user.username}}\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -971,6 +979,8 @@ var NavbarComponent = /** @class */ (function () {
     }
     NavbarComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.isSearchInFocus = false;
+        this.isHoveringSearch = false;
         this.users$ = this.searchTerms.pipe(
         // wait 300ms after each keystroke before considering the term
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["debounceTime"])(300), 
@@ -978,6 +988,12 @@ var NavbarComponent = /** @class */ (function () {
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["distinctUntilChanged"])(), 
         // switch to new search observable each time the term changes
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["switchMap"])(function (term) { return _this.authService.searchUsers(term); }));
+    };
+    NavbarComponent.prototype.changeSearchHover = function () {
+        this.isHoveringSearch = !this.isHoveringSearch;
+    };
+    NavbarComponent.prototype.changeSearchFocus = function () {
+        this.isSearchInFocus = !this.isSearchInFocus;
     };
     NavbarComponent.prototype.onLogoutClick = function () {
         this.authService.logout();
@@ -1093,7 +1109,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<div *ngIf=\"user\">\n  <h2 class=\"page-header\">{{user.name}}</h2>\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\">Username: {{user.username}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n    <li class=\"list-group-item\">Join Date: {{user.join_date}}</li>\n    <li class=\"list-group-item\">Number of Solved Problems: {{user.num_solved}}</li>\n    <li class=\"list-group-item\">Number of Solution Attempts: {{user.num_attempted}}</li>\n    <div class=\"jumbotron\">\n      <p class=\"lead\" style=\"white-space: pre-line\">{{attempted_problems}}{{solved_problems}}</p>\n    </div>\n  </ul>\n</div>\n"
+module.exports = "<br/>\n<div *ngIf=\"user\">\n  <h2 class=\"page-header\">{{user.name}}</h2>\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\">Username: {{user.username}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n    <li class=\"list-group-item\">Join Date: {{user.join_date}}</li>\n  </ul>\n</div>\n<br/>\n"
 
 /***/ }),
 
@@ -1205,7 +1221,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<h2 class=\"page-header\">Register</h2>\n<form (submit)=\"onRegisterSubmit()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Email</label>\n    <input type=\"text\" [(ngModel)]=\"email\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">\n  <br/>\n</form>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n"
+module.exports = "<br/>\n<h2 class=\"page-header\">Register</h2>\n<form (submit)=\"onRegisterSubmit()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Email</label>\n    <input type=\"text\" [(ngModel)]=\"email\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">\n  <br/>\n</form>\n<br/>\n"
 
 /***/ }),
 
@@ -1296,7 +1312,7 @@ var RegisterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".list {\r\n  width: 25%;\r\n}\r\n\r\n.info {\r\n  width: 75%;\r\n  height: 1200px;\r\n}\r\n\r\n.sub-table{\r\n  background-color: #f5f5f5;\r\n}\r\n\r\n.my-dropdown::after{\r\n  content: '˅';\r\n  font-family: \"Courier New\", serif;\r\n  float: right;\r\n}\r\n\r\n.custom-radio{\r\n  float: left;\r\n  margin-left: 20px;\r\n}\r\n\r\n.radio-label{\r\n  float: left;\r\n}\r\n\r\n.search-results{\r\n  margin-top: 0;\r\n}\r\n\r\n\r\n\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9zdGF0aXN0aWNzL3N0YXRpc3RpY3MuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFVBQVU7QUFDWjs7QUFFQTtFQUNFLFVBQVU7RUFDVixjQUFjO0FBQ2hCOztBQUVBO0VBQ0UseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGlDQUFpQztFQUNqQyxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsV0FBVztBQUNiOztBQUVBO0VBQ0UsYUFBYTtBQUNmIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9zdGF0aXN0aWNzL3N0YXRpc3RpY3MuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5saXN0IHtcclxuICB3aWR0aDogMjUlO1xyXG59XHJcblxyXG4uaW5mbyB7XHJcbiAgd2lkdGg6IDc1JTtcclxuICBoZWlnaHQ6IDEyMDBweDtcclxufVxyXG5cclxuLnN1Yi10YWJsZXtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjVmNWY1O1xyXG59XHJcblxyXG4ubXktZHJvcGRvd246OmFmdGVye1xyXG4gIGNvbnRlbnQ6ICfLhSc7XHJcbiAgZm9udC1mYW1pbHk6IFwiQ291cmllciBOZXdcIiwgc2VyaWY7XHJcbiAgZmxvYXQ6IHJpZ2h0O1xyXG59XHJcblxyXG4uY3VzdG9tLXJhZGlve1xyXG4gIGZsb2F0OiBsZWZ0O1xyXG4gIG1hcmdpbi1sZWZ0OiAyMHB4O1xyXG59XHJcblxyXG4ucmFkaW8tbGFiZWx7XHJcbiAgZmxvYXQ6IGxlZnQ7XHJcbn1cclxuXHJcbi5zZWFyY2gtcmVzdWx0c3tcclxuICBtYXJnaW4tdG9wOiAwO1xyXG59XHJcblxyXG5cclxuXHJcbiJdfQ== */"
+module.exports = ".list {\r\n  width: 25%;\r\n}\r\n\r\n.info {\r\n  width: 75%;\r\n}\r\n\r\n.sub-table{\r\n  background-color: #f5f5f5;\r\n}\r\n\r\n.my-dropdown::after{\r\n  content: '˅';\r\n  font-family: \"Courier New\", serif;\r\n  float: right;\r\n}\r\n\r\n.order-radio{\r\n  float: left;\r\n  margin-left: 20px;\r\n}\r\n\r\n.radio-label{\r\n  float: left;\r\n}\r\n\r\n.search-form{\r\n  margin-bottom: 0;\r\n}\r\n\r\n\r\n\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9zdGF0aXN0aWNzL3N0YXRpc3RpY3MuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFVBQVU7QUFDWjs7QUFFQTtFQUNFLFVBQVU7QUFDWjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixpQ0FBaUM7RUFDakMsWUFBWTtBQUNkOztBQUVBO0VBQ0UsV0FBVztFQUNYLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvc3RhdGlzdGljcy9zdGF0aXN0aWNzLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubGlzdCB7XHJcbiAgd2lkdGg6IDI1JTtcclxufVxyXG5cclxuLmluZm8ge1xyXG4gIHdpZHRoOiA3NSU7XHJcbn1cclxuXHJcbi5zdWItdGFibGV7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogI2Y1ZjVmNTtcclxufVxyXG5cclxuLm15LWRyb3Bkb3duOjphZnRlcntcclxuICBjb250ZW50OiAny4UnO1xyXG4gIGZvbnQtZmFtaWx5OiBcIkNvdXJpZXIgTmV3XCIsIHNlcmlmO1xyXG4gIGZsb2F0OiByaWdodDtcclxufVxyXG5cclxuLm9yZGVyLXJhZGlve1xyXG4gIGZsb2F0OiBsZWZ0O1xyXG4gIG1hcmdpbi1sZWZ0OiAyMHB4O1xyXG59XHJcblxyXG4ucmFkaW8tbGFiZWx7XHJcbiAgZmxvYXQ6IGxlZnQ7XHJcbn1cclxuXHJcbi5zZWFyY2gtZm9ybXtcclxuICBtYXJnaW4tYm90dG9tOiAwO1xyXG59XHJcblxyXG5cclxuXHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -1307,7 +1323,7 @@ module.exports = ".list {\r\n  width: 25%;\r\n}\r\n\r\n.info {\r\n  width: 75%;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: flex; height: 2000px\">\n  <div class=\"list\">\n    <table class=\"table table-hover\">\n      <tbody class=\"body\">\n      <tr class=\"change-cursor\" (click)=\"onClickGeneral()\" [class.table-success]=\"clickedGeneral\">\n        <th class=\"my-dropdown\" scope=\"row\">General</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedGeneral\" (click)=\"onClickUsers('Users')\" [class.table-active]=\"'Users' === selected.name\">\n        <th scope=\"row\">&emsp;Users</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedGeneral\" (click)=\"onClickProblems('Problems')\" [class.table-active]=\"'Problems' === selected.name\">\n        <th scope=\"row\">&emsp;Problems</th>\n      </tr>\n      <tr class=\"change-cursor\" (click)=\"onClickCategories()\" [class.table-success]=\"clickedCategories\">\n        <th class=\"my-dropdown\" scope=\"row\">Categories</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Declarations and Initialization')\" [class.table-active]=\"'Declarations and Initialization' === selected.name\">\n        <th scope=\"row\">&emsp;Declarations and Initialization</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Expressions')\" [class.table-active]=\"'Expressions' === selected.name\">\n        <th scope=\"row\">&emsp;Expressions</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Integers')\" [class.table-active]=\"'Integers' === selected.name\">\n        <th scope=\"row\">&emsp;Integers</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Containers')\" [class.table-active]=\"'Containers' === selected.name\">\n        <th scope=\"row\">&emsp;Containers</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Characters and Strings')\" [class.table-active]=\"'Characters and Strings' === selected.name\">\n        <th scope=\"row\">&emsp;Characters and Strings</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Memory Management')\" [class.table-active]=\"'Memory Management' === selected.name\">\n        <th scope=\"row\">&emsp;Memory Management</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Input Output')\" [class.table-active]=\"'Input Output' === selected.name\">\n        <th scope=\"row\">&emsp;Input Output</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Exceptions and Error Handling')\" [class.table-active]=\"'Exceptions and Error Handling' === selected.name\">\n        <th scope=\"row\">&emsp;Exceptions and Error Handling</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Object Oriented Programming')\" [class.table-active]=\"'Object Oriented Programming' === selected.name\">\n        <th scope=\"row\">&emsp;Object Oriented Programming</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Concurrency')\" [class.table-active]=\"'Concurrency' === selected.name\">\n        <th scope=\"row\">&emsp;Concurrency</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Miscellaneous')\" [class.table-active]=\"'Miscellaneous' === selected.name\">\n        <th scope=\"row\">&emsp;Miscellaneous</th>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n  <div class=\"info\" *ngIf=\"selected.name !== undefined\">\n    <br/>\n    <h2 align=\"center\">{{selected.name}}</h2>\n    <div *ngIf=\"selected.name === 'Users'\" class=\"jumbotron\">\n      <p class=\"lead\">The number of users in the system is: {{numUsers}}</p>\n      <hr class=\"my-4\">\n      <div class=\"form-group\">\n        <input type=\"text\" [(ngModel)]=\"searchUsername\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control mr-sm-2\" placeholder=\"Search for username\" autocomplete=\"off\" (input)=\"onSearchUser(searchUsername)\">\n      </div>\n      <ul class=\"list-group search-results\">\n        <li class=\"list-group-item d-flex justify-content-between align-items-center change-cursor\" *ngFor=\"let user of searchUsers$ | async\" (click)=\"onSelectUser(user)\">\n            {{user.username}}\n        </li>\n      </ul>\n      <div *ngIf=\"selectedUser !== undefined\">\n        <br/>\n        <h2 class=\"page-header\">{{selectedUser.name}}</h2>\n        <ul class=\"list-group\">\n          <li class=\"list-group-item\">Username: {{selectedUser.username}}</li>\n          <li class=\"list-group-item\">Email: {{selectedUser.email}}</li>\n          <li class=\"list-group-item\">Join Date: {{selectedUser.join_date}}</li>\n          <li class=\"list-group-item\">Number of Solved Problems: {{selectedUser.num_solved}}</li>\n          <li class=\"list-group-item\">Number of Solution Attempts: {{selectedUser.num_attempted}}</li>\n          <li class=\"list-group-item\">User has solved: {{selectedUser.attempts}}</li>\n          <li class=\"list-group-item\">User has attempted: {{selectedUser.solved}}</li>\n        </ul>\n        <br/>\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickRemoveUser(selectedUser)\">Remove User</button>\n        <hr class=\"my-4\">\n        <p>And even more possible commands to apply to the user! <i>Maybe give test?!</i></p>\n      </div>\n    </div>\n    <div *ngIf=\"selected.name === 'Problems'\" class=\"jumbotron\">\n      <p class=\"lead\">The number of problems in the system is: {{numProblems}}</p>\n      <ul class=\"list-group\">\n        <li class=\"list-group-item\">Most solved problems: {{maxProblemsText}}</li>\n        <li class=\"list-group-item\">Number of users that solved: {{maxSolutions}}</li>\n        <li class=\"list-group-item\">Least solved problems: {{minProblemsText}}</li>\n        <li class=\"list-group-item\">Number of users that solved: {{minSolutions}}</li>\n      </ul>\n      <hr class=\"my-4\">\n      <div class=\"form-group\">\n        <input type=\"text\" [(ngModel)]=\"searchProblem\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control mr-sm-2\" placeholder=\"Search for problem name\" autocomplete=\"off\" (input)=\"onSearchProblem(searchProblem)\">\n      </div>\n      <ul class=\"list-group search-results\">\n        <li class=\"list-group-item d-flex justify-content-between align-items-center change-cursor\" *ngFor=\"let problem of searchProblems$ | async\" (click)=\"onSelectProblem(problem)\">\n          {{problem.name}}\n        </li>\n      </ul>\n      <div *ngIf=\"selectedProblem !== undefined\">\n        <br/>\n        <h2 class=\"page-header\">{{selectedProblem.name}}</h2>\n        <ul class=\"list-group\">\n          <li class=\"list-group-item\">Name: {{selectedProblem.name}}</li>\n          <li class=\"list-group-item\">Difficulty: {{selectedProblem.difficulty}}</li>\n          <li class=\"list-group-item\">Categories: {{selectedProblem.category}}</li>\n          <li class=\"list-group-item\">Point value: {{selectedProblem.points}}</li>\n          <li class=\"list-group-item\">Type: {{selectedProblem.type_text}}</li>\n          <li class=\"list-group-item\">Number of users that solved the problem: {{selectedProblem.num_solved}}</li>\n          <li class=\"list-group-item\">Number of attempts to solve the problem: {{selectedProblem.num_attempted}}</li>\n          <li class=\"list-group-item\">Percent of users that solved: {{selectedProblem.solved_percent}}</li>\n          <li class=\"list-group-item\">Solving users: {{selectedProblem.solvingUsers}}</li>\n          <li class=\"list-group-item\">Avg attempts until first solution: {{selectedProblem.avg_attempts}}</li>\n        </ul>\n        <br/>\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickRemoveProblem(selectedProblem)\">Remove Problem</button>\n        <hr class=\"my-4\">\n        <p>And even more possible commands to apply to the problem!</p>\n      </div>\n    </div>\n    <div *ngIf=\"selected.name !== 'Users' && selected.name !== 'Problems'\" class=\"jumbotron\">\n      <p class=\"lead\" style=\"white-space: pre-line\">\n        The number of attempts of problems from this category is: {{selected.num_attempted}}<br>\n        The number of times a problem from this category has been solved is: {{selected.num_solved}}<br>\n      </p>\n      <hr class=\"my-4\">\n      <p class=\"lead\">List of problems from this category:</p>\n      <p class=\"radio-label\">Order by: </p>\n      <fieldset>\n        <div class=\"form-group\">\n          <div class=\"custom-control custom-radio\">\n            <input type=\"radio\" id=\"order1\" name=\"order\" class=\"custom-control-input\" checked=\"\" (change)=\"onChangeOrder('attempts')\">\n            <label class=\"custom-control-label\" for=\"order1\">Number of attempts</label>\n          </div>\n          <div class=\"custom-control custom-radio\">\n            <input type=\"radio\" id=\"order2\" name=\"order\" class=\"custom-control-input\"  (change)=\"onChangeOrder('solutions')\">\n            <label class=\"custom-control-label\" for=\"order2\">Number of solutions</label>\n          </div>\n        </div>\n      </fieldset>\n      <table class=\"table table-hover\">\n        <thead>\n        <tr>\n          <th scope=\"col\">Name</th>\n          <th scope=\"col\">Difficulty</th>\n          <th scope=\"col\"># Attempts</th>\n          <th scope=\"col\"># Solutions</th>\n          <th scope=\"col\"></th>\n        </tr>\n        </thead>\n        <tbody>\n        <tr *ngFor=\"let problem of displayedProblems\">\n          <th scope=\"row\">{{problem.name}}</th>\n          <td>{{problem.difficulty}}</td>\n          <td>{{problem.num_attempted}}</td>\n          <td>{{problem.num_solved}}</td>\n          <td>\n            <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickRemoveProblem(problem)\">Remove</button>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n\n<!--\n        {{selected.solved_percent}}% of users have solved this problem.</p>-->\n"
+module.exports = "<div style=\"display: flex;\">\n  <div class=\"list\">\n    <table class=\"table table-hover\">\n      <tbody class=\"body\">\n      <tr class=\"change-cursor\" (click)=\"onClickGeneral()\" [class.table-success]=\"clickedGeneral\">\n        <th class=\"my-dropdown\" scope=\"row\">General</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedGeneral\" (click)=\"onClickUsers('User Statistics')\" [class.table-active]=\"'User Statistics' === selected.name\">\n        <th scope=\"row\">&emsp;User Statistics</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedGeneral\" (click)=\"onClickProblems('Problem Statistics')\" [class.table-active]=\"'Problem Statistics' === selected.name\">\n        <th scope=\"row\">&emsp;Problem Statistics</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedGeneral\" (click)=\"onClickAddProblem('Add Problem')\" [class.table-active]=\"'Add Problem' === selected.name\">\n        <th scope=\"row\">&emsp;Add Problem</th>\n      </tr>\n      <tr class=\"change-cursor\" (click)=\"onClickCategories()\" [class.table-success]=\"clickedCategories\">\n        <th class=\"my-dropdown\" scope=\"row\">Categories</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Declarations and Initialization')\" [class.table-active]=\"'Declarations and Initialization' === selected.name\">\n        <th scope=\"row\">&emsp;Declarations and Initialization</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Expressions')\" [class.table-active]=\"'Expressions' === selected.name\">\n        <th scope=\"row\">&emsp;Expressions</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Integers')\" [class.table-active]=\"'Integers' === selected.name\">\n        <th scope=\"row\">&emsp;Integers</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Containers')\" [class.table-active]=\"'Containers' === selected.name\">\n        <th scope=\"row\">&emsp;Containers</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Characters and Strings')\" [class.table-active]=\"'Characters and Strings' === selected.name\">\n        <th scope=\"row\">&emsp;Characters and Strings</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Memory Management')\" [class.table-active]=\"'Memory Management' === selected.name\">\n        <th scope=\"row\">&emsp;Memory Management</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Input Output')\" [class.table-active]=\"'Input Output' === selected.name\">\n        <th scope=\"row\">&emsp;Input Output</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Exceptions and Error Handling')\" [class.table-active]=\"'Exceptions and Error Handling' === selected.name\">\n        <th scope=\"row\">&emsp;Exceptions and Error Handling</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Object Oriented Programming')\" [class.table-active]=\"'Object Oriented Programming' === selected.name\">\n        <th scope=\"row\">&emsp;Object Oriented Programming</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Concurrency')\" [class.table-active]=\"'Concurrency' === selected.name\">\n        <th scope=\"row\">&emsp;Concurrency</th>\n      </tr>\n      <tr class=\"change-cursor sub-table\" *ngIf=\"clickedCategories\" (click)=\"onClickCategory('Miscellaneous')\" [class.table-active]=\"'Miscellaneous' === selected.name\">\n        <th scope=\"row\">&emsp;Miscellaneous</th>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n  <div class=\"info\" *ngIf=\"selected.name !== undefined\">\n    <br/>\n    <h2 align=\"center\">{{selected.name}}</h2>\n    <div *ngIf=\"selected.name === 'User Statistics'\" class=\"jumbotron\">\n      <p class=\"lead\">The number of users in the system is: {{numUsers}}</p>\n      <hr class=\"my-4\">\n      <div (mouseenter)=\"changeUserSearchHover()\" (mouseleave)=\"changeUserSearchHover()\">\n        <div class=\"form-group search-form\">\n          <input type=\"text\" [(ngModel)]=\"searchUsername\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control mr-sm-2\" placeholder=\"Search for username\" autocomplete=\"off\" (input)=\"onSearchUser(searchUsername)\"  (focus)=\"changeUserSearchFocus()\" (blur)=\"changeUserSearchFocus()\">\n        </div>\n        <ul class=\"list-group search-results\" *ngIf=\"isUserSearchInFocus || isHoveringUserSearch\">\n          <li class=\"list-group-item d-flex justify-content-between align-items-center change-cursor\" *ngFor=\"let user of searchUsers$ | async\" (click)=\"onSelectUser(user)\">\n              {{user.username}}\n          </li>\n        </ul>\n      </div>\n      <div *ngIf=\"selectedUser !== undefined\">\n        <br/>\n        <h2 class=\"page-header\">{{selectedUser.name}}</h2>\n        <ul class=\"list-group\">\n          <li class=\"list-group-item\">Username: {{selectedUser.username}}</li>\n          <li class=\"list-group-item\">Email: {{selectedUser.email}}</li>\n          <li class=\"list-group-item\">Join Date: {{selectedUser.join_date}}</li>\n          <li class=\"list-group-item\">Number of Solved Problems: {{selectedUser.num_solved}}</li>\n          <li class=\"list-group-item\">Number of Solution Attempts: {{selectedUser.num_attempted}}</li>\n          <li class=\"list-group-item\">User has solved: {{selectedUser.solved}}</li>\n          <li class=\"list-group-item\">User has attempted: {{selectedUser.attempts}}</li>\n        </ul>\n        <br/>\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickRemoveUser(selectedUser)\">Remove User</button>\n        <br/>\n        <br/>\n        <div style=\"position: relative;\" *ngIf=\"removeResult\">\n          <ngx-ui-loader [loaderId]=\"'removeUserLoader'\" [fgsSize]=\"30\"></ngx-ui-loader>\n          <div *ngIf=\"removeResult.success == true\" class=\"alert alert-dismissible alert-success\">\n            <strong>{{removeResult.msg}}</strong>\n          </div>\n          <div *ngIf=\"removeResult.success == false\" class=\"alert alert-dismissible alert-danger\">\n            <strong>{{removeResult.msg}}</strong>\n          </div>\n        </div>\n        <hr class=\"my-4\">\n        <p>And even more possible commands to apply to the user! <i>Maybe give test?!</i></p>\n      </div>\n    </div>\n    <div *ngIf=\"selected.name === 'Problem Statistics'\" class=\"jumbotron\">\n      <p class=\"lead\">The number of problems in the system is: {{numProblems}}</p>\n      <ul class=\"list-group\">\n        <li class=\"list-group-item\">Most solved problems: {{maxProblemsText}}</li>\n        <li class=\"list-group-item\">Number of users that solved: {{maxSolutions}}</li>\n        <li class=\"list-group-item\">Least solved problems: {{minProblemsText}}</li>\n        <li class=\"list-group-item\">Number of users that solved: {{minSolutions}}</li>\n      </ul>\n      <hr class=\"my-4\">\n      <div (mouseenter)=\"changeProblemSearchHover()\" (mouseleave)=\"changeProblemSearchHover()\">\n        <div class=\"form-group search-form\">\n          <input type=\"text\" [(ngModel)]=\"searchProblem\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control mr-sm-2\" placeholder=\"Search for problem name\" autocomplete=\"off\" (input)=\"onSearchProblem(searchProblem)\" (focus)=\"changeProblemSearchFocus()\" (blur)=\"changeProblemSearchFocus()\">\n        </div>\n        <ul class=\"list-group search-results\" *ngIf=\"isProblemSearchInFocus || isHoveringProblemSearch\">\n          <li class=\"list-group-item d-flex justify-content-between align-items-center change-cursor\" *ngFor=\"let problem of searchProblems$ | async\" (click)=\"onSelectProblem(problem)\">\n            {{problem.name}}\n          </li>\n        </ul>\n      </div>\n      <div *ngIf=\"selectedProblem !== undefined\">\n        <br/>\n        <h2 class=\"page-header\">{{selectedProblem.name}}</h2>\n        <ul class=\"list-group\">\n          <li class=\"list-group-item\">Name: {{selectedProblem.name}}</li>\n          <li class=\"list-group-item\">Difficulty: {{selectedProblem.difficulty}}</li>\n          <li class=\"list-group-item\">Categories: {{selectedProblem.category}}</li>\n          <li class=\"list-group-item\">Point value: {{selectedProblem.points}}</li>\n          <li class=\"list-group-item\">Type: {{selectedProblem.type_text}}</li>\n          <li class=\"list-group-item\">Number of users that solved the problem: {{selectedProblem.num_solved}}</li>\n          <li class=\"list-group-item\">Number of attempts to solve the problem: {{selectedProblem.num_attempted}}</li>\n          <li class=\"list-group-item\">Percent of users that solved: {{selectedProblem.solved_percent}}%</li>\n          <li class=\"list-group-item\">Solving users: {{selectedProblem.solvingUsers}}</li>\n          <li class=\"list-group-item\">Avg attempts until first solution: {{selectedProblem.avg_attempts}}</li>\n        </ul>\n        <br/>\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickRemoveProblem(selectedProblem)\">Remove Problem</button>\n        <br/>\n        <br/>\n        <div style=\"position: relative;\" *ngIf=\"removeResult\">\n          <ngx-ui-loader [loaderId]=\"'removeProbLoader'\" [fgsSize]=\"30\"></ngx-ui-loader>\n          <div *ngIf=\"removeResult.success == true\" class=\"alert alert-dismissible alert-success\">\n            <strong>{{removeResult.msg}}</strong>\n          </div>\n          <div *ngIf=\"removeResult.success == false\" class=\"alert alert-dismissible alert-danger\">\n            <strong>{{removeResult.msg}}</strong>\n          </div>\n        </div>\n        <hr class=\"my-4\">\n        <p>And even more possible commands to apply to the problem!</p>\n      </div>\n    </div>\n    <div *ngIf=\"selected.name === 'Add Problem'\" class=\"jumbotron\">\n      <h3>Configure Problem</h3>\n      <div class=\"form-group\">\n        <label>Name</label>\n        <input type=\"text\" [(ngModel)]=\"addProbName\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n      </div>\n      <div class=\"form-group\">\n        <label>Difficulty</label>\n        <div class=\"custom-control custom-radio\">\n          <input type=\"radio\" id=\"addProbDiff1\" name=\"addProbDiff\" class=\"custom-control-input\" checked=\"\" (change)=\"onChangeAddProbDiff('Easy')\">\n          <label class=\"custom-control-label\" for=\"addProbDiff1\">Easy</label>\n        </div>\n        <div class=\"custom-control custom-radio\">\n          <input type=\"radio\" id=\"addProbDiff2\" name=\"addProbDiff\" class=\"custom-control-input\" (change)=\"onChangeAddProbDiff('Medium')\">\n          <label class=\"custom-control-label\" for=\"addProbDiff2\">Medium</label>\n        </div>\n        <div class=\"custom-control custom-radio\">\n          <input type=\"radio\" id=\"addProbDiff3\" name=\"addProbDiff\" class=\"custom-control-input\" (change)=\"onChangeAddProbDiff('Hard')\">\n          <label class=\"custom-control-label\" for=\"addProbDiff3\">Hard</label>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label>Points</label>\n        <input type=\"text\" [(ngModel)]=\"addProbPoints\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n      </div>\n      <label>Categories</label>\n      <div class=\"form-group\">\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category1\" [(ngModel)]=\"categoryDCL\">\n          <label class=\"custom-control-label\" for=\"category1\">Declarations and Initialization</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category2\" [(ngModel)]=\"categoryEXP\">\n          <label class=\"custom-control-label\" for=\"category2\">Expressions</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category3\" [(ngModel)]=\"categoryINT\">\n          <label class=\"custom-control-label\" for=\"category3\">Integers</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category4\" [(ngModel)]=\"categoryCTR\">\n          <label class=\"custom-control-label\" for=\"category4\">Containers</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category5\" [(ngModel)]=\"categorySTR\">\n          <label class=\"custom-control-label\" for=\"category5\">Characters and Strings</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category6\" [(ngModel)]=\"categoryMEM\">\n          <label class=\"custom-control-label\" for=\"category6\">Memory Management</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category7\" [(ngModel)]=\"categoryFIO\">\n          <label class=\"custom-control-label\" for=\"category7\">Input Output</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category8\" [(ngModel)]=\"categoryERR\">\n          <label class=\"custom-control-label\" for=\"category8\">Exceptions and Error Handling</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category9\" [(ngModel)]=\"categoryOOP\">\n          <label class=\"custom-control-label\" for=\"category9\">Object Oriented Programming</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category10\" [(ngModel)]=\"categoryCON\">\n          <label class=\"custom-control-label\" for=\"category10\">Concurrency</label>\n        </div>\n        <div class=\"custom-control custom-checkbox\">\n          <input type=\"checkbox\" class=\"custom-control-input\" id=\"category11\" [(ngModel)]=\"categoryMSC\">\n          <label class=\"custom-control-label\" for=\"category11\">Miscellaneous</label>\n        </div>\n      </div>\n      <label>Explanation of the problem</label>\n      <div class=\"form-group\">\n        <textarea class=\"form-control\" id=\"addProbParagraph\" rows=\"5\" [(ngModel)]=\"addProbParagraph\"></textarea>\n      </div>\n      <label>Optional: Code for the problem (<i>displays under explanation</i>)</label>\n      <ngx-codemirror [(ngModel)]=\"addProbCode\"\n                      [options]=\"{\n                  lineNumbers: true,\n                  theme: 'material',\n                  mode: 'text/x-c++src',\n                  indentUnit: 4,\n                  indentWithTabs: true,\n                  autoCloseBrackets: true\n                }\">{{addProbCode}}</ngx-codemirror>\n      <br/>\n      <label>Choices</label>\n      <div class=\"form-group\" *ngFor=\"let i of addProbSolCount\">\n        <input type=\"text\" [(ngModel)]=\"addProbSols[i]\" [ngModelOptions]=\"{standalone:true}\" class=\"form-control\">\n      </div>\n      <div style=\"display: flex\">\n        <button type=\"button\" class=\"btn btn-info\" (click)=\"onAddProbChoice()\">+</button>\n        <button type=\"button\" class=\"btn btn-info\" style=\"margin-left: 5px; width: 36px;\" *ngIf=\"addProbSolCount.length !== 2\" (click)=\"onRemoveProbChoice()\">-</button>\n      </div>\n      <br/>\n      <label>Correct Choice</label>\n      <div class=\"form-group\">\n        <select multiple=\"\" class=\"form-control\" id=\"addProbCorrectChoice\" [(ngModel)]=\"addProbSol\">\n          <option *ngFor=\"let sol of addProbSols\">{{sol}}</option>\n        </select>\n      </div>\n      <div class=\"text-center\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitProblem()\">Add Problem</button>\n      </div>\n      <br/>\n      <div style=\"position: relative;\" *ngIf=\"addProbResult\">\n        <ngx-ui-loader [loaderId]=\"'addProbSubmitLoader'\" [fgsSize]=\"30\"></ngx-ui-loader>\n        <div *ngIf=\"addProbResult.success == true\" class=\"alert alert-dismissible alert-success\">\n          <strong>{{addProbResult.msg}}</strong>\n        </div>\n        <div *ngIf=\"addProbResult.success == false\" class=\"alert alert-dismissible alert-danger\">\n          <strong>{{addProbResult.msg}}</strong>\n        </div>\n      </div>\n    </div>\n    <div *ngIf=\"selected.name !== 'User Statistics' && selected.name !== 'Problem Statistics' && selected.name !== 'Add Problem'\" class=\"jumbotron\">\n      <p class=\"lead\" style=\"white-space: pre-line\">\n        The number of attempts of problems from this category is: {{selected.num_attempted}}<br>\n        The number of times a problem from this category has been solved is: {{selected.num_solved}}<br>\n      </p>\n      <hr class=\"my-4\">\n      <p class=\"lead\">List of problems from this category:</p>\n      <p class=\"radio-label\">Order by: </p>\n      <fieldset>\n        <div class=\"form-group\">\n          <div class=\"custom-control custom-radio order-radio\">\n            <input type=\"radio\" id=\"order1\" name=\"order\" class=\"custom-control-input\" checked=\"\" (change)=\"onChangeOrder('attempts')\">\n            <label class=\"custom-control-label\" for=\"order1\">Number of attempts</label>\n          </div>\n          <div class=\"custom-control custom-radio order-radio\">\n            <input type=\"radio\" id=\"order2\" name=\"order\" class=\"custom-control-input\"  (change)=\"onChangeOrder('solutions')\">\n            <label class=\"custom-control-label\" for=\"order2\">Number of solutions</label>\n          </div>\n        </div>\n      </fieldset>\n      <table class=\"table table-hover\">\n        <thead>\n        <tr>\n          <th scope=\"col\">Name</th>\n          <th scope=\"col\">Difficulty</th>\n          <th scope=\"col\"># Attempts</th>\n          <th scope=\"col\"># Solutions</th>\n          <th scope=\"col\"></th>\n        </tr>\n        </thead>\n        <tbody>\n        <tr *ngFor=\"let problem of displayedProblems\">\n          <th scope=\"row\">{{problem.name}}</th>\n          <td>{{problem.difficulty}}</td>\n          <td>{{problem.num_attempted}}</td>\n          <td>{{problem.num_solved}}</td>\n          <td>\n            <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickRemoveProblem(problem)\">Remove</button>\n          </td>\n        </tr>\n        </tbody>\n      </table>\n      <div style=\"position: relative;\" *ngIf=\"removeResult\">\n        <ngx-ui-loader [loaderId]=\"'removeProbLoader'\" [fgsSize]=\"30\"></ngx-ui-loader>\n        <div *ngIf=\"removeResult.success == true\" class=\"alert alert-dismissible alert-success\">\n          <strong>{{removeResult.msg}}</strong>\n        </div>\n        <div *ngIf=\"removeResult.success == false\" class=\"alert alert-dismissible alert-danger\">\n          <strong>{{removeResult.msg}}</strong>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<!--\n        {{selected.solved_percent}}% of users have solved this problem.</p>-->\n"
 
 /***/ }),
 
@@ -1327,6 +1343,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var ngx_ui_loader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-ui-loader */ "./node_modules/ngx-ui-loader/fesm5/ngx-ui-loader.js");
+
 
 
 
@@ -1334,9 +1352,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var StatisticsComponent = /** @class */ (function () {
-    function StatisticsComponent(problemService, authService) {
+    function StatisticsComponent(problemService, authService, spinnerService) {
         this.problemService = problemService;
         this.authService = authService;
+        this.spinnerService = spinnerService;
         this.userSearchTerms = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
         this.problemSearchTerms = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
     }
@@ -1396,6 +1415,103 @@ var StatisticsComponent = /** @class */ (function () {
                     }
                 }
             });
+        });
+    };
+    StatisticsComponent.prototype.onChangeAddProbDiff = function (difficulty) {
+        this.addProbDiff = difficulty;
+    };
+    StatisticsComponent.prototype.onAddProbChoice = function () {
+        this.addProbSols.push("Choice " + (this.addProbSolCount.length + 1));
+        this.addProbSolCount.push(this.addProbSolCount.length);
+    };
+    StatisticsComponent.prototype.onRemoveProbChoice = function () {
+        if (this.addProbSol !== undefined && this.addProbSol[0] === this.addProbSols[this.addProbSols.length - 1]) {
+            this.addProbSol = undefined;
+        }
+        this.addProbSols.pop();
+        this.addProbSolCount.pop();
+    };
+    StatisticsComponent.prototype.onSubmitProblem = function () {
+        var _this = this;
+        window.scroll({
+            top: 2000,
+            behavior: 'smooth'
+        });
+        this.spinnerService.startLoader('addProbSubmitLoader');
+        var re = /[1-9][0-9]*/;
+        if (!this.addProbName.trim() || !this.addProbPoints.trim() || !this.addProbParagraph.trim()) {
+            this.addProbResult = { success: false, msg: 'Failed to add problem. Please fill in all required fields.' };
+            this.spinnerService.stopLoader('addProbSubmitLoader');
+            return;
+        }
+        if (!matchExactRegEx(re, this.addProbPoints.trim())) {
+            this.addProbResult = { success: false, msg: 'Failed to add problem. \'Points\' must be a positive integer.' };
+            this.spinnerService.stopLoader('addProbSubmitLoader');
+            return;
+        }
+        if (this.addProbSols.includes('')) {
+            this.addProbResult = { success: false, msg: 'Failed to add problem. Can\'t have empty choice.' };
+            this.spinnerService.stopLoader('addProbSubmitLoader');
+            return;
+        }
+        if (this.addProbSol === undefined) {
+            this.addProbResult = { success: false, msg: 'Failed to add problem. Please select the correct solution.' };
+            this.spinnerService.stopLoader('addProbSubmitLoader');
+            return;
+        }
+        var category = ['cpp', this.addProbDiff];
+        if (this.categoryDCL) {
+            category.push('DCL');
+        }
+        if (this.categoryEXP) {
+            category.push('EXP');
+        }
+        if (this.categoryINT) {
+            category.push('INT');
+        }
+        if (this.categoryCTR) {
+            category.push('CTR');
+        }
+        if (this.categorySTR) {
+            category.push('STR');
+        }
+        if (this.categoryMEM) {
+            category.push('MEM');
+        }
+        if (this.categoryFIO) {
+            category.push('FIO');
+        }
+        if (this.categoryERR) {
+            category.push('ERR');
+        }
+        if (this.categoryOOP) {
+            category.push('OOP');
+        }
+        if (this.categoryCON) {
+            category.push('CON');
+        }
+        if (this.categoryMSC) {
+            category.push('MSC');
+        }
+        var problemInfo = {
+            name: this.addProbName,
+            difficulty: this.addProbDiff,
+            points: Number(this.addProbPoints.trim()),
+            category: category,
+            paragraph: this.addProbParagraph,
+            type: 'close',
+            solutions: this.addProbSols,
+            solution: this.addProbSol[0]
+        };
+        if (this.addProbCode.trim()) {
+            problemInfo.code = this.addProbCode;
+        }
+        this.problemService.addClosedProblem(problemInfo).subscribe(function (resp) {
+            _this.addProbResult = resp;
+            if (resp.success) {
+                _this.getAllInfo();
+            }
+            _this.spinnerService.stopLoader('addProbSubmitLoader');
         });
     };
     StatisticsComponent.prototype.onSearchUser = function (username) {
@@ -1462,12 +1578,22 @@ var StatisticsComponent = /** @class */ (function () {
     StatisticsComponent.prototype.onClickUsers = function (name) {
         this.selected.name = name;
         this.selectedUser = undefined;
+        this.removeResult = undefined;
+    };
+    StatisticsComponent.prototype.onClickAddProblem = function (name) {
+        this.removeResult = undefined;
+        this.selected.name = name;
     };
     StatisticsComponent.prototype.onClickProblems = function (name) {
         this.selected.name = name;
         this.selectedProblem = undefined;
+        this.removeResult = undefined;
     };
     StatisticsComponent.prototype.onClickCategory = function (name) {
+        this.removeResult = undefined;
+        this.doGetCategory(name);
+    };
+    StatisticsComponent.prototype.doGetCategory = function (name) {
         this.displayedProblems = [];
         this.selected.name = name;
         var category = this.getCategory(name);
@@ -1522,6 +1648,18 @@ var StatisticsComponent = /** @class */ (function () {
             });
         }
     };
+    StatisticsComponent.prototype.changeUserSearchFocus = function () {
+        this.isUserSearchInFocus = !this.isUserSearchInFocus;
+    };
+    StatisticsComponent.prototype.changeUserSearchHover = function () {
+        this.isHoveringUserSearch = !this.isHoveringUserSearch;
+    };
+    StatisticsComponent.prototype.changeProblemSearchFocus = function () {
+        this.isProblemSearchInFocus = !this.isProblemSearchInFocus;
+    };
+    StatisticsComponent.prototype.changeProblemSearchHover = function () {
+        this.isHoveringProblemSearch = !this.isHoveringProblemSearch;
+    };
     StatisticsComponent.prototype.getCategory = function (name) {
         switch (name) {
             case 'Declarations and Initialization':
@@ -1549,10 +1687,35 @@ var StatisticsComponent = /** @class */ (function () {
         }
     };
     StatisticsComponent.prototype.onClickRemoveProblem = function (problem) {
-        console.log('Removing ' + problem.name);
+        var _this = this;
+        window.scroll({
+            top: 2000,
+            behavior: 'smooth'
+        });
+        this.spinnerService.startLoader('removeProbLoader');
+        this.problemService.removeProblem(problem.name).subscribe(function (result) {
+            _this.removeResult = result;
+            _this.getAllInfo();
+            if (_this.selected.name === 'Problem Statistics') {
+            }
+            else {
+                _this.doGetCategory(_this.selected.name);
+            }
+            _this.spinnerService.stopLoader('removeProbLoader');
+        });
     };
     StatisticsComponent.prototype.onClickRemoveUser = function (user) {
-        console.log('Removing ' + user.username);
+        var _this = this;
+        window.scroll({
+            top: 2000,
+            behavior: 'smooth'
+        });
+        this.spinnerService.startLoader('removeUserLoader');
+        this.authService.removeUser(user.username).subscribe(function (result) {
+            _this.removeResult = result;
+            _this.getAllInfo();
+            _this.spinnerService.stopLoader('removeUserLoader');
+        });
     };
     StatisticsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1562,6 +1725,8 @@ var StatisticsComponent = /** @class */ (function () {
         this.selected = {};
         this.displayedProblems = [];
         this.displayOrder = 'Number of attempts';
+        this.isHoveringUserSearch = false;
+        this.isUserSearchInFocus = false;
         this.searchUsers$ = [];
         this.searchUsers$ = this.userSearchTerms.pipe(
         // wait 300ms after each keystroke before considering the term
@@ -1583,6 +1748,8 @@ var StatisticsComponent = /** @class */ (function () {
             }
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])(result);
         }));
+        this.isHoveringProblemSearch = false;
+        this.isProblemSearchInFocus = false;
         this.searchProblems$ = [];
         this.searchProblems$ = this.problemSearchTerms.pipe(
         // wait 300ms after each keystroke before considering the term
@@ -1604,6 +1771,25 @@ var StatisticsComponent = /** @class */ (function () {
             }
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])(result);
         }));
+        // Adding problem part initialization
+        this.addProbName = '';
+        this.addProbPoints = '';
+        this.addProbDiff = 'Easy';
+        this.categoryDCL = false;
+        this.categoryEXP = false;
+        this.categoryINT = false;
+        this.categoryCTR = false;
+        this.categorySTR = false;
+        this.categoryMEM = false;
+        this.categoryFIO = false;
+        this.categoryERR = false;
+        this.categoryOOP = false;
+        this.categoryCON = false;
+        this.categoryMSC = false;
+        this.addProbParagraph = '';
+        this.addProbCode = '';
+        this.addProbSolCount = [0, 1, 2, 3];
+        this.addProbSols = ['Choice 1', 'Choice 2', 'Choice 3', 'Choice 4'];
     };
     StatisticsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1612,11 +1798,16 @@ var StatisticsComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./statistics.component.css */ "./src/app/components/statistics/statistics.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_problem_service__WEBPACK_IMPORTED_MODULE_2__["ProblemService"],
-            _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
+            ngx_ui_loader__WEBPACK_IMPORTED_MODULE_6__["NgxUiLoaderService"]])
     ], StatisticsComponent);
     return StatisticsComponent;
 }());
 
+function matchExactRegEx(r, str) {
+    var match = str.match(r);
+    return match && str === match[0];
+}
 
 
 /***/ }),
@@ -1639,7 +1830,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!completed\">\r\n  <br/>\r\n  <h1 class=\"text-center\">Problem {{cur_prob+1}} of {{num_problems}}</h1>\r\n  <div class=\"progress\">\r\n    <div class=\"progress-bar\" role=\"progressbar\" [attr.aria-valuenow]=\"progress\" [style.width.%]=\"(num_problems != 0)?(progress*100)/num_problems:10\"\r\n         aria-valuemin=\"0\" [attr.aria-valuemax]=\"num_problems\"></div>\r\n  </div>\r\n  <hr class=\"my-4\">\r\n  <h1>{{(problem === undefined)?'':problem.name}}</h1>\r\n  <div *ngIf=\"problem?.type==='open'\">\r\n    <p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\r\n    <ngx-codemirror [(ngModel)]=\"solution_code\"\r\n                    [options]=\"{\r\n                    lineNumbers: true,\r\n                    theme: 'material',\r\n                    mode: 'text/x-c++src',\r\n                    indentUnit: 4,\r\n                    indentWithTabs: true,\r\n                    autoCloseBrackets: true\r\n                  }\">{{solution_code}}</ngx-codemirror>\r\n    <br/>\r\n    <div>\r\n      <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\r\n    </div>\r\n    <br/>\r\n    <div style=\"position: relative; background-color: white; height: 50px; width: 100%\">\r\n      <ngx-ui-loader [loaderId]=\"'testLoader1'\" [fgsSize]=\"30\"></ngx-ui-loader>\r\n      <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n      <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n    </div>\r\n    <br *ngIf=\"!showNext\" />\r\n  </div>\r\n  <div *ngIf=\"problem?.type==='close'\">\r\n    <p style=\"white-space: pre-wrap;\">{{problem.paragraph}}</p>\r\n    <ngx-codemirror *ngIf=\"solution_code\" [(ngModel)]=\"solution_code\"\r\n                    [options]=\"{\r\n                    lineNumbers: true,\r\n                    theme: 'material',\r\n                    mode: 'text/x-c++src',\r\n                    indentUnit: 4,\r\n                    indentWithTabs: true,\r\n                    readOnly: true\r\n                  }\">{{solution_code}}</ngx-codemirror>\r\n    <br *ngIf=\"solution_code\"/>\r\n    <table class=\"table table-hover\">\r\n      <tbody>\r\n      <tr *ngFor=\"let sol of problem.solutions\" (click)=\"onSolveClosed(sol)\" class=\"change-cursor\">\r\n        <button type=\"button\" class=\"btn btn-primary btn-lg btn-block\">{{ sol }}</button>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n    <br/>\r\n    <div style=\"position: relative; background-color: white; height: 50px; width: 100%\">\r\n      <ngx-ui-loader [loaderId]=\"'testLoader2'\" [fgsSize]=\"30\"></ngx-ui-loader>\r\n      <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n      <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n    </div>\r\n    <br *ngIf=\"!showNext\" />\r\n  </div>\r\n  <div *ngIf=\"showNext\">\r\n    <hr class=\"my-4\">\r\n    <div class=\"text-center\">\r\n      <button type=\"button\" class=\"btn btn-primary\" (click)=\"nextProblem()\">{{nextText}}</button>\r\n    </div>\r\n    <br/>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"completed\">\r\n  <br/>\r\n  <h1 class=\"text-center\">Test Results</h1>\r\n  <ul class=\"list-group\">\r\n    <li class=\"list-group-item\">You solved {{solvedProblems.length}} out of {{num_problems}}</li>\r\n    <li class=\"list-group-item\">Solved Problems: {{solvedText}}</li>\r\n    <li class=\"list-group-item\">Failed Problems: {{unsolvedText}}</li>\r\n  </ul>\r\n  <br/>\r\n  <div class=\"text-center\">\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"retakeTest()\">Retake Test</button>\r\n  </div>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n  <br/>\r\n</div>\r\n<ngx-ui-loader></ngx-ui-loader>\r\n\r\n"
+module.exports = "<div *ngIf=\"!completed\">\r\n  <br/>\r\n  <h1 class=\"text-center\">Problem {{cur_prob+1}} of {{num_problems}}</h1>\r\n  <div class=\"progress\">\r\n    <div class=\"progress-bar\" role=\"progressbar\" [attr.aria-valuenow]=\"progress\" [style.width.%]=\"(num_problems != 0)?(progress*100)/num_problems:10\"\r\n         aria-valuemin=\"0\" [attr.aria-valuemax]=\"num_problems\"></div>\r\n  </div>\r\n  <hr class=\"my-4\">\r\n  <h1>{{(problem === undefined)?'':problem.name}}</h1>\r\n  <div *ngIf=\"problem?.type==='open'\">\r\n    <p style=\"white-space: pre-wrap;\">{{(problem === undefined)?'':problem.paragraph}}</p>\r\n    <ngx-codemirror [(ngModel)]=\"solution_code\"\r\n                    [options]=\"{\r\n                    lineNumbers: true,\r\n                    theme: 'material',\r\n                    mode: 'text/x-c++src',\r\n                    indentUnit: 4,\r\n                    indentWithTabs: true,\r\n                    autoCloseBrackets: true\r\n                  }\">{{solution_code}}</ngx-codemirror>\r\n    <br/>\r\n    <div>\r\n      <button type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmitSolution(solution_code)\">Submit</button>\r\n    </div>\r\n    <br/>\r\n    <div style=\"position: relative; background-color: white; height: 50px; width: 100%\">\r\n      <ngx-ui-loader [loaderId]=\"'testLoader1'\" [fgsSize]=\"30\"></ngx-ui-loader>\r\n      <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n      <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n    </div>\r\n    <br *ngIf=\"!showNext\" />\r\n  </div>\r\n  <div *ngIf=\"problem?.type==='close'\">\r\n    <p style=\"white-space: pre-wrap;\">{{problem.paragraph}}</p>\r\n    <ngx-codemirror *ngIf=\"solution_code\" [(ngModel)]=\"solution_code\"\r\n                    [options]=\"{\r\n                    lineNumbers: true,\r\n                    theme: 'material',\r\n                    mode: 'text/x-c++src',\r\n                    indentUnit: 4,\r\n                    indentWithTabs: true,\r\n                    readOnly: true\r\n                  }\">{{solution_code}}</ngx-codemirror>\r\n    <br *ngIf=\"solution_code\"/>\r\n    <table class=\"table table-hover\">\r\n      <tbody>\r\n      <tr *ngFor=\"let sol of problem.solutions\" (click)=\"onSolveClosed(sol)\" class=\"change-cursor\">\r\n        <button type=\"button\" class=\"btn btn-primary btn-lg btn-block\">{{ sol }}</button>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n    <br/>\r\n    <div style=\"position: relative; background-color: white; height: 50px; width: 100%\">\r\n      <ngx-ui-loader [loaderId]=\"'testLoader2'\" [fgsSize]=\"30\"></ngx-ui-loader>\r\n      <div *ngIf=\"isSuccess == true\" class=\"alert alert-dismissible alert-success\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n      <div *ngIf=\"isSuccess == false\" class=\"alert alert-dismissible alert-danger\">\r\n        <strong>{{feedback_msg}}</strong>\r\n      </div>\r\n    </div>\r\n    <br *ngIf=\"!showNext\" />\r\n  </div>\r\n  <div *ngIf=\"showNext\">\r\n    <hr class=\"my-4\">\r\n    <div class=\"text-center\">\r\n      <button type=\"button\" class=\"btn btn-primary\" (click)=\"nextProblem()\">{{nextText}}</button>\r\n    </div>\r\n    <br/>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"completed\">\r\n  <br/>\r\n  <h1 class=\"text-center\">Test Results</h1>\r\n  <ul class=\"list-group\">\r\n    <li class=\"list-group-item\">You solved {{solvedProblems.length}} out of {{num_problems}}</li>\r\n    <li class=\"list-group-item\">Solved Problems: {{solvedText}}</li>\r\n    <li class=\"list-group-item\">Failed Problems: {{unsolvedText}}</li>\r\n  </ul>\r\n  <br/>\r\n  <div class=\"text-center\">\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"retakeTest()\">Retake Test</button>\r\n  </div>\r\n  <br/>\r\n</div>\r\n<ngx-ui-loader></ngx-ui-loader>\r\n\r\n"
 
 /***/ }),
 
@@ -2201,6 +2392,16 @@ var AuthService = /** @class */ (function () {
         };
         return this.http.get("http://localhost:3000/users/search/" + term, httpOptions);
     };
+    AuthService.prototype.removeUser = function (username) {
+        this.loadToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': this.authToken, 'Content-Type': 'application/json' })
+        };
+        var userRequest = {
+            username: username
+        };
+        return this.http.post("http://localhost:3000/users/removeUser", userRequest, httpOptions);
+    };
     AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
@@ -2259,7 +2460,7 @@ var ProblemService = /** @class */ (function () {
         };
         return this.http.get(problemsUrl + "/getProblem/" + name, httpOptions);
     };
-    ProblemService.prototype.testProblemSolution = function (name, solution) {
+    ProblemService.prototype.checkOpenSolutionAndUpdateCounters = function (name, solution) {
         var authToken = this.authService.getToken();
         var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': authToken, 'Content-Type': 'application/json' })
@@ -2302,6 +2503,23 @@ var ProblemService = /** @class */ (function () {
             solution: solution
         };
         return this.http.post(problemsUrl + "/checkClosedProblemSolution", problemRequest, httpOptions);
+    };
+    ProblemService.prototype.addClosedProblem = function (problemInfo) {
+        var authToken = this.authService.getToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': authToken, 'Content-Type': 'application/json' })
+        };
+        return this.http.post(problemsUrl + "/addClosedProblem", problemInfo, httpOptions);
+    };
+    ProblemService.prototype.removeProblem = function (name) {
+        var authToken = this.authService.getToken();
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Authorization': authToken, 'Content-Type': 'application/json' })
+        };
+        var problemRequest = {
+            name: name
+        };
+        return this.http.post(problemsUrl + "/removeProblem", problemRequest, httpOptions);
     };
     ProblemService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

@@ -43,16 +43,13 @@ const ProblemSchema = mongoose.Schema({
         type: Map
     },
     tests: {
-        type: [Object], // tests have property 'code' containing the code and optional property 'stdin' with input to test
-        required: true
+        type: [Object] // tests have property 'code' containing the code and optional property 'stdin' with input to test
     },
     solutions: {
-        type: [String],
-        required: false
+        type: [String]
     },
     solution: {
-        type: String,
-        required: false
+        type: String
     },
 });
 
@@ -75,7 +72,7 @@ module.exports.addProblem = function (newProblem, callback){
 };
 
 module.exports.getProblemByName = function (name, callback){
-    Problem.find({name: name}, callback);
+    Problem.findOne({name: name}, callback);
 };
 
 module.exports.clear = function (callback){
@@ -113,5 +110,29 @@ module.exports.solvedByUser = function (problemName, username, callback){
             }
             Problem.updateOne({name: problemName}, {solved_by: new_solved_by, num_solved: new_num_solved}, callback);
         });
+    });
+};
+
+module.exports.removeProblem = function (problemName, callback){
+    Problem.deleteOne({name: problemName}, callback);
+};
+
+module.exports.removeUserForProblem = function (problemName, user, callback){
+    Problem.findOne({name: problemName}, (err, problem) => {
+        if (err) throw err;
+        if (problem.solved_by !== undefined) {
+            let new_solved_by = problem.solved_by;
+            let new_num_solved = problem.num_solved;
+            if (new_solved_by.has(user.username)) {
+                new_solved_by.delete(user.username);
+                new_num_solved--;
+            }
+            Problem.updateOne({name: problemName}, {
+                solved_by: new_solved_by,
+                num_solved: new_num_solved
+            }, callback);
+        } else {
+            callback(null, problem);
+        }
     });
 };

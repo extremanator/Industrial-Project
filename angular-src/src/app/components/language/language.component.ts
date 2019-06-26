@@ -96,13 +96,13 @@ export class LanguageComponent implements OnInit {
   updateFilter(){
     let filters = ":";
     if (this.filterEasy){
-      filters += 'easy:';
+      filters += 'Easy:';
     }
     if (this.filterMedium){
-      filters += 'medium:';
+      filters += 'Medium:';
     }
     if (this.filterHard){
-      filters += 'hard:';
+      filters += 'Hard:';
     }
     filters += ':';
     if (this.filterDCL){
@@ -141,8 +141,12 @@ export class LanguageComponent implements OnInit {
     this.router.navigate([`/language/${this.routeLanguage}/${filters}`]);
   }
 
-  getFilters(filters: string): Filters{
-    let difficulties = [];
+  getFilters(filters: string): Filters {
+    const re = /(:[a-zA-Z0-9]+)*::([a-zA-Z0-9]+:)*/;
+    if (!matchExactRegEx(re, filters)) {
+      return {difficulties: [], categories: []};
+    }
+    const difficulties = [];
     let i;
     while(filters[1] != ':'){
        i = filters.indexOf(':', 1);
@@ -175,15 +179,15 @@ export class LanguageComponent implements OnInit {
           break;
       }
       const filters = this.getFilters(routeParams.filters);
-      if(filters.difficulties.includes('easy'))
+      if(filters.difficulties.includes('Easy'))
         this.filterEasy = true;
       else
         this.filterEasy = false;
-      if(filters.difficulties.includes('medium'))
+      if(filters.difficulties.includes('Medium'))
         this.filterMedium = true;
       else
         this.filterMedium = false;
-      if(filters.difficulties.includes('hard'))
+      if(filters.difficulties.includes('Hard'))
         this.filterHard = true;
       else
         this.filterHard = false;
@@ -235,4 +239,9 @@ export class LanguageComponent implements OnInit {
     });
   }
 
+}
+
+function matchExactRegEx(r, str) {
+  const match = str.match(r);
+  return match && str === match[0];
 }

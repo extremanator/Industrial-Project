@@ -5,6 +5,8 @@ import { Problem } from '../../problem';
 import { User } from '../../user';
 import {debounceTime, distinctUntilChanged, max, switchMap} from 'rxjs/operators';
 import { of, Subject } from 'rxjs';
+import {Arr} from "tern";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-statistics',
@@ -16,7 +18,6 @@ export class StatisticsComponent implements OnInit {
   users: Array<User>;
   numUsers: number;
   numProblems: number;
-  problemsInfo: Array<object>;
   selected: any;
   clickedGeneral: boolean;
   clickedCategories: boolean;
@@ -27,18 +28,46 @@ export class StatisticsComponent implements OnInit {
   maxProblemsText: string;
   minProblemsText: string;
 
+  removeResult: any;
+
   searchUsername: string;
   searchUsers$: any;
   selectedUser: any;
   private userSearchTerms = new Subject<string>();
+  isUserSearchInFocus: boolean;
+  isHoveringUserSearch: boolean;
 
   searchProblem: string;
   searchProblems$: any;
   selectedProblem: any;
   private problemSearchTerms = new Subject<string>();
+  isProblemSearchInFocus: boolean;
+  isHoveringProblemSearch: boolean;
+
+  addProbName: string;
+  addProbPoints: string;
+  addProbDiff: string;
+  categoryDCL: boolean;
+  categoryEXP: boolean;
+  categoryINT: boolean;
+  categoryCTR: boolean;
+  categorySTR: boolean;
+  categoryMEM: boolean;
+  categoryFIO: boolean;
+  categoryERR: boolean;
+  categoryOOP: boolean;
+  categoryCON: boolean;
+  categoryMSC: boolean;
+  addProbParagraph: string;
+  addProbCode: string;
+  addProbSolCount: Array<number>;
+  addProbSol: string;
+  addProbSols: Array<string>;
+  addProbResult: any;
 
   constructor(private problemService: ProblemService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private spinnerService: NgxUiLoaderService) { }
 
   getAllInfo() {
     this.problemService.getAllProblems().subscribe(problemsWrapper => {
@@ -88,6 +117,106 @@ export class StatisticsComponent implements OnInit {
           }
         }
       });
+    });
+  }
+
+  onChangeAddProbDiff(difficulty: string) {
+    this.addProbDiff = difficulty;
+  }
+
+  onAddProbChoice() {
+    this.addProbSols.push(`Choice ${this.addProbSolCount.length + 1}`);
+    this.addProbSolCount.push(this.addProbSolCount.length);
+  }
+
+  onRemoveProbChoice() {
+    if (this.addProbSol !== undefined && this.addProbSol[0] === this.addProbSols[this.addProbSols.length - 1]) {
+      this.addProbSol = undefined;
+    }
+    this.addProbSols.pop();
+    this.addProbSolCount.pop();
+  }
+
+  onSubmitProblem() {
+    window.scroll({
+      top: 2000,
+      behavior: 'smooth'
+    });
+    this.spinnerService.startLoader('addProbSubmitLoader');
+    const re = /[1-9][0-9]*/;
+    if (!this.addProbName.trim() || !this.addProbPoints.trim() || !this.addProbParagraph.trim()) {
+      this.addProbResult = {success: false, msg: 'Failed to add problem. Please fill in all required fields.'};
+      this.spinnerService.stopLoader('addProbSubmitLoader');
+      return;
+    }
+    if (!matchExactRegEx(re, this.addProbPoints.trim())) {
+      this.addProbResult = {success: false, msg: 'Failed to add problem. \'Points\' must be a positive integer.'};
+      this.spinnerService.stopLoader('addProbSubmitLoader');
+      return;
+    }
+    if (this.addProbSols.includes('')) {
+      this.addProbResult = {success: false, msg: 'Failed to add problem. Can\'t have empty choice.'};
+      this.spinnerService.stopLoader('addProbSubmitLoader');
+      return;
+    }
+    if (this.addProbSol === undefined) {
+      this.addProbResult = {success: false, msg: 'Failed to add problem. Please select the correct solution.'};
+      this.spinnerService.stopLoader('addProbSubmitLoader');
+      return;
+    }
+    const category = ['cpp', this.addProbDiff];
+    if (this.categoryDCL) {
+      category.push('DCL');
+    }
+    if (this.categoryEXP) {
+      category.push('EXP');
+    }
+    if (this.categoryINT) {
+      category.push('INT');
+    }
+    if (this.categoryCTR) {
+      category.push('CTR');
+    }
+    if (this.categorySTR) {
+      category.push('STR');
+    }
+    if (this.categoryMEM) {
+      category.push('MEM');
+    }
+    if (this.categoryFIO) {
+      category.push('FIO');
+    }
+    if (this.categoryERR) {
+      category.push('ERR');
+    }
+    if (this.categoryOOP) {
+      category.push('OOP');
+    }
+    if (this.categoryCON) {
+      category.push('CON');
+    }
+    if (this.categoryMSC) {
+      category.push('MSC');
+    }
+    const problemInfo: any = {
+      name: this.addProbName,
+      difficulty: this.addProbDiff,
+      points: Number(this.addProbPoints.trim()),
+      category: category,
+      paragraph: this.addProbParagraph,
+      type: 'close',
+      solutions: this.addProbSols,
+      solution: this.addProbSol[0]
+    };
+    if (this.addProbCode.trim()) {
+      problemInfo.code = this.addProbCode;
+    }
+    this.problemService.addClosedProblem(problemInfo).subscribe((resp) => {
+      this.addProbResult = resp;
+      if (resp.success) {
+        this.getAllInfo();
+      }
+      this.spinnerService.stopLoader('addProbSubmitLoader');
     });
   }
 
@@ -158,14 +287,26 @@ export class StatisticsComponent implements OnInit {
   onClickUsers(name) {
     this.selected.name = name;
     this.selectedUser = undefined;
+    this.removeResult = undefined;
+  }
+
+  onClickAddProblem(name) {
+    this.removeResult = undefined;
+    this.selected.name = name;
   }
 
   onClickProblems(name) {
     this.selected.name = name;
     this.selectedProblem = undefined;
+    this.removeResult = undefined;
   }
 
   onClickCategory(name) {
+    this.removeResult = undefined;
+    this.doGetCategory(name);
+  }
+
+  doGetCategory(name) {
     this.displayedProblems = [];
     this.selected.name = name;
     const category = this.getCategory(name);
@@ -219,6 +360,22 @@ export class StatisticsComponent implements OnInit {
     }
   }
 
+  changeUserSearchFocus() {
+    this.isUserSearchInFocus = !this.isUserSearchInFocus;
+  }
+
+  changeUserSearchHover() {
+    this.isHoveringUserSearch = !this.isHoveringUserSearch;
+  }
+
+  changeProblemSearchFocus() {
+    this.isProblemSearchInFocus = !this.isProblemSearchInFocus;
+  }
+
+  changeProblemSearchHover() {
+    this.isHoveringProblemSearch = !this.isHoveringProblemSearch;
+  }
+
   getCategory(name): string {
     switch (name) {
       case 'Declarations and Initialization':
@@ -247,11 +404,33 @@ export class StatisticsComponent implements OnInit {
   }
 
   onClickRemoveProblem(problem: Problem) {
-    console.log('Removing ' + problem.name);
+    window.scroll({
+      top: 2000,
+      behavior: 'smooth'
+    });
+    this.spinnerService.startLoader('removeProbLoader');
+    this.problemService.removeProblem(problem.name).subscribe((result) => {
+      this.removeResult = result;
+      this.getAllInfo();
+      if (this.selected.name === 'Problem Statistics') {
+      } else {
+        this.doGetCategory(this.selected.name);
+      }
+      this.spinnerService.stopLoader('removeProbLoader');
+    });
   }
 
   onClickRemoveUser(user: User) {
-    console.log('Removing ' + user.username);
+    window.scroll({
+      top: 2000,
+      behavior: 'smooth'
+    });
+    this.spinnerService.startLoader('removeUserLoader');
+    this.authService.removeUser(user.username).subscribe((result) => {
+      this.removeResult = result;
+      this.getAllInfo();
+      this.spinnerService.stopLoader('removeUserLoader');
+    });
   }
 
   ngOnInit() {
@@ -262,6 +441,8 @@ export class StatisticsComponent implements OnInit {
     this.displayedProblems = [];
     this.displayOrder = 'Number of attempts';
 
+    this.isHoveringUserSearch = false;
+    this.isUserSearchInFocus = false;
     this.searchUsers$ = [];
     this.searchUsers$ = this.userSearchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
@@ -286,6 +467,8 @@ export class StatisticsComponent implements OnInit {
       })
     );
 
+    this.isHoveringProblemSearch = false;
+    this.isProblemSearchInFocus = false;
     this.searchProblems$ = [];
     this.searchProblems$ = this.problemSearchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
@@ -309,7 +492,31 @@ export class StatisticsComponent implements OnInit {
         return of(result);
       })
     );
+
+    // Adding problem part initialization
+    this.addProbName = '';
+    this.addProbPoints = '';
+    this.addProbDiff = 'Easy';
+    this.categoryDCL = false;
+    this.categoryEXP = false;
+    this.categoryINT = false;
+    this.categoryCTR = false;
+    this.categorySTR = false;
+    this.categoryMEM = false;
+    this.categoryFIO = false;
+    this.categoryERR = false;
+    this.categoryOOP = false;
+    this.categoryCON = false;
+    this.categoryMSC = false;
+    this.addProbParagraph = '';
+    this.addProbCode = '';
+    this.addProbSolCount = [0, 1, 2, 3];
+    this.addProbSols = ['Choice 1', 'Choice 2', 'Choice 3', 'Choice 4'];
   }
 }
 
 
+function matchExactRegEx(r, str) {
+  const match = str.match(r);
+  return match && str === match[0];
+}

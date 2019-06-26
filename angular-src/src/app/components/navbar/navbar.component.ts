@@ -14,12 +14,16 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 export class NavbarComponent implements OnInit {
   users$: Observable<User[]>;
   private searchTerms = new Subject<string>();
+  isSearchInFocus: boolean;
+  isHoveringSearch: boolean;
 
   constructor(private authService: AuthService,
               private router: Router,
               private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
+    this.isSearchInFocus = false;
+    this.isHoveringSearch = false;
     this.users$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
@@ -29,7 +33,15 @@ export class NavbarComponent implements OnInit {
 
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.authService.searchUsers(term))
-    )
+    );
+  }
+
+  changeSearchHover() {
+    this.isHoveringSearch = !this.isHoveringSearch;
+  }
+
+  changeSearchFocus() {
+    this.isSearchInFocus = !this.isSearchInFocus;
   }
 
   onLogoutClick(){

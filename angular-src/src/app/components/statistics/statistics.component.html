@@ -1,15 +1,18 @@
-<div style="display: flex; height: 2000px">
+<div style="display: flex;">
   <div class="list">
     <table class="table table-hover">
       <tbody class="body">
       <tr class="change-cursor" (click)="onClickGeneral()" [class.table-success]="clickedGeneral">
         <th class="my-dropdown" scope="row">General</th>
       </tr>
-      <tr class="change-cursor sub-table" *ngIf="clickedGeneral" (click)="onClickUsers('Users')" [class.table-active]="'Users' === selected.name">
-        <th scope="row">&emsp;Users</th>
+      <tr class="change-cursor sub-table" *ngIf="clickedGeneral" (click)="onClickUsers('User Statistics')" [class.table-active]="'User Statistics' === selected.name">
+        <th scope="row">&emsp;User Statistics</th>
       </tr>
-      <tr class="change-cursor sub-table" *ngIf="clickedGeneral" (click)="onClickProblems('Problems')" [class.table-active]="'Problems' === selected.name">
-        <th scope="row">&emsp;Problems</th>
+      <tr class="change-cursor sub-table" *ngIf="clickedGeneral" (click)="onClickProblems('Problem Statistics')" [class.table-active]="'Problem Statistics' === selected.name">
+        <th scope="row">&emsp;Problem Statistics</th>
+      </tr>
+      <tr class="change-cursor sub-table" *ngIf="clickedGeneral" (click)="onClickAddProblem('Add Problem')" [class.table-active]="'Add Problem' === selected.name">
+        <th scope="row">&emsp;Add Problem</th>
       </tr>
       <tr class="change-cursor" (click)="onClickCategories()" [class.table-success]="clickedCategories">
         <th class="my-dropdown" scope="row">Categories</th>
@@ -53,17 +56,19 @@
   <div class="info" *ngIf="selected.name !== undefined">
     <br/>
     <h2 align="center">{{selected.name}}</h2>
-    <div *ngIf="selected.name === 'Users'" class="jumbotron">
+    <div *ngIf="selected.name === 'User Statistics'" class="jumbotron">
       <p class="lead">The number of users in the system is: {{numUsers}}</p>
       <hr class="my-4">
-      <div class="form-group">
-        <input type="text" [(ngModel)]="searchUsername" [ngModelOptions]="{standalone:true}" class="form-control mr-sm-2" placeholder="Search for username" autocomplete="off" (input)="onSearchUser(searchUsername)">
+      <div (mouseenter)="changeUserSearchHover()" (mouseleave)="changeUserSearchHover()">
+        <div class="form-group search-form">
+          <input type="text" [(ngModel)]="searchUsername" [ngModelOptions]="{standalone:true}" class="form-control mr-sm-2" placeholder="Search for username" autocomplete="off" (input)="onSearchUser(searchUsername)"  (focus)="changeUserSearchFocus()" (blur)="changeUserSearchFocus()">
+        </div>
+        <ul class="list-group search-results" *ngIf="isUserSearchInFocus || isHoveringUserSearch">
+          <li class="list-group-item d-flex justify-content-between align-items-center change-cursor" *ngFor="let user of searchUsers$ | async" (click)="onSelectUser(user)">
+              {{user.username}}
+          </li>
+        </ul>
       </div>
-      <ul class="list-group search-results">
-        <li class="list-group-item d-flex justify-content-between align-items-center change-cursor" *ngFor="let user of searchUsers$ | async" (click)="onSelectUser(user)">
-            {{user.username}}
-        </li>
-      </ul>
       <div *ngIf="selectedUser !== undefined">
         <br/>
         <h2 class="page-header">{{selectedUser.name}}</h2>
@@ -73,16 +78,27 @@
           <li class="list-group-item">Join Date: {{selectedUser.join_date}}</li>
           <li class="list-group-item">Number of Solved Problems: {{selectedUser.num_solved}}</li>
           <li class="list-group-item">Number of Solution Attempts: {{selectedUser.num_attempted}}</li>
-          <li class="list-group-item">User has solved: {{selectedUser.attempts}}</li>
-          <li class="list-group-item">User has attempted: {{selectedUser.solved}}</li>
+          <li class="list-group-item">User has solved: {{selectedUser.solved}}</li>
+          <li class="list-group-item">User has attempted: {{selectedUser.attempts}}</li>
         </ul>
         <br/>
         <button type="button" class="btn btn-danger" (click)="onClickRemoveUser(selectedUser)">Remove User</button>
+        <br/>
+        <br/>
+        <div style="position: relative;" *ngIf="removeResult">
+          <ngx-ui-loader [loaderId]="'removeUserLoader'" [fgsSize]="30"></ngx-ui-loader>
+          <div *ngIf="removeResult.success == true" class="alert alert-dismissible alert-success">
+            <strong>{{removeResult.msg}}</strong>
+          </div>
+          <div *ngIf="removeResult.success == false" class="alert alert-dismissible alert-danger">
+            <strong>{{removeResult.msg}}</strong>
+          </div>
+        </div>
         <hr class="my-4">
         <p>And even more possible commands to apply to the user! <i>Maybe give test?!</i></p>
       </div>
     </div>
-    <div *ngIf="selected.name === 'Problems'" class="jumbotron">
+    <div *ngIf="selected.name === 'Problem Statistics'" class="jumbotron">
       <p class="lead">The number of problems in the system is: {{numProblems}}</p>
       <ul class="list-group">
         <li class="list-group-item">Most solved problems: {{maxProblemsText}}</li>
@@ -91,14 +107,16 @@
         <li class="list-group-item">Number of users that solved: {{minSolutions}}</li>
       </ul>
       <hr class="my-4">
-      <div class="form-group">
-        <input type="text" [(ngModel)]="searchProblem" [ngModelOptions]="{standalone:true}" class="form-control mr-sm-2" placeholder="Search for problem name" autocomplete="off" (input)="onSearchProblem(searchProblem)">
+      <div (mouseenter)="changeProblemSearchHover()" (mouseleave)="changeProblemSearchHover()">
+        <div class="form-group search-form">
+          <input type="text" [(ngModel)]="searchProblem" [ngModelOptions]="{standalone:true}" class="form-control mr-sm-2" placeholder="Search for problem name" autocomplete="off" (input)="onSearchProblem(searchProblem)" (focus)="changeProblemSearchFocus()" (blur)="changeProblemSearchFocus()">
+        </div>
+        <ul class="list-group search-results" *ngIf="isProblemSearchInFocus || isHoveringProblemSearch">
+          <li class="list-group-item d-flex justify-content-between align-items-center change-cursor" *ngFor="let problem of searchProblems$ | async" (click)="onSelectProblem(problem)">
+            {{problem.name}}
+          </li>
+        </ul>
       </div>
-      <ul class="list-group search-results">
-        <li class="list-group-item d-flex justify-content-between align-items-center change-cursor" *ngFor="let problem of searchProblems$ | async" (click)="onSelectProblem(problem)">
-          {{problem.name}}
-        </li>
-      </ul>
       <div *ngIf="selectedProblem !== undefined">
         <br/>
         <h2 class="page-header">{{selectedProblem.name}}</h2>
@@ -110,17 +128,144 @@
           <li class="list-group-item">Type: {{selectedProblem.type_text}}</li>
           <li class="list-group-item">Number of users that solved the problem: {{selectedProblem.num_solved}}</li>
           <li class="list-group-item">Number of attempts to solve the problem: {{selectedProblem.num_attempted}}</li>
-          <li class="list-group-item">Percent of users that solved: {{selectedProblem.solved_percent}}</li>
+          <li class="list-group-item">Percent of users that solved: {{selectedProblem.solved_percent}}%</li>
           <li class="list-group-item">Solving users: {{selectedProblem.solvingUsers}}</li>
           <li class="list-group-item">Avg attempts until first solution: {{selectedProblem.avg_attempts}}</li>
         </ul>
         <br/>
         <button type="button" class="btn btn-danger" (click)="onClickRemoveProblem(selectedProblem)">Remove Problem</button>
+        <br/>
+        <br/>
+        <div style="position: relative;" *ngIf="removeResult">
+          <ngx-ui-loader [loaderId]="'removeProbLoader'" [fgsSize]="30"></ngx-ui-loader>
+          <div *ngIf="removeResult.success == true" class="alert alert-dismissible alert-success">
+            <strong>{{removeResult.msg}}</strong>
+          </div>
+          <div *ngIf="removeResult.success == false" class="alert alert-dismissible alert-danger">
+            <strong>{{removeResult.msg}}</strong>
+          </div>
+        </div>
         <hr class="my-4">
         <p>And even more possible commands to apply to the problem!</p>
       </div>
     </div>
-    <div *ngIf="selected.name !== 'Users' && selected.name !== 'Problems'" class="jumbotron">
+    <div *ngIf="selected.name === 'Add Problem'" class="jumbotron">
+      <h3>Configure Problem</h3>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" [(ngModel)]="addProbName" [ngModelOptions]="{standalone:true}" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Difficulty</label>
+        <div class="custom-control custom-radio">
+          <input type="radio" id="addProbDiff1" name="addProbDiff" class="custom-control-input" checked="" (change)="onChangeAddProbDiff('Easy')">
+          <label class="custom-control-label" for="addProbDiff1">Easy</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" id="addProbDiff2" name="addProbDiff" class="custom-control-input" (change)="onChangeAddProbDiff('Medium')">
+          <label class="custom-control-label" for="addProbDiff2">Medium</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" id="addProbDiff3" name="addProbDiff" class="custom-control-input" (change)="onChangeAddProbDiff('Hard')">
+          <label class="custom-control-label" for="addProbDiff3">Hard</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Points</label>
+        <input type="text" [(ngModel)]="addProbPoints" [ngModelOptions]="{standalone:true}" class="form-control">
+      </div>
+      <label>Categories</label>
+      <div class="form-group">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category1" [(ngModel)]="categoryDCL">
+          <label class="custom-control-label" for="category1">Declarations and Initialization</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category2" [(ngModel)]="categoryEXP">
+          <label class="custom-control-label" for="category2">Expressions</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category3" [(ngModel)]="categoryINT">
+          <label class="custom-control-label" for="category3">Integers</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category4" [(ngModel)]="categoryCTR">
+          <label class="custom-control-label" for="category4">Containers</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category5" [(ngModel)]="categorySTR">
+          <label class="custom-control-label" for="category5">Characters and Strings</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category6" [(ngModel)]="categoryMEM">
+          <label class="custom-control-label" for="category6">Memory Management</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category7" [(ngModel)]="categoryFIO">
+          <label class="custom-control-label" for="category7">Input Output</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category8" [(ngModel)]="categoryERR">
+          <label class="custom-control-label" for="category8">Exceptions and Error Handling</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category9" [(ngModel)]="categoryOOP">
+          <label class="custom-control-label" for="category9">Object Oriented Programming</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category10" [(ngModel)]="categoryCON">
+          <label class="custom-control-label" for="category10">Concurrency</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="category11" [(ngModel)]="categoryMSC">
+          <label class="custom-control-label" for="category11">Miscellaneous</label>
+        </div>
+      </div>
+      <label>Explanation of the problem</label>
+      <div class="form-group">
+        <textarea class="form-control" id="addProbParagraph" rows="5" [(ngModel)]="addProbParagraph"></textarea>
+      </div>
+      <label>Optional: Code for the problem (<i>displays under explanation</i>)</label>
+      <ngx-codemirror [(ngModel)]="addProbCode"
+                      [options]="{
+                  lineNumbers: true,
+                  theme: 'material',
+                  mode: 'text/x-c++src',
+                  indentUnit: 4,
+                  indentWithTabs: true,
+                  autoCloseBrackets: true
+                }">{{addProbCode}}</ngx-codemirror>
+      <br/>
+      <label>Choices</label>
+      <div class="form-group" *ngFor="let i of addProbSolCount">
+        <input type="text" [(ngModel)]="addProbSols[i]" [ngModelOptions]="{standalone:true}" class="form-control">
+      </div>
+      <div style="display: flex">
+        <button type="button" class="btn btn-info" (click)="onAddProbChoice()">+</button>
+        <button type="button" class="btn btn-info" style="margin-left: 5px; width: 36px;" *ngIf="addProbSolCount.length !== 2" (click)="onRemoveProbChoice()">-</button>
+      </div>
+      <br/>
+      <label>Correct Choice</label>
+      <div class="form-group">
+        <select multiple="" class="form-control" id="addProbCorrectChoice" [(ngModel)]="addProbSol">
+          <option *ngFor="let sol of addProbSols">{{sol}}</option>
+        </select>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" (click)="onSubmitProblem()">Add Problem</button>
+      </div>
+      <br/>
+      <div style="position: relative;" *ngIf="addProbResult">
+        <ngx-ui-loader [loaderId]="'addProbSubmitLoader'" [fgsSize]="30"></ngx-ui-loader>
+        <div *ngIf="addProbResult.success == true" class="alert alert-dismissible alert-success">
+          <strong>{{addProbResult.msg}}</strong>
+        </div>
+        <div *ngIf="addProbResult.success == false" class="alert alert-dismissible alert-danger">
+          <strong>{{addProbResult.msg}}</strong>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="selected.name !== 'User Statistics' && selected.name !== 'Problem Statistics' && selected.name !== 'Add Problem'" class="jumbotron">
       <p class="lead" style="white-space: pre-line">
         The number of attempts of problems from this category is: {{selected.num_attempted}}<br>
         The number of times a problem from this category has been solved is: {{selected.num_solved}}<br>
@@ -130,11 +275,11 @@
       <p class="radio-label">Order by: </p>
       <fieldset>
         <div class="form-group">
-          <div class="custom-control custom-radio">
+          <div class="custom-control custom-radio order-radio">
             <input type="radio" id="order1" name="order" class="custom-control-input" checked="" (change)="onChangeOrder('attempts')">
             <label class="custom-control-label" for="order1">Number of attempts</label>
           </div>
-          <div class="custom-control custom-radio">
+          <div class="custom-control custom-radio order-radio">
             <input type="radio" id="order2" name="order" class="custom-control-input"  (change)="onChangeOrder('solutions')">
             <label class="custom-control-label" for="order2">Number of solutions</label>
           </div>
@@ -162,6 +307,15 @@
         </tr>
         </tbody>
       </table>
+      <div style="position: relative;" *ngIf="removeResult">
+        <ngx-ui-loader [loaderId]="'removeProbLoader'" [fgsSize]="30"></ngx-ui-loader>
+        <div *ngIf="removeResult.success == true" class="alert alert-dismissible alert-success">
+          <strong>{{removeResult.msg}}</strong>
+        </div>
+        <div *ngIf="removeResult.success == false" class="alert alert-dismissible alert-danger">
+          <strong>{{removeResult.msg}}</strong>
+        </div>
+      </div>
     </div>
   </div>
 </div>

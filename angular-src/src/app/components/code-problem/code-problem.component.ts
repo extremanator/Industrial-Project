@@ -35,7 +35,7 @@ export class CodeProblemComponent implements OnInit {
       top: 1000,
       behavior: 'smooth'
     });
-    this.problemService.testProblemSolution(this.problem.name, submitted_code).subscribe((res) => {
+    this.problemService.checkOpenSolutionAndUpdateCounters(this.problem.name, submitted_code).subscribe((res) => {
       this.isSuccess = res.success;
       this.feedback_msg = res.msg;
       this.spinnerService.stopLoader('resultLoader');

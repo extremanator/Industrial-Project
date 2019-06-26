@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { of, Observable } from "rxjs";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from "../user";
+import {StandardResp} from "./problem.service";
 
 const helper = new JwtHelperService();
 
@@ -11,10 +12,10 @@ const httpOptions = {
 };
 
 export interface CountResp {
-  num_users: number
+  num_users: number;
 }
 
-export interface RegisterResp {
+export interface Resp1 {
   success: boolean;
   msg: string;
 }
@@ -52,8 +53,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(user): Observable<RegisterResp>{
-    return this.http.post<RegisterResp>('http://localhost:3000/users/register', user, httpOptions);
+  registerUser(user): Observable<StandardResp>{
+    return this.http.post<StandardResp>('http://localhost:3000/users/register', user, httpOptions);
   }
 
   authenticateUser(user): Observable<AuthResp>{
@@ -147,4 +148,14 @@ export class AuthService {
     return this.http.get<User[]>(`http://localhost:3000/users/search/${term}`, httpOptions);
   }
 
+  removeUser(username): Observable<StandardResp> {
+    this.loadToken();
+    const httpOptions = {
+      headers: new HttpHeaders({'Authorization': this.authToken, 'Content-Type': 'application/json' })
+    };
+    const userRequest = {
+      username: username
+    };
+    return this.http.post<StandardResp>(`http://localhost:3000/users/removeUser`, userRequest, httpOptions);
+  }
 }

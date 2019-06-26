@@ -105,7 +105,7 @@ module.exports.passedProblem = function (username, problem_name, callback){
                 new_attempted_problems[problem_name].solved = true;
                 new_attempted_problems[problem_name].dateSol = time;
                 User.updateOne({username: username}, {
-                    total_points: (user.total_points + problem[0].points),
+                    total_points: (user.total_points + problem.points),
                     attempted_problems: new_attempted_problems,
                     num_solved: (user.num_solved + 1)
                 }, callback);
@@ -151,4 +151,25 @@ module.exports.getNumUsers = function(callback){
 module.exports.searchForUsers = function(username, callback){
     const num_search_results = 4;
     User.find({username: {$regex: username, $options: 'i'}}, null, {limit: num_search_results}, callback);
+};
+
+module.exports.removeProblemForUser = function(username, problem, callback){
+    User.findOne({username: username}, (err, user) => {
+        if (err) throw err;
+        let new_attempted_problems = Object.assign({}, user.attempted_problems);
+        let new_num_solved = user.num_solved;
+        let new_total_points = user.total_points;
+        if (new_attempted_problems[problem.name] !== undefined) {
+            if(new_attempted_problems[problem.name].solved){
+                new_total_points -= problem.points;
+                new_num_solved--;
+            }
+            delete new_attempted_problems[problem.name];
+        }
+        User.updateOne({username: username}, {attempted_problems: new_attempted_problems, num_solved: new_num_solved, total_points: new_total_points}, callback);
+    });
+};
+
+module.exports.removeUser = function (username, callback){
+    User.deleteOne({username: username}, callback);
 };

@@ -23,7 +23,7 @@ mongoose.connect(config.database);
 // On Connection
 mongoose.connection.on('connected', () => {
     console.log(`Connected to database ${config.database}`);
-    Problem.initialize(DBproblems, (err) => {
+    /*Problem.initialize(DBproblems, (err) => {
         if (err && err.code !== 11000){
             console.log('Failed to initialize problems DB');
         }
@@ -43,7 +43,7 @@ mongoose.connection.on('connected', () => {
     });
     User.addUserIfUnique(admin, (err, admin) => {
        if (err && (err !== 'Email not unique') && (err !== 'Username not unique')) throw err;
-    });
+    });*/
 });
 
 mongoose.connection.on('error', (err) => {

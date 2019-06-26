@@ -4,7 +4,6 @@
 
 .info {
   width: 75%;
-  height: 1200px;
 }
 
 .sub-table{
@@ -17,7 +16,7 @@
   float: right;
 }
 
-.custom-radio{
+.order-radio{
   float: left;
   margin-left: 20px;
 }
@@ -26,8 +25,8 @@
   float: left;
 }
 
-.search-results{
-  margin-top: 0;
+.search-form{
+  margin-bottom: 0;
 }
 
 

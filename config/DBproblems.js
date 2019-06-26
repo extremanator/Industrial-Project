@@ -5,7 +5,7 @@ module.exports = [
     name: 'Compare Password',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy', 'STR'],
+    category: ['cpp', 'Easy', 'STR'],
     paragraph:
         'The following function should return \'true\' if the given password is \'adminadmin\' and \'false\' otherwise.\n' +
         'Some users managed to login without knowing the password!\n' +
@@ -55,14 +55,12 @@ module.exports = [
             '}\n'
       }
     ],
-    solutions: ['a',],
-    solution: 'a'
   }),
   new Problem({
     name: 'Array Boundaries',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy', 'CTR'],
+    category: ['cpp', 'Easy', 'CTR'],
     paragraph:
         'The following function should return the i\'th element of the given array.\n' +
         'When using the function some unexpected results happened. Can you fix it? \n' +
@@ -94,14 +92,12 @@ module.exports = [
             '}\n'
       }
     ],
-    solutions: ['a'],
-    solution: 'a'
   }),
   new Problem({
     name: 'Login Attempts',
     difficulty: 'Medium',
     points: 10,
-    category: ['cpp', 'medium', 'FIO', 'MSC'],
+    category: ['cpp', 'Medium', 'FIO', 'MSC'],
     paragraph:
         'Alice wrote a login system. The function \'checkLogin\' is getting input from the user and checks if the user is valid.\n' +
         'After a while someone managed to log in without knowing a valid username. Can you make sure it doesn\'t happen?\n' +
@@ -185,7 +181,7 @@ module.exports = [
     name: 'Getting started with Vectors',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy', 'CTR'],
+    category: ['cpp', 'Easy', 'CTR'],
     paragraph:
         'Bob wrote the following function which receives as parameters: a container and an index.\n' +
         'It should return the element in index i, or \'-1\' if there was an error.\n' +
@@ -242,7 +238,7 @@ module.exports = [
     name: 'Simple Copy',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy', 'STR', 'MEM'],
+    category: ['cpp', 'Easy', 'STR', 'MEM'],
     paragraph:
         'Bob tried to implement a function to help him copy data from one place to another, but it didn\'t work as expected.\n' +
         'Find the problem and fix it.\n' +
@@ -291,7 +287,7 @@ module.exports = [
     name: 'Basics using Exceptions',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy', 'ERR'],
+    category: ['cpp', 'Easy', 'ERR'],
     paragraph:
         'The function \'f\' should return error code \'-1\' when B is thrown and \'-2\' when D is thrown, otherwise return \'0\'.\n' +
         'Something is not right with the following code, can you figure it out?\n' +
@@ -361,7 +357,7 @@ module.exports = [
     name: 'Don\'t forget the little things',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy', 'DCL'],
+    category: ['cpp', 'Easy', 'DCL'],
     paragraph:
         'When using the following function some unexpected results happened.\n' +
         'Fix the code so that it will return the sum of the numbers 1, ..., n.\n' +
@@ -405,7 +401,7 @@ module.exports = [
     name: 'Strings understanding',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy', 'STR'],
+    category: ['cpp', 'Easy', 'STR'],
     paragraph:
         'The following function should take in a positive number as argument a string and adds the number to the end of the string to create a message.\n' +
         'There are some problems with the current implementation. Can you fix the given code?\n' +
@@ -466,7 +462,7 @@ module.exports = [
     name: 'Sizeof 1',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy', 'MSC'],
+    category: ['cpp', 'Easy', 'MSC'],
     paragraph:
         'What is the value of size in the following program equal to?\n',
     code:
@@ -480,7 +476,6 @@ module.exports = [
     type: 'close',
     num_solved: 0,
     num_attempted: 0,
-    tests: [{code: ''}],
     solutions: [
       'sizeof("0123456789")',
       'sizeof("0123456789") + 1',
@@ -493,13 +488,12 @@ module.exports = [
     name: 'Do you know basic math',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy', 'MSC'],
+    category: ['cpp', 'Easy', 'MSC'],
     paragraph:
         'Solve the following: 2*3+3 = ?',
     type: 'close',
     num_solved: 0,
     num_attempted: 0,
-    tests: [{code: ''}],
     solutions: [
       '12',
       '4',
@@ -512,7 +506,7 @@ module.exports = [
     name: 'User Input',
     difficulty: 'Medium',
     points: 10,
-    category: ['cpp', 'medium', 'FIO'],
+    category: ['cpp', 'Medium', 'FIO'],
     paragraph:
         'Alice tries to write a function to classify users. It reads an username as input and returns \'1\' if the user is an Admin,\n' +
         'and \'0\' otherwise. Some of Alice\'s workers were smarter than her and managed to register as admins even though they are not!\n' +
@@ -587,7 +581,7 @@ module.exports = [
     name: 'Multithreading 1',
     difficulty: 'Easy',
     points: 5,
-    category: ['cpp', 'easy', 'CON'],
+    category: ['cpp', 'Easy', 'CON'],
     paragraph:
         'Bob wrote the code below for his top secret long-range missile.\n' +
         'Tomorrow they are planning to test the missile launch (uh oh). Will the test pass with 100% certainty (assuming all other code is perfect)?',
@@ -615,7 +609,6 @@ module.exports = [
     type: 'close',
     num_solved: 0,
     num_attempted: 0,
-    tests: [{code: ''}],
     solutions: [
       'Yes, because the threads access different flags',
       'No, because you always have to use a lock when accessing shared variables',
@@ -628,7 +621,7 @@ module.exports = [
     name: 'Const 1',
     difficulty: 'Medium',
     points: 10,
-    category: ['cpp', 'easy', 'MSC'],
+    category: ['cpp', 'Medium', 'MSC'],
     paragraph:
         'Examine the code below.\n' +
         'What will be the output of the program?',
@@ -648,7 +641,6 @@ module.exports = [
     type: 'close',
     num_solved: 0,
     num_attempted: 0,
-    tests: [{code: ''}],
     solutions: [
       'Garbage value',
       'Compilation Error',

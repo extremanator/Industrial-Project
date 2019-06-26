@@ -5,6 +5,7 @@ const config = require('../config/database');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const Problem = require('../models/problem');
 
 // Register User
 router.post('/register', (req, res, next) => {
@@ -98,6 +99,37 @@ router.get('/getUser/:username', passport.authenticate('jwt', {session:false}), 
     User.getUserByUsername(username, (err, user) => {
         if(err) throw err;
         res.json({user: user});
+    });
+});
+
+router.post('/removeUser', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    const username = req.body.username;
+    User.getUserByUsername(username, (err, user) => {
+        if (err) throw err;
+        if (user === null){
+            res.json({success: false, msg: 'User doesn\'t exist.'});
+        } else {
+            User.removeUser(username, (err, data) => {
+                if (err) throw err;
+                const attemptedProbs = [];
+                for (let problemName in user.attempted_problems){
+                    attemptedProbs.push(problemName);
+                }
+                function removeAux(i) {
+                    if (i === attemptedProbs.length) {
+                        res.json({success: true, msg: `Removed ${username}`});
+                    } else if (!user.attempted_problems[attemptedProbs[i]].solved) {
+                        removeAux(i+1);
+                    } else {
+                        Problem.removeUserForProblem(attemptedProbs[i], user, (err, problem) => {
+                            if (err) throw err;
+                            removeAux(i + 1);
+                        });
+                    }
+                }
+                removeAux(0);
+            });
+        }
     });
 });
 

@@ -30,35 +30,80 @@ router.get('/getLanguageProblems/:language', passport.authenticate('jwt', {sessi
 
 router.get('/getProblem/:name', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     const problemName = req.params.name;
-    Problem.getProblemByName(problemName, (err, problemArr) => {
+    Problem.getProblemByName(problemName, (err, problem) => {
         if(err){
             throw err;
         } else {
-            res.json({problem: problemArr[0]});
+            res.json({problem: problem});
         }
     });
 });
 
-/*router.post('/add', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    let newProblem = new Problem({
-        name: req.body.name,
-        difficulty: req.body.difficulty,
-        category: req.body.category,
-        paragraph: req.body.paragraph,
-        code: req.body.code,
-        type: req.body.type,
-        tests: req.body.tests
-    });
+router.post('/addClosedProblem', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    if (req.user.isAdmin) {
+        const problemInfo = {
+            name: req.body.name,
+            difficulty: req.body.difficulty,
+            points: req.body.points,
+            category: req.body.category,
+            paragraph: req.body.paragraph,
+            type: req.body.type,
+            num_solved: 0,
+            num_attempted: 0,
+            solutions: req.body.solutions,
+            solution: req.body.solution
+        };
+        // code is optional for closed problems
+        if (req.body.code !== undefined){
+            problemInfo.code = req.body.code;
+        }
+        let newProblem = new Problem(problemInfo);
 
-    Problem.addProblem(newProblem, (err, problem) => {
-        if(err){
-            console.log(err);
-            res.json({success: false, msg:'Failed to add problem'});
-        } else{
-            res.json({success: true, msg:'Problem added'});
+        Problem.addProblem(newProblem, (err, problem) => {
+            if (err) {
+                if (err.code === 11000) {
+                    res.json({success: false, msg: 'Failed to add problem. A problem with that name already exists.'})
+                } else {
+                    res.json({success: false, msg: `Failed to add problem. Error name: ${err.name}`});
+                }
+            } else {
+                res.json({success: true, msg: 'Problem added'});
+            }
+        });
+    }
+});
+
+router.post('/removeProblem', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    const problemName = req.body.name;
+    Problem.getProblemByName(problemName, (err, problem) => {
+        if (err) throw err;
+        if (problem === null){
+            res.json({success: false, msg: 'Problem doesn\'t exist.'});
+        } else {
+            Problem.removeProblem(problemName, (err, data) => {
+                if (err) throw err;
+                if (problem.solved_by !== undefined) {
+                    const solving_users = Array.from(problem.solved_by.keys());
+
+                    function removeAux(i) {
+                        if (i === solving_users.length) {
+                            res.json({success: true, msg: `Removed ${problemName}`});
+                        } else {
+                            User.removeProblemForUser(solving_users[i], problem, (err, user) => {
+                                if (err) throw err;
+                                removeAux(i + 1);
+                            });
+                        }
+                    }
+
+                    removeAux(0);
+                } else {
+                    res.json({success: true, msg: `Removed ${problemName}`});
+                }
+            });
         }
     });
-});*/
+});
 
 router.post('/checkProblemSolution', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     checkSolution(req, res, next, true);
@@ -71,9 +116,8 @@ router.post('/checkTestSolution', passport.authenticate('jwt', {session:false}),
 router.post('/checkClosedProblemSolution', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     const problemName = req.body.name;
     const user = req.user;
-    Problem.getProblemByName(problemName, (err, problemArr) => {
+    Problem.getProblemByName(problemName, (err, problem) => {
         if(err) throw err;
-        const problem = problemArr[0];
         User.attemptedProblem(user.username, problemName, (err, resp) => {
             if (err) throw err;
             Problem.attemptedByUser(problemName, user.username, (err, resp) => {
@@ -97,9 +141,8 @@ router.post('/checkClosedProblemSolution', passport.authenticate('jwt', {session
 router.post('/checkClosedTestSolution', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     const problemName = req.body.name;
     const user = req.user;
-    Problem.getProblemByName(problemName, (err, problemArr) => {
+    Problem.getProblemByName(problemName, (err, problem) => {
         if(err) throw err;
-        const problem = problemArr[0];
         if(req.body.solution === problem.solution) {
             res.json({success: true, msg: 'Correct!'});
         } else {
@@ -116,11 +159,11 @@ function checkSolution(req, res, next, updateCounters){
     const m = now.getMinutes();
     const time = `${now.getHours()}.${((m<10)?(`0${m}`):m)}.${now.getSeconds()}.${now.getMilliseconds()}-${now.getDate()}.${now.getMonth()+1}.${now.getFullYear()}`;
     const tempName = `#um-${user.username}#ts-${time}`; //um = username, ts=timestamp
-    Problem.getProblemByName(problemName, (err, problemArr) => {
+    Problem.getProblemByName(problemName, (err, problem) => {
         if(err){
             res.json({success: false, msg: 'Failed to get problem'});
         } else {
-            const tests = problemArr[0].tests;
+            const tests = problem.tests;
             // Recursive function to run all tests one after the other (waiting for previous to finish)
             function doTests(i){
                 if (i === tests.length){ //If we passed all tests
