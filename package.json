@@ -13,6 +13,7 @@
     "compile-run": "^2.3.0",
     "cors": "*",
     "express": "*",
+    "fs-extra": "^8.1.0",
     "jsonwebtoken": "*",
     "mongoose": "*",
     "passport": "*",

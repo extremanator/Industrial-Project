@@ -3,31 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="8407e5df-890d-423f-a6f1-222db1a91d01" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_Structure (1).xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_Structure.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/code-problem/code-problem.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/code-problem/code-problem.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/language/language.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/language/language.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/navbar/navbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/navbar/navbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/navbar/navbar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/public-profile/public-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/public-profile/public-profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/statistics/statistics.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/statistics/statistics.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/statistics/statistics.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/statistics/statistics.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/statistics/statistics.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/statistics/statistics.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/test-problem/test-problem.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/test-problem/test-problem.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/services/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/services/problem.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/services/problem.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/DBproblems.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/DBproblems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/problem.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/problem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/problems.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/problems.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/#um-admin#ts-17.09.32.743-11.6.2019.cpp" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -40,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/code-problem/code-problem.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="39" column="34" lean-forward="true" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+            <state relative-caret-position="850">
+              <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -53,10 +32,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/problems.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="335">
+              <caret line="218" column="50" lean-forward="true" selection-start-line="218" selection-start-column="50" selection-end-line="218" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/DBproblems.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="457">
+              <caret line="577" column="5" lean-forward="true" selection-start-line="577" selection-start-column="5" selection-end-line="577" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/users.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+              <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -64,8 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/test-problem/test-problem.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="103" column="26" lean-forward="true" selection-start-line="103" selection-start-column="26" selection-end-line="103" selection-end-column="26" />
+            <state relative-caret-position="1666">
+              <caret line="103" column="26" selection-start-line="103" selection-start-column="26" selection-end-line="103" selection-end-column="26" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -76,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/angular-src/src/app/services/problem.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-464">
-              <caret line="62" column="108" lean-forward="true" selection-start-line="62" selection-start-column="108" selection-end-line="62" selection-end-column="108" />
+            <state relative-caret-position="986">
+              <caret line="62" column="108" selection-start-line="62" selection-start-column="108" selection-end-line="62" selection-end-column="108" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -88,7 +85,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/angular-src/src/app/services/auth.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
+            <state relative-caret-position="2601">
               <caret line="158" column="72" selection-start-line="158" selection-start-column="72" selection-end-line="158" selection-end-column="72" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
@@ -110,8 +107,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>consol</find>
-      <find>console.log</find>
       <find>onClickItem</find>
       <find>selected</find>
       <find>name</find>
@@ -136,10 +131,12 @@
       <find>window</find>
       <find>getProb</find>
       <find>problemArr</find>
-      <find>console</find>
       <find>getPr</find>
       <find>problem</find>
       <find>getProblemByName</find>
+      <find>result</find>
+      <find>console</find>
+      <find>Simple</find>
     </findStrings>
     <replaceStrings>
       <replace>onClickCategory</replace>
@@ -200,8 +197,8 @@
         <option value="$PROJECT_DIR$/routes/users.js" />
         <option value="$PROJECT_DIR$/models/problem.js" />
         <option value="$PROJECT_DIR$/models/user.js" />
-        <option value="$PROJECT_DIR$/routes/problems.js" />
         <option value="$PROJECT_DIR$/angular-src/src/app/services/problem.service.ts" />
+        <option value="$PROJECT_DIR$/routes/problems.js" />
       </list>
     </option>
   </component>
@@ -215,101 +212,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="code-problem" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="language" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="leaderboard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="navbar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="statistics" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rafael-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Rafael-Project" type="b2602c69:ProjectViewProjectNode" />
@@ -325,6 +233,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -404,14 +313,19 @@
       <workItem from="1560842723099" duration="2523000" />
       <workItem from="1560861155544" duration="1274000" />
       <workItem from="1561139281023" duration="44467000" />
+      <workItem from="1562274663309" duration="11001000" />
+      <workItem from="1562319861995" duration="4518000" />
+      <workItem from="1562332460371" duration="14000" />
+      <workItem from="1562521283216" duration="5165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="274155000" />
+    <option name="totallyTimeSpent" value="294853000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19497687" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -443,13 +357,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/code-problem/code-problem.component.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/profile/profile.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
@@ -539,9 +446,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Project_Structure.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Project_Structure.xml" />
     <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/navbar/navbar.component.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -657,13 +562,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/DBproblems.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="93" column="6" selection-start-line="93" selection-start-column="6" selection-end-line="93" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/angular-src/src/app/app.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -685,44 +583,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/problems.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1888">
-          <caret line="87" column="43" lean-forward="true" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/user.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="393">
           <caret line="104" column="67" lean-forward="true" selection-start-line="104" selection-start-column="67" selection-end-line="104" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/angular-src/src/app/services/auth.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="158" column="72" selection-start-line="158" selection-start-column="72" selection-end-line="158" selection-end-column="72" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/test-problem/test-problem.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="103" column="26" lean-forward="true" selection-start-line="103" selection-start-column="26" selection-end-line="103" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -825,23 +689,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/code-problem/code-problem.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/test-problem/test-problem.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1666">
+          <caret line="103" column="26" selection-start-line="103" selection-start-column="26" selection-end-line="103" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/angular-src/src/app/services/problem.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-464">
-          <caret line="62" column="108" lean-forward="true" selection-start-line="62" selection-start-column="108" selection-end-line="62" selection-end-column="108" />
+        <state relative-caret-position="986">
+          <caret line="62" column="108" selection-start-line="62" selection-start-column="108" selection-end-line="62" selection-end-column="108" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/code-problem/code-problem.component.ts">
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/services/auth.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="39" column="34" lean-forward="true" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+        <state relative-caret-position="2601">
+          <caret line="158" column="72" selection-start-line="158" selection-start-column="72" selection-end-line="158" selection-end-column="72" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compile-run.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/problems.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="218" column="50" lean-forward="true" selection-start-line="218" selection-start-column="50" selection-end-line="218" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/DBproblems.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="577" column="5" lean-forward="true" selection-start-line="577" selection-start-column="5" selection-end-line="577" selection-end-column="5" />
         </state>
       </provider>
     </entry>
