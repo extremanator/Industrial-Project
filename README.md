@@ -81,7 +81,7 @@ For example the command ```docker ps -all``` will show all the active/exited ima
 You'll also need to change the variable absolutePath in routes/problems.js to be the path to the project folder on your computer in unix format (with slash, not backslash) - just copy the format of the current placeholder.  
 Note that currently when we run docker (only two commands in routes/problems.js) we don't limit cpu or memory used by the docker, you can change this yourself by adding flags to the commands. For example, you can find the limitation flags [here](https://docs.docker.com/config/containers/resource_constraints/).
 
-If you downloaded the older version of Docker you'll also have running the Docker Quickstart Terminal (icon added to desktop in default installation) and wait for the terminal to wait for commands. This will allow the backend to create images while running.
+If you downloaded the older version of Docker you'll also need to run the Docker Quickstart Terminal (icon added to desktop in default installation) everytime you start the backend. Wait for the terminal to wait for commands. This will allow the backend to create images while running.
 
 ## Deployment
 
