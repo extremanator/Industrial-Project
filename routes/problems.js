@@ -215,7 +215,6 @@ function checkSolution(req, res, next, updateCounters){
 
                                     function dockerCallback(err, stdout, stderr) {
                                         // we get an error message when we shut down docker image due to timeout
-                                        console.log('err: ' + err);
                                         if (err) {
                                             // remove the docker image
                                             exec(`docker rm -f ${tempName}`, (err, stdout, stderr) => {
@@ -236,7 +235,6 @@ function checkSolution(req, res, next, updateCounters){
                                                 });
                                             });
                                         } else {
-                                            console.log('===' + stdout + '====');
                                             // on success of test python script prints 0 to stdout
                                             if (stdout === '0') {
                                                 doTests(i + 1);
