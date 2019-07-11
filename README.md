@@ -93,6 +93,7 @@ If you downloaded the older version of Docker you'll also need to run the Docker
 * [ExpressJS](https://expressjs.com/) - Used for communication between the frontend & backend
 * [MongoDB](https://www.mongodb.com/) - The database used
 * [Angular](https://angular.io/docs/) - The language used for the frontend
+* [Docker](https://www.docker.com/) - Used for creating VMs in which we compile and run user supplied code
 
 ## Authors
 
