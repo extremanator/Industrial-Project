@@ -36,7 +36,7 @@ Now you'll start the server by using the command:
 
 The console should say somewhere "\[initandlisten\] waiting for connections" meaning the mongoDB server is running.
 
-Next go to the project folder you created and open a cmd in the "Rafael-Project-master" folder.
+Next go to the project folder you created and open a cmd in the "Industrial-Project-master" folder.
 Now run from the console:
 ```
 npm install
